@@ -6,7 +6,7 @@ using UnityEngine;
 public class MouseOrbitImproved : MonoBehaviour
 {
     public Transform target;
-    public float distance = 5.0f;
+    public float distance = 2.0f;
     public float xSpeed = 120.0f;
     public float ySpeed = 120.0f;
 
@@ -40,7 +40,18 @@ public class MouseOrbitImproved : MonoBehaviour
 
             Quaternion rotation = Quaternion.Euler(y, x, 0);
 
+            distance = Mathf.Clamp(distance - Input.GetAxis("Mouse ScrollWheel") * 5, distanceMin, distanceMax);
+
+            RaycastHit hit;
+            if (Physics.Linecast(target.position, transform.position, out hit))
+            {
+                distance -= hit.distance;
+            }
+            Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
+            Vector3 position = rotation * negDistance;
+
             transform.rotation = rotation;
+            transform.position = position;
         }
 
         if ((zoom = Input.GetAxis("Mouse ScrollWheel")) != 0) {
@@ -53,6 +64,7 @@ public class MouseOrbitImproved : MonoBehaviour
             if (Physics.Linecast(target.position, transform.position, out hit)) {
                 distance -= hit.distance;
             }
+
             Vector3 negDistance = new Vector3(0.0f, 0.0f, -distance);
             Vector3 position;
             if (zoom > 0) {
