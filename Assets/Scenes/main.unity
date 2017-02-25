@@ -192,12 +192,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   distance: 5
-  xSpeed: 120
-  ySpeed: 120
-  yMinLimit: -20
-  yMaxLimit: 80
-  distanceMin: 0.5
-  distanceMax: 15
   x: 0
   y: 0
   z: 0
@@ -212,6 +206,7 @@ GameObject:
   - component: {fileID: 186475688}
   - component: {fileID: 186475687}
   - component: {fileID: 186475686}
+  - component: {fileID: 186475690}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -282,6 +277,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &186475690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 186475685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7543d525bb5f16c40a5efc947bbebfa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &331684868
 GameObject:
   m_ObjectHideFlags: 0
