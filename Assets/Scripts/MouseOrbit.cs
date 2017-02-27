@@ -1,124 +1,113 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Assets.Scripts
+/// <summary>
+///     Class <c>MouseOrbit</c> implements to operate the camera.
+/// </summary>
+[AddComponentMenu("Camera-Control/Mouse Orbit with zoom")]
+public class MouseOrbit : MonoBehaviour
 {
     /// <summary>
-    /// Class <c>MouseOrbit</c> implements to operate the camera.
+    ///     The instance variables
+    ///     <c>XSpeed</c>, <c>YSpeed</c>,
+    ///     <c>YMinLimit</c>, <c>YMaxLimit</c>,
+    ///     <c>DistanceMin</c>, <c>DistanceMax</c>
+    ///     define the parameters of the camera.
     /// </summary>
+    public readonly float XSpeed = 120f;
 
-    [AddComponentMenu("Camera-Control/Mouse Orbit with zoom")]
-    public class MouseOrbit : MonoBehaviour
+    public readonly float YSpeed = 120f;
+
+    public readonly float YMinLimit = -85f;
+    public readonly float YMaxLimit = 85f;
+
+    public readonly float DistanceMin = 2f;
+    public readonly float DistanceMax = 15f;
+
+    private Transform target;
+    private float distance = 2f;
+
+    private const float DeltaPosition = 0.02f;
+    private const float DeltaGetAxis = 5f;
+
+    private float xEulerAngles;
+    private float yEulerAngles;
+    private float zoom;
+
+    private void Start()
     {
-        private Transform _target;
-        private float _distance = 2f;
+        target = transform;
+        distance = -target.position.z;
 
-        /// <summary>
-        /// The instance variables
-        /// <c>xSpeed</c>, <c>ySpeed</c>,
-        /// <c>yMinLimit</c>, <c>yMaxLimit</c>,
-        /// <c>distanceMin</c>, <c>distanceMax</c>
-        /// define the parameters of the camera.
-        /// </summary>
-        public readonly float XSpeed = 120f;
-        public readonly float YSpeed = 120f;
+        var angles = transform.eulerAngles;
+        xEulerAngles = angles.x;
+        yEulerAngles = angles.y;
+    }
 
-        public readonly float YMinLimit = -85f;
-        public readonly float YMaxLimit = 85f;
-
-        public readonly float DistanceMin = 2f;
-        public readonly float DistanceMax = 15f;
-
-        private const float DeltaPosition = 0.02f;
-        private const float DeltaGetAxis = 5f;
-
-        private float _xEulerAngles = 0.0f;
-        private float _yEulerAngles = 0.0f;
-        private float _zoom = 0.0f;
-
-        void Start()
+    private void LateUpdate()
+    {
+        if (Input.GetMouseButton(0))
         {
-            _target = transform;
-            _distance = -_target.position.z;
-
-            var angles = transform.eulerAngles;
-            _xEulerAngles = angles.x;
-            _yEulerAngles = angles.y;
+            Debug.Log("Pressed left click.");
+            SphericalMovement();
         }
-
-        void LateUpdate()
+        else if (Math.Abs(zoom = Input.GetAxis("Mouse ScrollWheel")) > 1E-6)
         {
-            if (Input.GetMouseButton(0))
-            {
-                Debug.Log("Pressed left click.");
-                SphericalMovement();
-            }
-            else if (Math.Abs((_zoom = Input.GetAxis("Mouse ScrollWheel"))) > 1E-6)
-            {
-                Debug.Log("Mouse scroll wheel click.");
-                Translate();
-                SphericalMovement();
-            }
+            Debug.Log("Mouse scroll wheel click.");
+            Translate();
+            SphericalMovement();
         }
+    }
 
-        private void SphericalMovement()
-        {
-            _xEulerAngles += Input.GetAxis("Mouse X") * XSpeed * _distance * DeltaPosition;
-            _yEulerAngles -= Input.GetAxis("Mouse Y") * YSpeed * DeltaPosition;
+    private void SphericalMovement()
+    {
+        xEulerAngles += Input.GetAxis("Mouse X") * XSpeed * distance * DeltaPosition;
+        yEulerAngles -= Input.GetAxis("Mouse Y") * YSpeed * DeltaPosition;
 
-            _yEulerAngles = ClampAngle(_yEulerAngles, YMinLimit, YMaxLimit);
+        yEulerAngles = ClampAngle(yEulerAngles, YMinLimit, YMaxLimit);
 
-            var rotation = Quaternion.Euler(_yEulerAngles, _xEulerAngles, 0);
+        var rotation = Quaternion.Euler(yEulerAngles, xEulerAngles, 0);
 
-            _distance = Mathf.Clamp(
-                _distance - Input.GetAxis("Mouse ScrollWheel") * DeltaGetAxis,
-                DistanceMin,
-                DistanceMax);
+        distance = Mathf.Clamp(
+            distance - Input.GetAxis("Mouse ScrollWheel") * DeltaGetAxis,
+            DistanceMin,
+            DistanceMax);
 
-            RaycastHit hit;
-            if (Physics.Linecast(_target.position, transform.position, out hit))
-            {
-                _distance -= hit.distance;
-            }
+        RaycastHit hit;
+        if (Physics.Linecast(target.position, transform.position, out hit))
+            distance -= hit.distance;
 
-            var negDistance = new Vector3(0.0f, 0.0f, -_distance);
-            var position = rotation * negDistance;
+        var negDistance = new Vector3(0.0f, 0.0f, -distance);
+        var position = rotation * negDistance;
 
-            transform.rotation = rotation;
-            transform.position = position;
-        }
+        transform.rotation = rotation;
+        transform.position = position;
+    }
 
-        private void Translate()
-        {
-            var rotation = Quaternion.Euler(_yEulerAngles, _xEulerAngles, 0);
-            _distance = Mathf.Clamp(_distance - _zoom * DeltaGetAxis, DistanceMin, DistanceMax);
+    private void Translate()
+    {
+        var rotation = Quaternion.Euler(yEulerAngles, xEulerAngles, 0);
+        distance = Mathf.Clamp(distance - zoom * DeltaGetAxis, DistanceMin, DistanceMax);
 
-            RaycastHit hit;
-            if (Physics.Linecast(_target.position, transform.position, out hit))
-            {
-                _distance -= hit.distance;
-            }
+        RaycastHit hit;
+        if (Physics.Linecast(target.position, transform.position, out hit))
+            distance -= hit.distance;
 
-            var negDistance = new Vector3(0.0f, 0.0f, -_distance);
-            Vector3 position;
-            if (_zoom > 0)
-            {
-                position = _target.position - (rotation * negDistance) * DeltaPosition;
-            }
-            else
-            {
-                position = (rotation * negDistance) * DeltaPosition + _target.position;
-            }
-            transform.position = position;
-        }
+        var negDistance = new Vector3(0.0f, 0.0f, -distance);
+        Vector3 position;
+        if (zoom > 0)
+            position = target.position - rotation * negDistance * DeltaPosition;
+        else
+            position = rotation * negDistance * DeltaPosition + target.position;
+        transform.position = position;
+    }
 
-        public static float ClampAngle(float angle, float min, float max)
-        {
-            if (angle < -360F)
-                angle += 360F;
-            if (angle > 360F)
-                angle -= 360F;
-            return Mathf.Clamp(angle, min, max);
-        }
+    public static float ClampAngle(float angle, float min, float max)
+    {
+        if (angle < -360F)
+            angle += 360F;
+        if (angle > 360F)
+            angle -= 360F;
+        return Mathf.Clamp(angle, min, max);
     }
 }
