@@ -6,8 +6,8 @@ public class CubeLocalRotation : MonoBehaviour
 {
     float rotx = 0f;
     float roty = 0f;
-    public readonly float rotation_speed_x = 10f;
-    public readonly float rotation_speed_y = 10f;
+    public float rotation_speed_x = 10f;
+    public float rotation_speed_y = 10f;
 
     Vector3 upFromWorld;
     Vector3 rightFromWorld;
