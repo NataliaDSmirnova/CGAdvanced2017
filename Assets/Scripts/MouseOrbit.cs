@@ -48,12 +48,12 @@ public class MouseOrbit : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            Debug.Log("Pressed left click.");
+         //   Debug.Log("Pressed left click.");
             SphericalMovement();
         }
         else if (Math.Abs(zoom = Input.GetAxis("Mouse ScrollWheel")) > 1E-6)
         {
-            Debug.Log("Mouse scroll wheel click.");
+         //   Debug.Log("Mouse scroll wheel click.");
             Translate();
             SphericalMovement();
         }
