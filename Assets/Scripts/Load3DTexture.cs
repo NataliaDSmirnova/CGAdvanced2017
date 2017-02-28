@@ -9,18 +9,30 @@ public class Load3DTexture : MonoBehaviour
     public Material textureMaterial;
     private string texFileName = "Default3DTexture";
 
-
+    public string VolumeTextureData { get; set; }
+                                                
     // Use this for initialization
     void Start()
-    {        
-        LoadCustomTexture();
-        textureMaterial.mainTexture = texture;
+    {
+        VolumeTextureData = "_MainTex";
+        LoadCustomTextureData();
+        LoadVolumeTexture();        
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+
+    // Assigning to material
+    public void LoadVolumeTexture() {
+        if (textureMaterial.GetTexture(VolumeTextureData) != null) {
+            textureMaterial.mainTexture = texture;
+        } else{
+            Debug.Log("3D Texture isn't set");
+        }
     }
 
 
@@ -34,7 +46,7 @@ public class Load3DTexture : MonoBehaviour
                  *                                                 (Xdim, Ydim, 0) -> (0, 0, 1),
                  *                                                 ... )
      */
-    private void LoadCustomTexture()
+    private void LoadCustomTextureData()
     {
         TextAsset textAssetData = Resources.Load(texFileName) as TextAsset;
         string rawTextData = textAssetData.text;
