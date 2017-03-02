@@ -1,4 +1,6 @@
-﻿Shader "Unlit/DiffuseShader"
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
+Shader "Unlit/DiffuseShader"
 {
 	Properties
 	{
@@ -35,7 +37,6 @@
 	struct v2f
 	{
 		float4 vertex : SV_POSITION;
-		float3 dirToLight : TEXCOORD0;
 		float3 norm : NORMAL;
 	};
 
@@ -44,14 +45,13 @@
 	{
 		v2f output;
 		output.vertex = UnityObjectToClipPos(input.vertex);
-		output.norm = UnityObjectToWorldNormal(input.norm);
-		output.dirToLight = _WorldSpaceLightPos0.xyz;
+		output.norm = normalize(UnityObjectToWorldNormal(input.norm));
 		return output;
 	}
 
 	fixed4 frag(v2f input) : SV_Target
 	{
-		fixed4 col = _Ambient + _Diffuse * _Light * max(0.0, dot(input.norm, input.dirToLight));
+		fixed4 col = _Ambient + _Diffuse * _Light * max(0.0, dot(input.norm, _WorldSpaceLightPos0.xyz));
 	return col;
 	}
 		ENDCG
