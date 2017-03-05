@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class RenderObject : MonoBehaviour {
 
-    public Object renderObject;
+    public GameObject renderObject;
 
-    // Use this for initialization
+    private RenderTexture renderTexture;
+    private SpriteRenderer spriteRenderer;
+
     void Start () {
-		
-	}
+        spriteRenderer = GetComponent<Renderer>() as SpriteRenderer;
+    }
 	
-	// Update is called once per frame
 	void Update () {
-		
-	}
+        // texture
+        renderTexture = RenderTexture.GetTemporary(Screen.width, Screen.height);
+        Graphics.SetRenderTarget(renderTexture);
+
+        spriteRenderer.material.SetPass(0);
+
+        Mesh objectMesh = renderObject.GetComponent<MeshFilter>().sharedMesh;
+        Graphics.DrawMeshNow(objectMesh, objectMesh.vertices[0], Quaternion.identity);
+
+        spriteRenderer.material.mainTexture = renderTexture;
+
+        Graphics.SetRenderTarget(null);
+        RenderTexture.ReleaseTemporary(renderTexture);
+    }
 }
