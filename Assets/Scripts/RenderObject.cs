@@ -4,31 +4,40 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class RenderObject : MonoBehaviour {
-
+    // input object
     public GameObject renderObject;
+    public Camera mainCamera;
 
+    // private variables
     private RenderTexture renderTexture;
-    private SpriteRenderer spriteRenderer;
     private RawImage image;
-    private RenderTexture rt;
     
     void Start () {
+        // get raw image from scene (see RTSprite)
         image = GetComponent<RawImage>();
-        rt = RenderTexture.GetTemporary(Screen.width, Screen.height);
+        // create temprorary texture of screen size
+        renderTexture = RenderTexture.GetTemporary(Screen.width, Screen.height);
     }
 	
 	void Update () {
-       
-        Graphics.SetRenderTarget(rt);
+        // set our temprorary texture as target for rendering
+        Graphics.SetRenderTarget(renderTexture);
 
+        // get mesh and meshRenderer from input object
         Mesh objectMesh = renderObject.GetComponent<MeshFilter>().sharedMesh;
         var renderer = renderObject.GetComponent<MeshRenderer>();
+        // activate first shader pass for our renderer
         renderer.material.SetPass(0);
 
-        Graphics.DrawMeshNow(objectMesh, objectMesh.vertices[0], Quaternion.identity);
+        //mainCamera.targetTexture = renderTexture;
 
-        image.texture = rt;
+        // draw mesh of input object to render texture
+        Graphics.DrawMeshNow(objectMesh, mainCamera.projectionMatrix * mainCamera.cameraToWorldMatrix);
 
+        // set texture of raw image equals to our render texture
+        image.texture = renderTexture;
+        //mainCamera.targetTexture = null;
+        // render again to backbuffer
         Graphics.SetRenderTarget(null);
     }
 }
