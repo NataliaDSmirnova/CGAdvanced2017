@@ -8,9 +8,13 @@ public class RenderObject : MonoBehaviour {
 
     private RenderTexture renderTexture;
     private SpriteRenderer spriteRenderer;
+    private int xSizeOfSprite;
+    private int ySizeOfSprite;
 
     void Start () {
         spriteRenderer = GetComponent<Renderer>() as SpriteRenderer;
+        xSizeOfSprite = (int) spriteRenderer.sprite.border.x;
+        ySizeOfSprite = (int) spriteRenderer.sprite.border.y;
     }
 	
 	void Update () {
@@ -21,7 +25,7 @@ public class RenderObject : MonoBehaviour {
         spriteRenderer.material.SetPass(0);
 
         Mesh objectMesh = renderObject.GetComponent<MeshFilter>().sharedMesh;
-        Graphics.DrawMeshNow(objectMesh, objectMesh.vertices[0], Quaternion.identity);
+        Graphics.DrawMeshNow(objectMesh, renderObject.transform.position, Quaternion.identity);
 
         spriteRenderer.material.mainTexture = renderTexture;
 
