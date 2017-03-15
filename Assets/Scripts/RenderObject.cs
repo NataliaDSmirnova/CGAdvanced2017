@@ -23,9 +23,26 @@ public class RenderObject : MonoBehaviour {
         // set our temprorary texture as target for rendering
         Graphics.SetRenderTarget(renderTexture);
 
+        if (renderObject == null)
+        {
+            Debug.Log("Object for rendering is not set");
+            return;
+        }
+
         // get mesh and meshRenderer from input object
         Mesh objectMesh = renderObject.GetComponent<MeshFilter>().sharedMesh;
+        if (objectMesh == null)
+        {
+            Debug.Log("Can't get mesh from input object");
+            return;
+        }
+
         var renderer = renderObject.GetComponent<MeshRenderer>();
+        if (renderer == null)
+        {
+            Debug.Log("Can't get mesh renderer from input object");
+            return;
+        }
 
         // activate first shader pass for our renderer
         renderer.material.SetPass(0);
