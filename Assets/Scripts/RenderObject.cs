@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RenderObject : MonoBehaviour {
+public class RenderObject : MonoBehaviour
+{
     // input objects
     public GameObject renderObject;
     public Camera mainCamera;
@@ -12,22 +13,24 @@ public class RenderObject : MonoBehaviour {
     private RenderTexture renderTexture;
     private RawImage image;
     
-    void Start () {
+    void Start() {
         // get raw image from scene (see RTSprite)
         image = GetComponent<RawImage>();
         // create temprorary texture of screen size
         renderTexture = RenderTexture.GetTemporary(Screen.width, Screen.height);
     }
 
-    void Update ()
+    void Update()
     {
         // rescale raw image size depending on screen size
-        float width = image.rectTransform.sizeDelta.x;
         float height = image.rectTransform.sizeDelta.y;
-        image.rectTransform.sizeDelta = new Vector2(height * Screen.width / (float) Screen.height, height);
+        float width = height * Screen.width / (float)Screen.height;
+        image.rectTransform.sizeDelta = new Vector2(width, height);
+        // fix position of image in left lower corner
+        image.rectTransform.anchoredPosition = new Vector2((width - Screen.width) / 2, (height - Screen.height) / 2);
     }
 	
-	void OnRenderObject () {
+	void OnRenderObject() {
         // set our temprorary texture as target for rendering
         Graphics.SetRenderTarget(renderTexture);
         // clear render texture
