@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class RenderObject : MonoBehaviour {
-    // input object
+    // input objects
     public GameObject renderObject;
     public Camera mainCamera;
 
-    // private variables
+    // private objects
     private RenderTexture renderTexture;
     private RawImage image;
     
@@ -18,18 +18,28 @@ public class RenderObject : MonoBehaviour {
         // create temprorary texture of screen size
         renderTexture = RenderTexture.GetTemporary(Screen.width, Screen.height);
     }
+
+    void Update ()
+    {
+        // rescale raw image size depending on screen size
+        float width = image.rectTransform.sizeDelta.x;
+        float height = image.rectTransform.sizeDelta.y;
+        image.rectTransform.sizeDelta = new Vector2(height * Screen.width / (float) Screen.height, height);
+    }
 	
 	void OnRenderObject () {
         // set our temprorary texture as target for rendering
         Graphics.SetRenderTarget(renderTexture);
-
+        // clear render texture
+        GL.Clear(false, true, new Color(0f, 0f, 0f));
+            
         if (renderObject == null)
         {
             Debug.Log("Object for rendering is not set");
             return;
         }
 
-        // get mesh and meshRenderer from input object
+        // get mesh from input object
         Mesh objectMesh = renderObject.GetComponent<MeshFilter>().sharedMesh;
         if (objectMesh == null)
         {
@@ -37,6 +47,7 @@ public class RenderObject : MonoBehaviour {
             return;
         }
 
+        // get mesh renderer from input object
         var renderer = renderObject.GetComponent<MeshRenderer>();
         if (renderer == null)
         {
@@ -48,8 +59,7 @@ public class RenderObject : MonoBehaviour {
         renderer.material.SetPass(0);
 
         // draw mesh of input object to render texture
-        Graphics.DrawMeshNow(objectMesh, 
-            renderObject.transform.localToWorldMatrix * mainCamera.worldToCameraMatrix * mainCamera.projectionMatrix);
+        Graphics.DrawMeshNow(objectMesh, renderObject.transform.localToWorldMatrix * mainCamera.worldToCameraMatrix);
 
         // set texture of raw image equals to our render texture
         image.texture = renderTexture;
