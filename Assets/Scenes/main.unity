@@ -490,7 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a93ef0113b0bc04d94f561d8395bf2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renderObject: {fileID: 563324952}
+  renderObject: {fileID: 186475685}
   mainCamera: {fileID: 81444179}
 --- !u!114 &869943231
 MonoBehaviour:
@@ -647,10 +647,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48dacb86ab906fd48aa8765a60789e15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 1744152111}
-  cube: {fileID: 186475686}
+  button: {fileID: 0}
+  cube: {fileID: 0}
   otherMaterial: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  otherShader: {fileID: 4800000, guid: a86b8cd62f697d948a93c15fc291b59b, type: 3}
+  otherShader: {fileID: 0}
 --- !u!1 &1785651108
 GameObject:
   m_ObjectHideFlags: 0

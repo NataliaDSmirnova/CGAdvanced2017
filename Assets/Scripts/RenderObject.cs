@@ -62,7 +62,7 @@ public class RenderObject : MonoBehaviour
         renderer.material.SetPass(0);
 
         // draw mesh of input object to render texture
-        Graphics.DrawMeshNow(objectMesh, renderObject.transform.localToWorldMatrix * mainCamera.worldToCameraMatrix);
+        Graphics.DrawMeshNow(objectMesh, renderObject.transform.localToWorldMatrix);
 
         // set texture of raw image equals to our render texture
         image.texture = renderTexture;
