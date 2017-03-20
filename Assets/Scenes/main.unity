@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 186475686}
   - component: {fileID: 186475690}
   - component: {fileID: 186475691}
+  - component: {fileID: 186475692}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -299,6 +300,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texture: {fileID: 0}
   textureMaterial: {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+--- !u!114 &186475692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 186475685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48dacb86ab906fd48aa8765a60789e15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  otherMaterial: {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!1 &331684868
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,7 +399,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 563324952}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -535,7 +548,6 @@ GameObject:
   - component: {fileID: 1744152113}
   - component: {fileID: 1744152112}
   - component: {fileID: 1744152111}
-  - component: {fileID: 1744152114}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -600,7 +612,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1744152112}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 186475692}
+        m_MethodName: ChangeMaterialOnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1744152112
@@ -636,21 +659,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1744152109}
---- !u!114 &1744152114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1744152109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48dacb86ab906fd48aa8765a60789e15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button: {fileID: 0}
-  cube: {fileID: 0}
-  otherMaterial: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  otherShader: {fileID: 0}
 --- !u!1 &1785651108
 GameObject:
   m_ObjectHideFlags: 0
