@@ -6,14 +6,15 @@ using UnityEngine.UI;
 public class RenderObject : MonoBehaviour
 {
     // input objects
-    public GameObject renderObject;
     public Camera mainCamera;
+    public GameObject renderObject;
 
     // private objects
-    private RenderTexture renderTexture;
     private RawImage image;
-    
-    void Start() {
+    private RenderTexture renderTexture;
+
+    void Start()
+    {
         // get raw image from scene (see RTSprite)
         image = GetComponent<RawImage>();
         // create temprorary texture of screen size
@@ -23,14 +24,16 @@ public class RenderObject : MonoBehaviour
     void Update()
     {
         // rescale raw image size depending on screen size
-        float height = image.rectTransform.sizeDelta.y;
-        float width = height * Screen.width / (float)Screen.height;
-        image.rectTransform.sizeDelta = new Vector2(width, height);
+        float imageHeight = image.rectTransform.sizeDelta.y;
+        float imageWidth = imageHeight * Screen.width / (float) Screen.height;
+        image.rectTransform.sizeDelta = new Vector2(imageWidth, imageHeight);
         // fix position of image in left lower corner
-        image.rectTransform.anchoredPosition = new Vector2((width - Screen.width) / 2, (height - Screen.height) / 2);
+        image.rectTransform.anchoredPosition = new Vector2((imageWidth - Screen.width) / 2, 
+                                                           (imageHeight - Screen.height) / 2);
     }
 	
-	void OnRenderObject() {
+	void OnRenderObject()
+    {
         // set our temprorary texture as target for rendering
         Graphics.SetRenderTarget(renderTexture);
         // clear render texture
