@@ -8,6 +8,7 @@ public class Load3DTexture : MonoBehaviour
     public Texture3D texture;
     public Material textureMaterial;
     private string texFileName = "Default3DTexture";
+    private string volumeShaderName = "XRayEffectShader";
 
     public string VolumeTextureData { get; set; }
                                                 
@@ -27,13 +28,30 @@ public class Load3DTexture : MonoBehaviour
 
 
     // Assigning to material
-    public void LoadVolumeTexture() {
-        if (textureMaterial.GetTexture(VolumeTextureData) != null) {
+    public void LoadVolumeTexture()
+    {
+        if (textureMaterial.GetTexture(VolumeTextureData) != null)
+        {
             textureMaterial.mainTexture = texture;
-        } else{
-            Debug.Log("3D Texture isn't set");
         }
-    }
+        else if (textureMaterial.shader.name.EndsWith(volumeShaderName))
+        {
+            textureMaterial.mainTexture = texture;
+
+            Vector3 cubePos = gameObject.transform.localPosition,
+                    cubeScale = gameObject.transform.localScale;
+
+            textureMaterial.SetFloatArray("_LowBound", 
+              new float[4] { cubePos.x - 0.5f * cubeScale.x, cubePos.y - 0.5f * cubeScale.y, cubePos.z - 0.5f * cubeScale.z, 1.0f / (float)texture.depth });
+            textureMaterial.SetFloatArray("_HighBound",
+              new float[4] { cubePos.x + 0.5f * cubeScale.x, cubePos.y + 0.5f * cubeScale.y, cubePos.z + 0.5f * cubeScale.z, (float)texture.depth });
+        } 
+        else 
+        {
+            Debug.Log("3D Texture isn't set (special shader needed)");
+        }
+
+  }
 
 
     /* Load custom texture. 
