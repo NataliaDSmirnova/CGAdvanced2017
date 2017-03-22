@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class RenderObject : MonoBehaviour
 {
     // input objects
-    public Camera mainCamera;
     public GameObject renderObject;
 
     // private objects
