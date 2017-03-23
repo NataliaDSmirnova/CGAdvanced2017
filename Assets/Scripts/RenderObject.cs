@@ -10,6 +10,7 @@ public class RenderObject : MonoBehaviour
 
     // private objects
     private RawImage image;
+    private bool renderFront = true;
     private RenderTexture renderTexture;
 
     void Start()
@@ -52,6 +53,12 @@ public class RenderObject : MonoBehaviour
             return;
         }
 
+        // if render back face, reverse mesh
+        if (!renderFront)
+        {
+            objectMesh = ReverseObjectMesh(objectMesh);
+        }
+
         // get mesh renderer from input object
         var renderer = renderObject.GetComponent<MeshRenderer>();
         if (renderer == null)
@@ -71,5 +78,41 @@ public class RenderObject : MonoBehaviour
 
         // render again to backbuffer
         Graphics.SetRenderTarget(null);
+    }
+
+    public void RenderObjectOnValueChanged()
+    {
+        renderFront = !renderFront;
+    }
+
+    Mesh ReverseObjectMesh(Mesh objectMesh)
+    {
+        var newObjectMesh = new Mesh();
+        var objectNormals = objectMesh.normals;
+        var newNormals = new Vector3[objectNormals.Length];
+
+        // switch normals direction
+        for (var j = 0; j < objectNormals.Length; j++)
+        {
+            newNormals[j] = -objectNormals[j];
+        }
+
+        // set new order for vertices in triangles
+        var objectTriangles = objectMesh.triangles;
+        var newTriangles = new int[objectTriangles.Length];
+        for (var i = 0; i < objectTriangles.Length; i += 3)
+        {
+            newTriangles[i] = objectTriangles[i];
+            newTriangles[i + 1] = objectTriangles[i + 2];
+            newTriangles[i + 2] = objectTriangles[i + 1];
+        }
+
+        // set all variables to new object mesh
+        newObjectMesh.vertices = objectMesh.vertices;
+        newObjectMesh.uv = objectMesh.uv;
+        newObjectMesh.normals = newNormals;
+        newObjectMesh.triangles = newTriangles;
+
+        return newObjectMesh;
     }
 }
