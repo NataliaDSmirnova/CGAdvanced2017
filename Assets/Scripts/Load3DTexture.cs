@@ -15,22 +15,38 @@ public class Load3DTexture : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        VolumeTextureData = "_MainTex";
-        LoadCustomTextureData();
-        LoadVolumeTexture();        
+      //    VolumeTextureData = "_MainTex";
+      var renderer = GetComponent<MeshRenderer>();
+      textureMaterial = renderer != null ? renderer.sharedMaterial : null; 
+      LoadCustomTextureData();
+      LoadVolumeTexture();        
     }
 
     // Update is called once per frame
     void Update()
     {
+      if (textureMaterial != null)
+      {
+     //   textureMaterial.mainTexture = texture;
 
+        Vector3 cubePos = gameObject.transform.localPosition,
+                cubeScale = gameObject.transform.localScale;
+
+        textureMaterial.SetTexture("_MainTex", texture);
+        textureMaterial.SetVector("_LowBound",
+          new Vector4(cubePos.x - 0.5f * cubeScale.x, cubePos.y - 0.5f * cubeScale.y, cubePos.z - 0.5f * cubeScale.z, 1.0f / (float)texture.depth ));
+        textureMaterial.SetVector("_HighBound",
+          new Vector4( cubePos.x + 0.5f * cubeScale.x, cubePos.y + 0.5f * cubeScale.y, cubePos.z + 0.5f * cubeScale.z, (float)texture.depth ));
+      //textureMaterial.SetFloatArray("_LowBound", new float[4] { 1.0f, 1.0f, 0.0f, 1.0f });
+      //textureMaterial.SetVector("_LowBound", new Vector4(1.0f, 1.0f, 0.0f, 1.0f));
+      }
     }
 
 
     // Assigning to material
     public void LoadVolumeTexture()
     {
-        if (textureMaterial.GetTexture(VolumeTextureData) != null)
+       /* if (textureMaterial.GetTexture(VolumeTextureData) != null)
         {
             textureMaterial.mainTexture = texture;
         }
@@ -49,7 +65,7 @@ public class Load3DTexture : MonoBehaviour
         else 
         {
             Debug.Log("3D Texture isn't set (special shader needed)");
-        }
+        }*/
 
   }
 

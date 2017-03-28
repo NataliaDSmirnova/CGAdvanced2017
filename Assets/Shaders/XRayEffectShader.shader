@@ -1,9 +1,9 @@
-﻿Shader "Unlit/XRayEffectShader"
+﻿Shader "CGA/XRayEffectShader"
 {
 	  Properties
 	  {
-		    _MainTex ("3D Texture", 3D) = "white" {}
-        _LowBound ("Low Bound", Vector) = (0, 0, 0, 1)
+		    _Tex3D ("3D Texture", 3D) = "white" {}
+        _LowBound ("Low Bound", Vector) = (0, 1, 0, 1)
         _HighBound("High Bound", Vector) = (1, 1, 1, 1)
 	  }
 
@@ -18,7 +18,7 @@
 			      #pragma vertex vert
 			      #pragma fragment frag			      
 			
-            #pragma enable_d3d11_debug_symbols
+          //  #pragma enable_d3d11_debug_symbols
 
 			      #include "UnityCG.cginc"
 
@@ -34,9 +34,9 @@
 				        float4 vertex : SV_POSITION;
 			      };
 
-			      sampler3D _MainTex;
-			      float4 _MainTex_ST;            
-            float4 _MainTex_TexelSize;
+			      sampler3D _Tex3D;
+			    //  float4 _MainTex_ST;            
+            //float4 _MainTex_TexelSize;
 
             struct Ray
             {
@@ -119,7 +119,7 @@
 			      }
 			
 
-            fixed4 frag(v2f input) : SV_Target
+            float4 frag(v2f input) : SV_Target
             {
                 /*int a = int(_MainTex_TexelSize[2]),
                     b = int(_MainTex_TexelSize[3]),
@@ -131,9 +131,14 @@
                 fixed4 col = 0;
                 Ray ray;
                 float3 bounds[2],
-                  delta = { (_HighBound[0] - _LowBound[0]) * _MainTex_TexelSize[0],
+               /*   delta = { (_HighBound[0] - _LowBound[0]) * _MainTex_TexelSize[0],
                             (_HighBound[1] - _LowBound[1]) * _MainTex_TexelSize[1],
-                            (_HighBound[2] - _LowBound[2]) * _LowBound[3] };
+                            (_HighBound[2] - _LowBound[2]) * _LowBound[3] };*/
+                   delta = { (_HighBound[0] - _LowBound[0]) * _LowBound[3],
+                  (_HighBound[1] - _LowBound[1]) * _LowBound[3],
+                  (_HighBound[2] - _LowBound[2]) *  _LowBound[3] };
+
+
 
                 ray.origin = _WorldSpaceCameraPos;                
                 ray.dir = normalize((mul(inverse(UNITY_MATRIX_P * UNITY_MATRIX_V),
@@ -154,13 +159,14 @@
 
                             if (isIntersected(ray, bounds, 0.0f, 1.0f) == true) 
                             {
-                                col += tex3D(_MainTex, float3(x, y, z));
+                                col += tex3D(_Tex3D, float3(x, y, z));
                                 n += 1;
                             }
                         }
                     }
-                }                  
-                
+                } 
+                //return _LowBound;
+             //   return float4(1, 0, 0, 1);
 				        return col / (n + 1);
 			      }
 			      ENDCG
