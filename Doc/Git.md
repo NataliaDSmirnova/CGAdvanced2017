@@ -1,8 +1,23 @@
 # Справка по командам Git
 
-#### Установка Git
+## Содержание
+
+* [Установка Git](#install-git)
+* [Настройка Git](#setting-up-git)
+* [Создание репозитория в существующем каталоге](#initializing-a-repository-in-an-existing-directory)
+* [Определение состояния файлов](#checking-the-status-of-your-files)
+* [Отслеживание новых файлов](#staging-files)
+* [Игнорирование файлов](#gitignore)
+* [Псевдонимы в Git](#useful-alias)* 
+* [Прятанье](#stashing-files)
+
+
+
+#### Install Git
 
 Нажмите [сюда](http://git-scm.com/download/), чтобы скачать и установить Git.
+
+#### Setting up git
 
 ##### [Установка имени и электронной почты](https://git-scm.com/book/ru/v1/%D0%92%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5-%D0%9F%D0%B5%D1%80%D0%B2%D0%BE%D0%BD%D0%B0%D1%87%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-Git#Имя-пользователя)
 
@@ -51,7 +66,7 @@ color.diff=auto
 
 #### Основы Git
 
-##### Создание репозитория в существующем каталоге
+##### Initializing a repository in an existing directory
 
 Если вы собираетесь начать использовать Git для существующего проекта, то вам необходимо перейти в проектный каталог и в командной строке ввести:
 
@@ -67,7 +82,7 @@ $ git add README
 $ git commit -m 'initial project version'
 ```
 
-##### Определение состояния файлов
+##### Checking the status of your files
 
 Используйте команду `git status`, чтобы проверить текущее состояния файлов.
 
@@ -84,7 +99,7 @@ A  lib/git.rb
 M  lib/simplegit.rb
 ?? LICENSE.txt
 ```
-##### Отслеживание новых файлов
+##### Staging files
 
 После инициализации Git-репозитория в выбранную директорию, все файлы должны отслеживаться. Любые изменения, сделанные в любом файле, будут показаны после `git status`, как неиндексированные изменения.
 
@@ -104,11 +119,11 @@ $ git add .
 $ git add -p
 ```
 
-##### Игнорирование файлов
+##### gitignore
 
 Чтобы не видеть файлы, которые вы не хотите добавлять в Git-репозиторий, в списках неотслеживаемых, нужно создать файл .gitignore. Набор полезных .gitignore шаблонов можно посмотреть [тут](https://github.com/github/gitignore).
 
-##### Псевдонимы в Git
+##### Useful Alias
 
 ```sh
 $ git config --global alias.co checkout
@@ -117,7 +132,7 @@ $ git config --global alias.ci commit
 $ git config --global alias.st status
 ```
 
-#### [Прятанье](https://git-scm.com/book/ru/v1/%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B-Git-%D0%9F%D1%80%D1%8F%D1%82%D0%B0%D0%BD%D1%8C%D0%B5)
+#### [Stashing files](https://git-scm.com/book/ru/v1/%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B-Git-%D0%9F%D1%80%D1%8F%D1%82%D0%B0%D0%BD%D1%8C%D0%B5)
 
 Часто возникает такая ситуация, что пока вы работаете над частью своего проекта, всё находится в беспорядочном состоянии, а вам нужно переключить ветки, чтобы немного поработать над чем-то другим. Проблема в том, что вы не хотите фиксировать изменения с наполовину сделанной работой только для того, чтобы позже можно было вернуться в это же состояние. Ответ на эту проблему — команда `git stash`.
 
@@ -315,78 +330,3 @@ http://stepansuvorov.com/blog/2012/11/git-stash-%D1%8D%D1%82%D0%BE-%D1%82%D0%BE-
 http://najomi.org/git
 
 https://marklodato.github.io/visual-git-guide/index-ru.html
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
