@@ -8,9 +8,19 @@
 * [Определение состояния файлов](#checking-the-status-of-your-files)
 * [Отслеживание новых файлов](#staging-files)
 * [Игнорирование файлов](#gitignore)
-* [Псевдонимы в Git](#useful-alias)* 
-* [Прятанье](#stashing-files)
-
+* [Псевдонимы в Git](#useful-alias) 
+* [Прятанье (stash)](#stashing-files)
+* [Фиксация изменений (commit)](#committing-files)
+* [Удаление файлов](#removing-files)
+* [Перемещение файлов](#moving-files)
+* [Ветки и слияния (checkout, branch, merge)](#branching-and-merging)
+* [Обновление изменений в локальном репозитории из Github репозитория (pull)](#updating-a-local-repository-with-changes-from-a-github-repository)
+* [Инструменты Git](#git-tools)
+* [Git blame](#git-blame)
+* [Git bisect](#git-bisect)
+* [Полезное ПО](#useful-software)
+* [Git log](#git-log)
+* [Пример](#example)
 
 
 #### Install Git
@@ -132,7 +142,7 @@ $ git config --global alias.ci commit
 $ git config --global alias.st status
 ```
 
-#### [Stashing files](https://git-scm.com/book/ru/v1/%D0%98%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B-Git-%D0%9F%D1%80%D1%8F%D1%82%D0%B0%D0%BD%D1%8C%D0%B5)
+#### Stashing files
 
 Часто возникает такая ситуация, что пока вы работаете над частью своего проекта, всё находится в беспорядочном состоянии, а вам нужно переключить ветки, чтобы немного поработать над чем-то другим. Проблема в том, что вы не хотите фиксировать изменения с наполовину сделанной работой только для того, чтобы позже можно было вернуться в это же состояние. Ответ на эту проблему — команда `git stash`.
 
@@ -168,7 +178,7 @@ $ git stash show
 $ git diff stash@{0}
 ```
 
-##### Фиксация изменений
+##### Committing files
 
 После индексирования или прятанья файлов следующим шагом фиксируются изменения.
 Простейший способ зафиксировать изменения - это использовать команду `git commit` 
@@ -187,7 +197,7 @@ $ git commit -a -m 'insert commit message'
 $ git commit --amend 'new commit message' or no message to maintain previous message
 ```
 
-##### Удаление файлов
+##### Removing files
 
 ```sh
 # Удаление файла
@@ -200,7 +210,7 @@ git rm --cached filename
 git rm \*~
 ```
 
-##### Перемещение файлов
+##### Moving files
 
 Git не отслеживает перемещение файлов явно. Для этого нужно использовать команду `git mv`
 
@@ -208,7 +218,7 @@ Git не отслеживает перемещение файлов явно. Д
 $ git mv file_from file_to
 ```
 
-#### Ветвление в Git
+#### Branching and merging
 
 ```sh
 # Создание локальной ветки
@@ -227,7 +237,7 @@ $ git branch -d branchname
 # Удаление локальной ветки (тупиковая ветка)
 $ git branch -D branchname
 
-# Удалить все ветки, которых нет во внешнем репозитории можно командой
+# Удалить все ветки, которых нет во внешнем репозитории, можно командой
 $ git remote prune origin
 
 # Просмотреть все существующие ветки  
@@ -261,15 +271,18 @@ $ git merge branchname
 $ git merge --abort
 ```
 
-#### Обновление изменений в локальном репозитории из Github репозитория
+#### Updating a local repository with changes from a Github repository
 
 ```sh
 $ git pull origin master
+
+# Команда заберет новую ветку master и переместит локальные изменения вашего коллеги на ее вершину.
+$ git pull --rebase origin master
 ```
 
-#### Инструменты Git
+#### Git Tools
 
-##### Аннотация файла
+##### Git blame
 
 Если вы отловили ошибку в коде и хотите узнать, когда и по какой причине она была внесена, то аннотация файла - лучший инструмент для этого случая.
 
@@ -278,7 +291,7 @@ $ git pull origin master
 $ git blame [filename]
 ```
 
-##### Бинарный поиск
+##### Git bisect
 
 Аннотирование файла помогает, когда вы знаете, где у вас ошибка, и есть с чего начинать. Если вы не знаете, что у вас сломалось, и с тех пор, когда код работал, были сделаны десятки или сотни коммитов, вы наверняка обратитесь за помощью к `git bisect`. Команда `bisect` выполняет бинарный поиск по истории коммитов и призвана помочь, как можно быстрее определить, в каком коммите была внесена ошибка.
 
@@ -292,8 +305,16 @@ Bisecting: 6 revisions left to test after this
 [ecb6e1bc347ccecc5f9350d878ce677feb13d3b2] error handling on repo
 ```
 
+##### Useful software
 
-#### Лог
+* [TortoiseGit](https://tortoisegit.org/)
+* [SourceTree](https://www.sourcetreeapp.com/)
+* [Git Client SmartGit](http://www.syntevo.com/smartgit/)
+* [GUI Clients](https://git-scm.com/download/gui/windows)
+
+
+
+#### Git log
 
 ```sh
 # Показать список всех фиксированных изменений, всю информацию о фиксированных изменениях
@@ -309,7 +330,17 @@ $ git log --author 'Author Name'
 $ git log --since=yesterday
 ```
 
+#### Example
 
+```sh
+$ git clone https://github.com/NataliaDSmirnova/CGAdvanced2017
+$ git add filename
+$ git commit -m 'Add some feature'
+$ git status
+$ git pull --rebase
+$ git status
+$ git push -u origin
+```
 
 #### Источники
 
