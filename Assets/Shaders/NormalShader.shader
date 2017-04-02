@@ -1,4 +1,4 @@
-﻿Shader "CGA/NormalShader" {
+﻿Shader "CGA/NormalCullBackShader" {
 
 	Properties {
 		_Opacity("opacity", Range(0, 1)) = 0.6
@@ -12,6 +12,7 @@
 			}
 
 			Blend SrcAlpha OneMinusSrcAlpha
+		    Cull Back
 
 			Pass
 			{
