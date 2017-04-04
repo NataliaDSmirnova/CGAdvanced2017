@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: CubeCullBackMaterial
-  m_Shader: {fileID: 4800000, guid: bc3d889a4a929e44791d81f89d90a0c9, type: 3}
+  m_Name: CullBackMaterial
+  m_Shader: {fileID: 4800000, guid: cf9f2211da737d44388372416b90edaf, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
@@ -47,12 +47,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     - first:
         name: _MainTex
-      second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - first:
-        name: _MainTexture
       second:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -108,7 +102,7 @@ Material:
       second: 1
     - first:
         name: _Opacity
-      second: 0.55
+      second: 0.6
     - first:
         name: _Parallax
       second: 0.02

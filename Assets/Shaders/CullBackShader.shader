@@ -1,4 +1,4 @@
-﻿Shader "CGA/NormalCullFrontShader" {
+﻿Shader "CGA/CullBackShader" {
 
 	Properties{
 		_Opacity("opacity", Range(0, 1)) = 0.6
@@ -10,9 +10,7 @@
 		"Queue" = "Transparent"
 		"RenderType" = "Transparent"
 	}
-
-		Blend SrcAlpha OneMinusSrcAlpha
-		Cull Front
+		Cull Back
 
 		Pass
 	{
@@ -20,8 +18,8 @@
 
 #include "UnityCG.cginc"
 
-#pragma vertex ComputeVertex
-#pragma fragment ComputeFragment
+#pragma vertex vert
+#pragma fragment frag	
 
 		float _Opacity;
 
@@ -34,22 +32,20 @@
 	struct VertexOutput
 	{
 		float4 vertex : SV_POSITION;
-		fixed4 color : COLOR;
 	};
 
-	VertexOutput ComputeVertex(VertexInput vertexInput)
+	VertexOutput vert(VertexInput vertexInput)
 	{
 		VertexOutput vertexOutput;
 
 		vertexOutput.vertex = mul(UNITY_MATRIX_MVP, vertexInput.vertex);
 		float3 vertexNormal = abs(vertexInput.normal);
-		vertexOutput.color = float4(vertexNormal.x, vertexNormal.y, vertexNormal.z, _Opacity);
 		return vertexOutput;
 	}
 
-	fixed4 ComputeFragment(VertexOutput vertexOutput) : SV_Target
+	fixed4 frag(VertexOutput vertexOutput) : SV_Target
 	{
-		return vertexOutput.color;
+		return vertexOutput.vertex;
 	}
 
 		ENDCG
