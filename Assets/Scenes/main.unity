@@ -603,8 +603,6 @@ GameObject:
   - component: {fileID: 627916649}
   - component: {fileID: 627916650}
   - component: {fileID: 627916651}
-  - component: {fileID: 627916652}
-  - component: {fileID: 627916653}
   m_Layer: 5
   m_Name: Toggle
   m_TagString: Untagged
@@ -675,7 +673,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 869943230}
-        m_MethodName: RenderObjectOnValueChanged
+        m_MethodName: RenderToTextureOnValueChanged
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -699,34 +697,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e32e3875d1edd2445adfe5ab64a8a48c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &627916652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 627916648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7f74b3014902e343a52ea036bffdf35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CullBackMaterial: {fileID: 2100000, guid: fbf7d36594d24cb48b18032c8102abb2, type: 2}
-  CullFrontMaterial: {fileID: 2100000, guid: 25c95ef7cefc61e489a710ca6c750734, type: 2}
-  material: {fileID: 0}
---- !u!114 &627916653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 627916648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ada0191e7d5bdfa46817e607642da3e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  renderObject: {fileID: 186475685}
-  CullBackMaterial: {fileID: 2100000, guid: fbf7d36594d24cb48b18032c8102abb2, type: 2}
-  CullFrontMaterial: {fileID: 2100000, guid: 25c95ef7cefc61e489a710ca6c750734, type: 2}
 --- !u!1 &642830196
 GameObject:
   m_ObjectHideFlags: 0
@@ -816,9 +786,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f74b3014902e343a52ea036bffdf35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CullBackMaterial: {fileID: 0}
-  CullFrontMaterial: {fileID: 0}
-  material: {fileID: 0}
 --- !u!114 &642830201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -905,10 +872,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 869943228}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a93ef0113b0bc04d94f561d8395bf2e, type: 3}
+  m_Script: {fileID: 11500000, guid: ada0191e7d5bdfa46817e607642da3e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   renderObject: {fileID: 186475685}
+  CullBackMaterial: {fileID: 2100000, guid: fbf7d36594d24cb48b18032c8102abb2, type: 2}
+  CullFrontMaterial: {fileID: 2100000, guid: 25c95ef7cefc61e489a710ca6c750734, type: 2}
 --- !u!114 &869943231
 MonoBehaviour:
   m_ObjectHideFlags: 0

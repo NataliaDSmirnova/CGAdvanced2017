@@ -21,9 +21,7 @@
 #pragma vertex vert
 #pragma fragment frag	
 
-		float _Opacity;
-
-	struct VertexInput
+		struct VertexInput
 	{
 		float4 vertex : POSITION;
 		float3 normal : NORMAL;
@@ -32,6 +30,7 @@
 	struct VertexOutput
 	{
 		float4 vertex : SV_POSITION;
+		float4 wpos : TEXCOORD0;
 	};
 
 	VertexOutput vert(VertexInput vertexInput)
@@ -39,13 +38,13 @@
 		VertexOutput vertexOutput;
 
 		vertexOutput.vertex = mul(UNITY_MATRIX_MVP, vertexInput.vertex);
-		float3 vertexNormal = abs(vertexInput.normal);
+		vertexOutput.wpos = vertexInput.vertex;
 		return vertexOutput;
 	}
 
-	fixed4 frag(VertexOutput vertexOutput) : SV_Target
+	float4 frag(VertexOutput vertexOutput) : SV_Target
 	{
-		return vertexOutput.vertex;
+		return vertexOutput.wpos;
 	}
 
 		ENDCG
