@@ -20,4 +20,13 @@ public class ChangeMaterial : MonoBehaviour
     {
         cube.material = cube.sharedMaterial != originalMaterial ? originalMaterial : otherMaterial;
     }
+
+    public void OpenFileOnClick()
+    {
+        var filePath = UnityEditor.EditorUtility.OpenFilePanel("level", Application.streamingAssetsPath, "txt");
+        if (filePath.Length != 0)
+        {
+            Debug.Log(filePath);
+        }
+    }
 }
