@@ -46,7 +46,7 @@ public class RenderToTexture : MonoBehaviour {
 
         if (renderObject == null)
         {
-            Debug.Log("Object for rendering is not set");
+            // Debug.Log("Object for rendering is not set");
             return;
         }
 
@@ -54,7 +54,7 @@ public class RenderToTexture : MonoBehaviour {
         Mesh objectMesh = renderObject.GetComponent<MeshFilter>().sharedMesh;
         if (objectMesh == null)
         {
-            Debug.Log("Can't get mesh from input object");
+            //Debug.Log("Can't get mesh from input object");
             return;
         }
 
