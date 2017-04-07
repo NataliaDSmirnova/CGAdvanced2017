@@ -1,4 +1,6 @@
-﻿Shader "CGA/CullFrontShader" {
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
+Shader "CGA/CullFrontShader" {
 
 	Properties{
 		_Opacity("opacity", Range(0, 1)) = 0.6
@@ -38,7 +40,7 @@
 		VertexOutput vertexOutput;
 
 		vertexOutput.vertex = mul(UNITY_MATRIX_MVP, vertexInput.vertex);
-		vertexOutput.wpos = vertexInput.vertex;
+		vertexOutput.wpos = mul(unity_ObjectToWorld, vertexInput.vertex);
 		return vertexOutput;
 	}
 
