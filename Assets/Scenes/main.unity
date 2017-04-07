@@ -707,10 +707,6 @@ GameObject:
   - component: {fileID: 642830197}
   - component: {fileID: 642830199}
   - component: {fileID: 642830198}
-  - component: {fileID: 642830200}
-  - component: {fileID: 642830203}
-  - component: {fileID: 642830202}
-  - component: {fileID: 642830201}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -775,59 +771,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 642830196}
---- !u!114 &642830200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 642830196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7f74b3014902e343a52ea036bffdf35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &642830201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 642830196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ada0191e7d5bdfa46817e607642da3e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  renderObject: {fileID: 0}
-  CullBackMaterial: {fileID: 0}
-  CullFrontMaterial: {fileID: 0}
---- !u!114 &642830202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 642830196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ada0191e7d5bdfa46817e607642da3e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  renderObject: {fileID: 0}
-  CullBackMaterial: {fileID: 0}
-  CullFrontMaterial: {fileID: 0}
---- !u!114 &642830203
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 642830196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ada0191e7d5bdfa46817e607642da3e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  renderObject: {fileID: 0}
-  CullBackMaterial: {fileID: 0}
-  CullFrontMaterial: {fileID: 0}
 --- !u!1 &696164841
 GameObject:
   m_ObjectHideFlags: 0
