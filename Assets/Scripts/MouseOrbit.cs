@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 /// <summary>
 ///     Class <c>MouseOrbit</c> implements to operate the camera.
@@ -48,8 +49,11 @@ public class MouseOrbit : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-         //   Debug.Log("Pressed left click.");
-            SphericalMovement();
+            //   Debug.Log("Pressed left click.");
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                SphericalMovement();
+            }       
         }
         else if (Math.Abs(zoom = Input.GetAxis("Mouse ScrollWheel")) > 1E-6)
         {
