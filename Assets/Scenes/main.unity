@@ -607,6 +607,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texture: {fileID: 0}
   textureMaterial: {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  _LowBound: {x: 0, y: 0, z: 0, w: 0}
+  _HighBound: {x: 0, y: 0, z: 0, w: 0}
+  _Params: {x: 0, y: 0, z: 0, w: 0}
+  _ScreenParams: {x: 0, y: 0, z: 0, w: 0}
+  cam: {fileID: 0}
+  P:
+    e00: 0
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 0
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 0
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 0
+  V:
+    e00: 0
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 0
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 0
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 0
 --- !u!114 &186475692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1894,7 +1933,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1258915411}
   - component: {fileID: 1258915412}
-  - component: {fileID: 1258915413}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -1971,20 +2009,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &1258915413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1258915410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c43c9677572c3984e97b863f2544ab2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  renderObject: {fileID: 186475685}
-  slider: {fileID: 1258915412}
-  shader: {fileID: 4800000, guid: 8e7d6946077d19a4e9ac013bca2aa5b2, type: 3}
 --- !u!1 &1385348281
 GameObject:
   m_ObjectHideFlags: 0
