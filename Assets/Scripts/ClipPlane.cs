@@ -5,52 +5,23 @@ using UnityEngine.UI;
 
 public class ClipPlane : MonoBehaviour
 {
-
     // input objects
-    public GameObject renderObject;
     public Slider slider;
-    public Shader shader;
+    public Material clipPlaneMaterial;
 
+    // private objects
+    private Renderer cube;
     private float clipX;
 
-    // Use this for initialization
     void Start()
     {
-
+        cube = GetComponent<Renderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ClipPlaneOnValueChanged(float value)
     {
-        clipX = slider.value - 0.5f;
-    }
-
-    void OnRenderObject()
-    {
-        Graphics.SetRenderTarget(null);
-
-        // get mesh from input object
-        Mesh objectMesh = renderObject.GetComponent<MeshFilter>().sharedMesh;
-        if (objectMesh == null)
-        {
-            Debug.Log("Can't get mesh from input object");
-            return;
-        }
-
-        // get mesh renderer from input object
-        var renderer = renderObject.GetComponent<MeshRenderer>();
-        if (renderer == null)
-        {
-            Debug.Log("Can't get mesh renderer from input object");
-            return;
-        }
-
-        // activate first shader pass for our renderer
-        renderer.material.shader = shader;
-        renderer.material.SetFloat("_ClipX", clipX);
-        renderer.material.SetPass(0);
-
-        // draw mesh of input object
-        Graphics.DrawMeshNow(objectMesh, renderObject.transform.localToWorldMatrix);
+        clipX = value - 0.5f;
+        cube.sharedMaterial = clipPlaneMaterial;
+        cube.sharedMaterial.SetFloat("_ClipX", clipX);
     }
 }

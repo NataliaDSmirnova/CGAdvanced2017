@@ -511,6 +511,7 @@ GameObject:
   - component: {fileID: 186475690}
   - component: {fileID: 186475691}
   - component: {fileID: 186475692}
+  - component: {fileID: 186475693}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -658,6 +659,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   otherMaterial: {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+--- !u!114 &186475693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 186475685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c43c9677572c3984e97b863f2544ab2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 1258915412}
+  clipPlaneMaterial: {fileID: 2100000, guid: c0870a70b9996404d9cd1f1ea154d169, type: 2}
 --- !u!1 &187089938
 GameObject:
   m_ObjectHideFlags: 0
@@ -2006,7 +2020,18 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 186475693}
+        m_MethodName: ClipPlaneOnValueChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &1385348281
