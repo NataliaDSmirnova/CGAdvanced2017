@@ -75,7 +75,7 @@ Material:
       second: 1
     - first:
         name: _ClipX
-      second: -0.5
+      second: -0.35714287
     - first:
         name: _Cutoff
       second: 0.5

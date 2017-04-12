@@ -2,7 +2,7 @@
 
 	Properties{
 		_Opacity("opacity", Range(0, 1)) = 0.6
-		_ClipX("clipX", float) = 1.0
+		_ClipX("clipX", float) = 0.0
 	}
 
 		SubShader{
@@ -35,7 +35,7 @@
 	struct VertexOutput
 	{
 		float4 vertex : SV_POSITION;
-		float4 wpos: TEXTCOORD0;
+		float4 objectPos: TEXTCOORD0;
 		fixed4 color : COLOR;
 	};
 
@@ -44,7 +44,7 @@
 		VertexOutput vertexOutput;
 
 		vertexOutput.vertex = mul(UNITY_MATRIX_MVP, vertexInput.vertex);
-		vertexOutput.wpos = mul(unity_ObjectToWorld, vertexInput.vertex);
+		vertexOutput.objectPos = vertexInput.vertex;
 		float3 vertexNormal = abs(vertexInput.normal);
 		vertexOutput.color = float4(vertexNormal.x, vertexNormal.y, vertexNormal.z, _Opacity);
 		return vertexOutput;
@@ -52,7 +52,7 @@
 
 	fixed4 frag(VertexOutput vertexOutput) : SV_Target
 	{
-		if (vertexOutput.wpos.x < _ClipX)
+		if (vertexOutput.objectPos.x < _ClipX)
 		discard;
 	return vertexOutput.color;
 	}
