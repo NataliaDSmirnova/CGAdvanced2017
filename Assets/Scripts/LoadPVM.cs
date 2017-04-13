@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -30,7 +30,7 @@ public class LoadPVM : MonoBehaviour {
             Debug.Log("Empty Volume Name");
             return;
         }
-        byte []volumeData = LoadPVMFile(volumeName, ref width, ref height, ref depth, ref components);
+        LoadPVMFile(volumeName, ref width, ref height, ref depth, ref components);
         
     }
 
@@ -333,8 +333,6 @@ public class LoadPVM : MonoBehaviour {
         uint bytes = 0, numc;
 
         byte[] volume = null;
-
-        float sx = 1.0f, sy = 1.0f, sz = 1.0f;
         
         bool hadDDSHead = false;
         data = ReadDDSFile(volumeName, ref bytes, ref hadDDSHead);
@@ -366,13 +364,9 @@ public class LoadPVM : MonoBehaviour {
 
             string[] lines = result.Split('\n');
             string[] dimInfo = lines[1].Split(' ');
-            string[] scaleInfo = lines[2].Split(' ');
             width = uint.Parse(dimInfo[0]);
             height = uint.Parse(dimInfo[1]);
             depth = uint.Parse(dimInfo[2]);
-            sx = float.Parse(scaleInfo[0]);
-            sy = float.Parse(scaleInfo[1]);
-            sz = float.Parse(scaleInfo[2]);
             string[] compon = lines[3].Split(' ');
             numc = uint.Parse(compon[0]);
             components = numc;
