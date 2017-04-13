@@ -1487,7 +1487,6 @@ GameObject:
   - component: {fileID: 869943229}
   - component: {fileID: 869943232}
   - component: {fileID: 869943231}
-  - component: {fileID: 869943233}
   - component: {fileID: 869943230}
   m_Layer: 5
   m_Name: RTSprite
@@ -1557,20 +1556,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 869943228}
---- !u!114 &869943233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 869943228}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ada0191e7d5bdfa46817e607642da3e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  renderObject: {fileID: 186475685}
-  CullBackMaterial: {fileID: 2100000, guid: fbf7d36594d24cb48b18032c8102abb2, type: 2}
-  CullFrontMaterial: {fileID: 2100000, guid: 25c95ef7cefc61e489a710ca6c750734, type: 2}
 --- !u!1 &875049464
 GameObject:
   m_ObjectHideFlags: 0
