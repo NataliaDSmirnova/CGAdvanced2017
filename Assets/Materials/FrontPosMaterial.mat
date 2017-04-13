@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: CullFrontMaterial
-  m_Shader: {fileID: 4800000, guid: 5bfdfd2c9f86ee54cb812fd5a600d191, type: 3}
+  m_Name: FrontPosMaterial
+  m_Shader: {fileID: 4800000, guid: cf9f2211da737d44388372416b90edaf, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
