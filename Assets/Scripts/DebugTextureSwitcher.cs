@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RenderObject : MonoBehaviour
+public class DebugTextureSwitcher : MonoBehaviour
 {
     // private objects
     private RawImage image;
