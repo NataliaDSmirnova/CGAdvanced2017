@@ -354,8 +354,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderObject: {fileID: 186475685}
-  frontMaterial: {fileID: 2100000, guid: 25c95ef7cefc61e489a710ca6c750734, type: 2}
-  backMaterial: {fileID: 2100000, guid: fbf7d36594d24cb48b18032c8102abb2, type: 2}
+  frontMaterial: {fileID: 2100000, guid: fbf7d36594d24cb48b18032c8102abb2, type: 2}
+  backMaterial: {fileID: 2100000, guid: 25c95ef7cefc61e489a710ca6c750734, type: 2}
 --- !u!1 &87007021
 GameObject:
   m_ObjectHideFlags: 0
@@ -1525,9 +1525,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a93ef0113b0bc04d94f561d8395bf2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renderObject: {fileID: 186475685}
-  CullBackMaterial: {fileID: 2100000, guid: fbf7d36594d24cb48b18032c8102abb2, type: 2}
-  CullFrontMaterial: {fileID: 2100000, guid: 25c95ef7cefc61e489a710ca6c750734, type: 2}
 --- !u!114 &869943231
 MonoBehaviour:
   m_ObjectHideFlags: 0
