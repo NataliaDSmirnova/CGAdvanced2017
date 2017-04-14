@@ -33,21 +33,22 @@ Shader "CGA/CullBackShader" {
 	{
 		float4 vertex : SV_POSITION;
 		float4 wpos : TEXCOORD0;
-	};
+  };
 
 	VertexOutput vert(VertexInput vertexInput)
 	{
 		VertexOutput vertexOutput;
 
 		vertexOutput.vertex = mul(UNITY_MATRIX_MVP, vertexInput.vertex);
-		vertexOutput.wpos = mul(unity_ObjectToWorld, vertexInput.vertex);
-		return vertexOutput;
+	///	vertexOutput.wpos = mul(unity_ObjectToWorld, vertexInput.vertex);
+    vertexOutput.wpos = (vertexInput.vertex + 1.0) * 0.5;
+    return vertexOutput;
 	}
 
 	float4 frag(VertexOutput vertexOutput) : SV_Target
 	{
 		return vertexOutput.wpos;
-	}
+  }
 
 		ENDCG
 	}
