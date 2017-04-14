@@ -22,6 +22,18 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
+        name: _BackTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _FronTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
         name: _MainTex
       second:
         m_Texture: {fileID: 0}
@@ -29,6 +41,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     - first:
         name: _Tex3D
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _Volume
       second:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -68,6 +86,9 @@ Material:
         name: _Parallax
       second: 0.02
     - first:
+        name: _Param
+      second: 1
+    - first:
         name: _SmoothnessTextureChannel
       second: 0
     - first:
@@ -89,3 +110,6 @@ Material:
     - first:
         name: _LowBound
       second: {r: 0, g: 0, b: 0, a: 1}
+    - first:
+        name: _Params
+      second: {r: 1.7320508, g: 0.4330127, b: 0, a: 0}

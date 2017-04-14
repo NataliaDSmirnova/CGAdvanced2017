@@ -524,9 +524,9 @@ GameObject:
   - component: {fileID: 186475687}
   - component: {fileID: 186475686}
   - component: {fileID: 186475690}
-  - component: {fileID: 186475691}
   - component: {fileID: 186475692}
   - component: {fileID: 186475693}
+  - component: {fileID: 186475694}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -547,7 +547,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 40e1e8b6ad6db954dac3d05d8308b3a6, type: 2}
+  - {fileID: 2100000, guid: b82b552a212b6034a95b4733c483013f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -610,65 +610,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeedX: 10
   rotationSpeedY: 10
---- !u!114 &186475691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 186475685}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 141493bc125d589448fe239475dfb814, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  texture: {fileID: 0}
-  textureMaterial: {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
-  _LowBound: {x: 0, y: 0, z: 0, w: 0}
-  _HighBound: {x: 0, y: 0, z: 0, w: 0}
-  _Params: {x: 0, y: 0, z: 0, w: 0}
-  _ScreenParams: {x: 0, y: 0, z: 0, w: 0}
-  cam: {fileID: 0}
-  P:
-    e00: 0
-    e01: 0
-    e02: 0
-    e03: 0
-    e10: 0
-    e11: 0
-    e12: 0
-    e13: 0
-    e20: 0
-    e21: 0
-    e22: 0
-    e23: 0
-    e30: 0
-    e31: 0
-    e32: 0
-    e33: 0
-  V:
-    e00: 0
-    e01: 0
-    e02: 0
-    e03: 0
-    e10: 0
-    e11: 0
-    e12: 0
-    e13: 0
-    e20: 0
-    e21: 0
-    e22: 0
-    e23: 0
-    e30: 0
-    e31: 0
-    e32: 0
-    e33: 0
 --- !u!114 &186475692
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 186475685}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48dacb86ab906fd48aa8765a60789e15, type: 3}
   m_Name: 
@@ -680,13 +628,25 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 186475685}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c43c9677572c3984e97b863f2544ab2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1258915412}
   clipPlaneMaterial: {fileID: 2100000, guid: c0870a70b9996404d9cd1f1ea154d169, type: 2}
+--- !u!114 &186475694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 186475685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4413f387e3e5a34abc31fe15a854022, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texture: {fileID: 0}
 --- !u!1 &187089938
 GameObject:
   m_ObjectHideFlags: 0

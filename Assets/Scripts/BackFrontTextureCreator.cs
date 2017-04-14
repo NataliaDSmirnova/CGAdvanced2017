@@ -12,12 +12,12 @@ public class BackFrontTextureCreator : MonoBehaviour
     public Material backMaterial;
     public RenderTexture FrontTexture { get { return frontTexture; } }
     public RenderTexture BackTexture { get { return backTexture; } }
-
+  
     // private objects
     private RenderTexture frontTexture;
     private RenderTexture backTexture;
     private CommandBuffer buffer;
-    
+  
     void Start()
     {
         frontTexture = RenderTexture.GetTemporary(Screen.width, Screen.height, 1, RenderTextureFormat.ARGBFloat);
@@ -25,6 +25,7 @@ public class BackFrontTextureCreator : MonoBehaviour
 
         // get mesh from input object
         buffer = new CommandBuffer();
+        buffer.name = "VolumeRendering";
         GetComponent<Camera>().AddCommandBuffer(CameraEvent.BeforeForwardOpaque, buffer);
     }
 
@@ -40,7 +41,7 @@ public class BackFrontTextureCreator : MonoBehaviour
 
         // form command buffer 
         buffer.Clear();
-        if (frontTexture  != null && frontMaterial)
+        if (frontTexture != null && frontMaterial)
         {
             buffer.SetRenderTarget(frontTexture);
             buffer.ClearRenderTarget(true, true, new Color(0f, 0f, 0f));
