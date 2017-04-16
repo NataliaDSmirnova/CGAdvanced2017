@@ -21,7 +21,10 @@ public class ClipPlane : MonoBehaviour
     public void ClipPlaneOnValueChanged(float value)
     {
         clipX = value - 0.5f;
-        cube.sharedMaterial = clipPlaneMaterial;
-        cube.sharedMaterial.SetFloat("_ClipX", clipX);
+        if (cube != null)
+        {
+            cube.sharedMaterial = clipPlaneMaterial;
+            cube.sharedMaterial.SetFloat("_ClipX", clipX);
+        }
     }
 }
