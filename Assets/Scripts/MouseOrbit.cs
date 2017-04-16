@@ -35,6 +35,9 @@ public class MouseOrbit : MonoBehaviour
     private float yEulerAngles;
     private float zoom;
 
+    private int lastScreenWidth;
+    private int lastScreenHeight;
+
     private void Start()
     {
         target = transform;
@@ -43,6 +46,9 @@ public class MouseOrbit : MonoBehaviour
         var angles = transform.eulerAngles;
         xEulerAngles = angles.x;
         yEulerAngles = angles.y;
+
+        lastScreenWidth = Screen.width;
+        lastScreenHeight = Screen.height;
     }
 
     private void LateUpdate()
@@ -50,7 +56,8 @@ public class MouseOrbit : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             //   Debug.Log("Pressed left click.");
-            if (!EventSystem.current.IsPointerOverGameObject())
+            if (EventSystem.current.currentSelectedGameObject == null && MouseIsInScreenField() && 
+                !ScreenIsResized())
             {
                 SphericalMovement();
             }       
@@ -113,5 +120,25 @@ public class MouseOrbit : MonoBehaviour
         if (angle > 360F)
             angle -= 360F;
         return Mathf.Clamp(angle, min, max);
+    }
+
+    public static bool MouseIsInScreenField()
+    {
+        if (Input.mousePosition.x <= 0 || Input.mousePosition.x >= Screen.width)
+            return false;
+        if (Input.mousePosition.y <= 0 || Input.mousePosition.y >= Screen.height)
+            return false;
+        return true;
+    }
+
+    public bool ScreenIsResized()
+    {
+        if (lastScreenWidth != Screen.width || lastScreenHeight != Screen.height)
+        {
+            lastScreenWidth = Screen.width;
+            lastScreenHeight = Screen.height;
+            return true;
+        }
+        return false;
     }
 }
