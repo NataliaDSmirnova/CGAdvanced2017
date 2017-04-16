@@ -1,4 +1,3 @@
 <img
-  src="/img/create_repository.png"
-  align="middle"
+  src="Doc/SourceTree/create_repository.png"
 />
