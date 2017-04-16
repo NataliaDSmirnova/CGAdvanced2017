@@ -22,7 +22,7 @@
 2. Введите *BitbucketStationSupplies* в поле **Name**. <br/>
 Bitbucket использует **Name** в URL репозитория. Например, если пользователь *the_best* создаст репозиторий с именем *awesome_repo*, то URL репозитория будет https://bitbucket.org/the_best/awesome_repo.
 3. **Access level**. Частный репозиторий только для вас и тех, кто вам предоставляет доступ к репозиторию. Если этот флаг не установлен, каждый может увидеть ваш репозиторий.
-4. В зависимости от типа репозитория, можно выбрать git или mercurial для **Repository type**. Имейте в виду, что вы не можете изменить **Repository type** после нажатия кнопки **Create repository**.
+4. В зависимости от типа репозитория, можно выбрать git или mercurial для **Repository type**. Имейте в виду, что вы не сможете изменить **Repository type** после нажатия кнопки **Create repository**.
 5. Нажмите  **Create repository**.
 Bitbucket создаст ваш репозиторий и отобразит страницу **Overview**.
 
