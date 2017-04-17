@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class Volume : MonoBehaviour
 {
+    //
+    public LoadPVM lPVM;
+    private string volumeName = "Baby.pvm";
+    //
+
     public Texture3D texture;
     private Material textureMaterial;
     private string texFileName = "Default3DTexture";
@@ -21,7 +26,8 @@ public class Volume : MonoBehaviour
         var renderer = GetComponent<MeshRenderer>();
         textureMaterial = renderer != null ? renderer.sharedMaterial : null; 
 
-        LoadCustomTextureData();
+        //LoadCustomTextureData();
+        LoadTextureDataFromPVM();
 
         // get texture creator from camera
         texCreator = Camera.main.GetComponent<BackFrontTextureCreator>();
@@ -72,6 +78,33 @@ public class Volume : MonoBehaviour
         }
 
         texture = new Texture3D(dimX, dimY, dimZ, TextureFormat.RGBA32, false);
+        texture.SetPixels32(colors);
+        texture.Apply();
+    }
+
+    private void LoadTextureDataFromPVM()
+    {
+        uint width = 0;
+        uint height = 0;
+        uint depth = 0;
+        uint components = 0;
+        if (volumeName.Length == 0)
+        {
+            Debug.Log("Empty Volume Name");
+            return;
+        }
+
+        if (lPVM == null)
+        {
+            lPVM = new LoadPVM();
+        }
+        Color32[] colors = lPVM.LoadPVMFile(volumeName, ref width, ref height, ref depth, ref components);
+        int dimX = 1, dimY = 1, dimZ = 1;
+        dimX = (int)width;
+        dimY = (int)height;
+        dimZ = (int)depth;
+        texture = new Texture3D(dimX, dimY, dimZ, TextureFormat.RGBA32, false);
+
         texture.SetPixels32(colors);
         texture.Apply();
     }

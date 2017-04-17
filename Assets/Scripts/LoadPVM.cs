@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
-public class LoadPVM : MonoBehaviour {
+public class LoadPVM {
     //fields
-    public string volumeName = "BluntFin.pvm";
-    
     private int currentBit = 0;
     private byte currentByte;
 
@@ -18,35 +16,113 @@ public class LoadPVM : MonoBehaviour {
     // properties
     // methods
 
-
-    void Start ()
+    // We need 2^n dimensions
+    uint countNewDim(uint Dim)
     {
-        uint width = 0;
-        uint height = 0;
-        uint depth = 0;
-        uint components = 0;
-        if (volumeName.Length == 0)
+        uint newDim = 1;
+        while (newDim < Dim)
         {
-            Debug.Log("Empty Volume Name");
-            return;
+            newDim *= 2;
         }
-        LoadPVMFile(volumeName, ref width, ref height, ref depth, ref components);
-        
-    }
-
-    void Update ()
-    {
-    }
-
-    public byte[] LoadPVMFile(string volumeName, ref uint width, ref uint height, ref uint depth, ref uint components)
-    {
-        byte[] raw = ReadPVMVolume(volumeName, ref width, ref height, ref depth, ref components);
-        //normalizeData(voxelCount, components, raw, ref dst);
-        return raw;
+        return newDim;
     }
     
 
-    private bool? ReadBit(ref BinaryReader binReader, bool bigEndian = false)
+    byte[] compress16to8(byte[] inputData)
+    {
+        int newLength = inputData.Length / 2;
+        byte[] retArray = new byte[newLength];
+        for (int i = 0; i < newLength; ++i)
+        {
+            retArray[i] = inputData[i * 2 + 1];
+        }
+        return retArray;
+    }
+
+
+    public Color32[] LoadPVMFile(string volumeName, ref uint width, ref uint height, ref uint depth, ref uint components)
+    {
+        byte[] raw = ReadPVMVolume(volumeName, ref width, ref height, ref depth, ref components);
+        uint nwidth, nheight, ndepth;
+        nwidth = countNewDim(width);
+        nheight = countNewDim(height);
+        ndepth = countNewDim(depth);
+        
+        uint nsize = nwidth * nheight * ndepth;
+        Color32[] retArr = new Color32[nsize];
+        for (uint i = 0; i < nsize; ++i)
+        {
+            retArr[i] = new Color32(0, 0, 0, 255);
+        }
+        if (components == 1)
+        {
+            for (uint z = 0; z < depth; ++z)
+            {
+                for (uint y = 0; y < height; ++y)
+                {
+                    for (uint x = 0; x < width; ++x)
+                    {
+                        uint nIndex = x + y * nwidth + z * nwidth * nheight;
+                        uint oIndex = x + y * width + z * width * height;
+                        retArr[nIndex].r = raw[oIndex];
+                        retArr[nIndex].g = raw[oIndex];
+                        retArr[nIndex].b = raw[oIndex];
+                    }
+                }
+            }
+        }
+        else if (components == 3)
+        {
+            for (uint z = 0; z < depth; ++z)
+            {
+                for (uint y = 0; y < height; ++y)
+                {
+                    for (uint x = 0; x < width; ++x)
+                    {
+                        uint nIndex = x + y * nwidth + z * nwidth * nheight;
+                        uint oIndex = (x + y * width + z * width * height) * 3;
+
+                        retArr[nIndex].r = raw[oIndex];
+                        retArr[nIndex].g = raw[oIndex + 1];
+                        retArr[nIndex].b = raw[oIndex + 2];
+
+                    }
+                }
+            }
+        }
+        else if (components == 2)
+        {
+            byte[] nRaw = compress16to8(raw);
+            for (uint z = 0; z < depth; ++z)
+            {
+                for (uint y = 0; y < height; ++y)
+                {
+                    for (uint x = 0; x < width; ++x)
+                    {
+                        uint nIndex = x + y * nwidth + z * nwidth * nheight;
+                        uint oIndex = x + y * width + z * width * height;
+
+                        retArr[nIndex].r = nRaw[oIndex];
+                        retArr[nIndex].g = nRaw[oIndex];
+                        retArr[nIndex].b = nRaw[oIndex];
+
+                    }
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("Component Error");
+        }
+
+        width = nwidth;
+        height = nheight;
+        depth = ndepth;
+        return retArr;
+    }
+
+
+    private bool? ReadBit(ref BinaryReader binReader)
     {
         if (currentBit == 0 || currentBit == 8)
         {
@@ -58,15 +134,9 @@ public class LoadPVM : MonoBehaviour {
             currentBit = 0;
         }
         bool outputBit;
-        if (!bigEndian)
-        {
-            outputBit = (currentByte & (1 << currentBit)) > 0;
-        }
-        else
-        {
-            outputBit = (currentByte & (1 << (7 - currentBit))) > 0;
-        }
 
+        outputBit = (currentByte & (1 << (7 - currentBit))) > 0;
+        
         ++currentBit;
         return outputBit;
     }
@@ -79,7 +149,7 @@ public class LoadPVM : MonoBehaviour {
         for (int i = 0; i < bits; ++i)
         {
             outputNBits = outputNBits << 1;
-            bool? curBit = ReadBit(ref binReader, true);
+            bool? curBit = ReadBit(ref binReader);
             if (curBit == null)
             {
                 return 0;
