@@ -5,6 +5,10 @@
     _Volume("VolumeTex", 3D) = "" {}
     _BackTex("BackFaceTex", 2D) = "white" {}
     _FronTex("FrontFaceTex", 2D) = "white" {}
+    _Step("Step size", Float) = 0.05
+    _StepFactor("Step factor", Range(0.5, 2.0)) = 1.0
+    _IENB("Inverted estimated number of blocks", Float) = 0.05
+    _Opacity("Opacity border", Float) = 0.0   
   }
 
     SubShader
@@ -39,6 +43,10 @@
         sampler2D _FrontTex;
 
         sampler3D _Volume;
+        float _Step;
+        float _StepFactor;
+        float _IENB;
+        float _Opacity;
  
         v2f vert(appdata v)
         {
@@ -66,20 +74,24 @@
           // ray throush the volume
           float3 dir = back.xyz - front.xyz;
           float length = distance(front, back);
-          float step = 0.05;
+          float step = _Step * _StepFactor;
           float3 stepDir = step * dir;
 
           // walk along the ray sampling the volume
           float3 pos = front;
-          float3 color = float3(0, 0, 0);
+          float3 sampledColor = float3(0, 0, 0), 
+            color = float3(0, 0, 0);
           for (int i = 0; i < 30; i++)
           {
             if (distance(pos, back) < step * 0.5) break; // check when reach the back  
-            color += tex3D(_Volume, pos.xyz).rgb * 0.05;
+            sampledColor = tex3D(_Volume, pos.xyz).rrr;
+            if (sampledColor.r < _Opacity)
+              sampledColor = 0;
+            color += sampledColor * _IENB;
             pos += stepDir;
           }
           // temp color
-          return float4 (color, max(color.b, max(color.r, color.g)));
+          return float4 (color, color.r);
         }
       ENDCG
     }

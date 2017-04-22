@@ -77,7 +77,7 @@ public class Volume : MonoBehaviour
             new Color32(byte.Parse(colorData[0]), byte.Parse(colorData[1]), byte.Parse(colorData[2]), 255);
         }
 
-        texture = new Texture3D(dimX, dimY, dimZ, TextureFormat.RGBA32, false);
+        texture = new Texture3D(dimX, dimY, dimZ, TextureFormat.RFloat, false);
         texture.SetPixels32(colors);
         texture.Apply();
     }
@@ -103,7 +103,7 @@ public class Volume : MonoBehaviour
         dimX = (int)width;
         dimY = (int)height;
         dimZ = (int)depth;
-        texture = new Texture3D(dimX, dimY, dimZ, TextureFormat.RGBA32, false);
+        texture = new Texture3D(dimX, dimY, dimZ, TextureFormat.RFloat, false);
 
         texture.SetPixels32(colors);
         texture.Apply();
