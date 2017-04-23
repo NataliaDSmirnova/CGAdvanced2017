@@ -2,15 +2,15 @@
 
 # Содержание
 
-* [Установка SourceTree](#Create-a-Git-repository)
-* [Создание Git-репозитория на сервере](#Create-a-Git-repository)
-* [Клонирование вашего репозитория на локальный компьютер](#Copy-your-repository-and-add-files)
-* [Получение изменений из удаленного репозитория](#Pull-changes-from-your-repository-on-Bitbucket)
-* [Отправка изменений на Bitbucket](#Create-a-branch-and-make-a-change)
-* [Слияние веток в SourceTree](#Merge-file-changes-from-a-branch)
-* [Получение изменений из Bitbucket](#Push-your-change-to-Bitbucket)
-* [Сочетание клавиш в Bitbucket](#SourceTree-Keyboard-Shortcuts)
-* [Блог SourceTree](#SourceTree-Blog)
+* [Установка SourceTree](#install-sourcetree)
+* [Создание Git-репозитория на сервере](#create-a-git-repository)
+* [Клонирование вашего репозитория на локальный компьютер](#copy-your-repository-and-add-files)
+* [Получение изменений из удаленного репозитория](#pull-changes-from-your-repository-on-bitbucket)
+* [Отправка изменений на Bitbucket](#create-a-branch-and-make-a-change)
+* [Слияние веток в SourceTree](#merge-file-changes-from-a-branch)
+* [Получение изменений из Bitbucket](#push-your-change-to-bitbucket)
+* [Сочетание клавиш в Bitbucket](#sourcetree-keyboard-shortcuts)
+* [Блог SourceTree](#sourceTree-blog)
 
 #### Install SourceTree
 
