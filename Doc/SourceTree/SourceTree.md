@@ -152,7 +152,7 @@ telescope light shield
   src="img/sourcetree_updated.png"
 />
 
-7. Чтобы добавить изменение, выберете **Stage file** из дополнительного меню, нажав на *supplies.txt* файл. 
+7. Чтобы добавить изменение, выберите **Stage file** из дополнительного меню, нажав на *supplies.txt* файл. 
 
 <img
   src="img/files_stage_git2.png"
