@@ -5,10 +5,10 @@
 * [Установка SourceTree](#install-sourcetree)
 * [Создание Git-репозитория на сервере](#create-a-git-repository)
 * [Клонирование вашего репозитория на локальный компьютер](#copy-your-repository-and-add-files)
-* [Получение изменений из удаленного репозитория](#pull-changes-from-your-repository-on-bitbucket)
 * [Отправка файла в Bitbucket](#push-a-file-to-bitbucket)
 * [Создание новых веток в Bitbucket](#create-a-branch-and-make-a-change)
 * [Слияние веток в SourceTree](#merge-file-changes-from-a-branch)
+* [Получение изменений из удаленного репозитория](#pull-changes-from-your-repository-on-bitbucket)
 * [Получение изменений из Bitbucket](#push-your-change-to-bitbucket)
 * [Сочетание клавиш в Bitbucket](#sourcetree-keyboard-shortcuts)
 * [Блог SourceTree](#sourcetree-blog)
@@ -207,6 +207,9 @@ telescope light shield
   src="img/mer_st_main_branch.png"
 />
 
+Более подробно о том, как использовать слияние веток, можно посмотреть [тут](https://blog.sourcetreeapp.com/2012/08/21/merge-or-rebase/).
+
+Более подробно о том, как разрешать конфликты слияния, можно посмотреть [тут](http://we.easyelectronics.ru/CADSoft/git-v-domashnem-hozyaystve-chast-2-uou-uou-potishe-ne-konfliktuy.html).
 
 #### Pull changes from your repository on Bitbucket
 
@@ -228,13 +231,12 @@ telescope light shield
 
 3. Перейдите в директорию своего репозитория на вашем локальном комьютере и вы увидите то, что только что добавили.
 
-Более подробно про данную команду можно посмотреть [тут](https://blog.sourcetreeapp.com/2012/08/21/merge-or-rebase/).
-
 
 #### Push your change to Bitbucket
 
 1. Из *SourceTree* нажмите кнопку **Push** для отправления ваших изменений.
 2. Из появившегося диалогового окна нажмите кнопку **OK**, чтобы отправить изменения на удаленный сервер.
+
 
 
 #### SourceTree Keyboard Shortcuts
