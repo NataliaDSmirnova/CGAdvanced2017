@@ -1,20 +1,23 @@
 # Инструкция по использованию SourceTree
 
-# Содержание
+## Содержание
 
 * [Установка SourceTree](#install-sourcetree)
 * [Создание Git-репозитория на сервере](#create-a-git-repository)
 * [Клонирование вашего репозитория на локальный компьютер](#copy-your-repository-and-add-files)
 * [Получение изменений из удаленного репозитория](#pull-changes-from-your-repository-on-bitbucket)
-* [Отправка изменений на Bitbucket](#create-a-branch-and-make-a-change)
+* [Отправка файла в Bitbucket](#push_a_file_to_bitbucket)
+* [Отправка новых веток в Bitbucket](#create-a-branch-and-make-a-change)
 * [Слияние веток в SourceTree](#merge-file-changes-from-a-branch)
 * [Получение изменений из Bitbucket](#push-your-change-to-bitbucket)
 * [Сочетание клавиш в Bitbucket](#sourcetree-keyboard-shortcuts)
-* [Блог SourceTree](#sourceTree-blog)
+* [Блог SourceTree](#sourcetree-blog)
+
 
 #### Install SourceTree
 
 Нажмите [сюда](https://www.sourcetreeapp.com/), чтобы скачать и установить SourceTree.
+
 
 #### Create a Git repository
 
@@ -44,6 +47,7 @@ Bitbucket создаст ваш репозиторий и отобразит с�
 
 Чтобы ознакомиться с тем, как создать репозиторий на GitHub, нажмите [сюда](https://help.github.com/articles/create-a-repo/).
 
+
 #### Copy your repository and add files
 
 Используйте SourceTree для клонирования вашего репозитория на локальный компьютер без использования командной строки.
@@ -63,7 +67,8 @@ Bitbucket создаст ваш репозиторий и отобразит с�
 
 4. Нажмите на кнопку **Clone**.
 
-#### Создание файла, добавление его локально и отправка в Bitbucket
+
+#### Push a file to Bitbucket
 
 1. Дважды щелкните на *bitbucketstationsupplies* репозиторий в *SourceTree* и увидите, что нет ничего, что можно было бы отправить из локального репозитория в удаленный репозиторий.
 
@@ -165,6 +170,7 @@ telescope light shield
   src="img/sourcetree_othercommit.png"
 />
 
+
 #### Merge file changes from a branch
 
 1. Сначала нужно вернуться в основную ветку, для этого в левостороннем меню выберите *Branches*.
@@ -200,6 +206,7 @@ telescope light shield
 <img
   src="img/mer_st_main_branch.png"
 />
+
 
 #### Pull changes from your repository on Bitbucket
 
