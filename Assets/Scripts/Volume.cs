@@ -7,7 +7,6 @@ public class Volume : MonoBehaviour
 {
     //
     public LoadPVM lPVM;
-    private string volumeName = "Baby.pvm";
     //
 
     public Texture3D texture;
@@ -26,12 +25,11 @@ public class Volume : MonoBehaviour
         var renderer = GetComponent<MeshRenderer>();
         textureMaterial = renderer != null ? renderer.sharedMaterial : null; 
 
-        //LoadCustomTextureData();
-        LoadTextureDataFromPVM();
 
         // get texture creator from camera
         texCreator = Camera.main.GetComponent<BackFrontTextureCreator>();
     }
+    
 
     // Update is called once per frame
     void OnWillRenderObject()
@@ -82,7 +80,7 @@ public class Volume : MonoBehaviour
         texture.Apply();
     }
 
-    private void LoadTextureDataFromPVM()
+    public void LoadTextureDataFromPVM(string volumeName)
     {
         uint width = 0;
         uint height = 0;

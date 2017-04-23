@@ -6,23 +6,20 @@ public class DropDownLog : MonoBehaviour {
 
     public UnityEngine.UI.Dropdown d;
     public string standartNamePVM;
-
-    void Log(int arg)
-    {
-        string optionselected = d.captionText.text;
-        Debug.Log(optionselected);
-    }
+    private Volume volumeClass;
+    
 
     // Use this for initialization
     void Start()
     {
         if (d != null)
         {
-            d.onValueChanged.AddListener(Log);
-            Debug.Log("Hello");
 
+            GameObject cubeObj = GameObject.Find("Cube");
+            volumeClass = cubeObj.GetComponent<Volume>();
 
-           // List<string> PVMInResources = new List<string>();
+            d.onValueChanged.AddListener(OnValueChange);
+            // List<string> PVMInResources = new List<string>();
             string pathResources = "Assets/Resources/";
             System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(pathResources);
             System.IO.FileInfo[] files = dir.GetFiles("*.pvm");
@@ -49,6 +46,11 @@ public class DropDownLog : MonoBehaviour {
     void Update()
     {
 
+    }
+
+    void OnValueChange(int arg)
+    {
+        volumeClass.LoadTextureDataFromPVM(d.captionText.text);
     }
 
 }

@@ -42,6 +42,7 @@ public class LoadPVM {
 
     public Color32[] LoadPVMFile(string volumeName, ref uint width, ref uint height, ref uint depth, ref uint components)
     {
+        currentBit = 0;
         byte[] raw = ReadPVMVolume(volumeName, ref width, ref height, ref depth, ref components);
         uint nwidth, nheight, ndepth;
         nwidth = countNewDim(width);
