@@ -40,8 +40,8 @@ Shader "CGA/CullBackShader" {
 		VertexOutput vertexOutput;
 
 		vertexOutput.vertex = mul(UNITY_MATRIX_MVP, vertexInput.vertex);
-	///	vertexOutput.wpos = mul(unity_ObjectToWorld, vertexInput.vertex);
-    vertexOutput.wpos = (vertexInput.vertex + 1.0) * 0.5;
+	    vertexOutput.wpos = mul(unity_ObjectToWorld, vertexInput.vertex);
+        vertexOutput.wpos = (vertexOutput.wpos + 1.0) * 0.5;
     return vertexOutput;
 	}
 
