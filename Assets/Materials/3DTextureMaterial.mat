@@ -56,6 +56,9 @@ Material:
         name: _BumpScale
       second: 1
     - first:
+        name: _ClipX
+      second: 0
+    - first:
         name: _Cutoff
       second: 0.5
     - first:
@@ -74,6 +77,9 @@ Material:
         name: _GlossyReflections
       second: 1
     - first:
+        name: _IENB
+      second: 0.05
+    - first:
         name: _Metallic
       second: 0
     - first:
@@ -82,6 +88,9 @@ Material:
     - first:
         name: _OcclusionStrength
       second: 1
+    - first:
+        name: _Opacity
+      second: 0
     - first:
         name: _Parallax
       second: 0.02
@@ -96,6 +105,12 @@ Material:
       second: 1
     - first:
         name: _SrcBlend
+      second: 1
+    - first:
+        name: _Step
+      second: 0.05
+    - first:
+        name: _StepFactor
       second: 1
     - first:
         name: _UVSec
