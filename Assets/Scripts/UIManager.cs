@@ -1,0 +1,169 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class UIManager : MonoBehaviour {
+
+    public GameObject panelD;
+    public bool isPanelDShow;
+    public GameObject panelF;
+    public bool isPanelFShow;
+    public GameObject panelH;
+    public bool isPanelHShow;
+    public GameObject panelL;
+    public bool isPanelLShow;
+
+    public UnityEngine.UI.Toggle toggleH;
+    public GameObject sliderH;
+    public UnityEngine.UI.Toggle toggleV;
+    public GameObject sliderV;
+
+    public GameObject panelModeXRay;
+    public GameObject panelModeVR;
+    public GameObject panelModeSurface;
+
+    public GameObject panelRGB;
+    public GameObject panelShininess;
+
+
+    // Use this for initialization
+    void Start ()
+    {
+
+        panelD.SetActive(isPanelDShow);
+        panelF.SetActive(isPanelFShow);
+        panelH.SetActive(isPanelHShow);
+        panelL.SetActive(isPanelLShow);
+
+        panelModeXRay.SetActive(true);
+        panelModeVR.SetActive(false);
+        panelModeSurface.SetActive(false);
+
+        panelRGB.SetActive(false);
+        panelShininess.SetActive(false);
+    }
+	
+	// Update is called once per frame
+	void Update ()
+    {
+		if (Input.GetKeyDown(KeyCode.D))
+        {
+            if (isPanelDShow)
+            {
+                isPanelDShow = false;
+                panelD.SetActive(isPanelDShow);
+            }
+            else
+            {
+                isPanelDShow = true;
+                panelD.SetActive(isPanelDShow);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (isPanelFShow)
+            {
+                isPanelFShow = false;
+                panelF.SetActive(isPanelFShow);
+            }
+            else
+            {
+                isPanelFShow = true;
+                panelF.SetActive(isPanelFShow);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            if (isPanelLShow)
+            {
+                isPanelLShow = false;
+                panelL.SetActive(isPanelLShow);
+            }
+            else
+            {
+                isPanelLShow = true;
+                panelL.SetActive(isPanelLShow);
+            }
+        }
+    }
+
+    public void PanelHClose()
+    {
+        isPanelHShow = false;
+        panelH.SetActive(isPanelHShow);
+    }
+
+    public void PanelHOpen()
+    {
+        isPanelHShow = true;
+        panelH.SetActive(isPanelHShow);
+    }
+    
+    public void OnClickToggleH()
+    {
+        sliderH.SetActive(toggleH.isOn);
+    }
+
+    public void OnClickToggleV()
+    {
+        sliderV.SetActive(toggleV.isOn);
+    }
+
+    public void ChangeMode(UnityEngine.UI.Dropdown d)
+    {
+
+        switch (d.value)
+        {
+            case 0:
+                panelModeXRay.SetActive(true);
+                panelModeVR.SetActive(false);
+                panelModeSurface.SetActive(false);
+
+                panelRGB.SetActive(false);
+                panelShininess.SetActive(false);
+                break;
+            case 1:
+                panelModeXRay.SetActive(false);
+                panelModeVR.SetActive(true);
+                panelModeSurface.SetActive(false);
+
+                panelRGB.SetActive(false);
+                panelShininess.SetActive(false);
+           
+                break;
+            case 2:
+                panelModeXRay.SetActive(false);
+                panelModeVR.SetActive(false);
+                panelModeSurface.SetActive(true);
+
+                panelRGB.SetActive(true);
+                panelShininess.SetActive(false);
+                break;
+            default:
+                panelModeXRay.SetActive(false);
+                panelModeVR.SetActive(false);
+                panelModeSurface.SetActive(false);
+
+                panelRGB.SetActive(false);
+                panelShininess.SetActive(false);
+                break;
+        }
+    }
+
+    public void ChangeReflParams(UnityEngine.UI.Dropdown param)
+    {
+        if (param.value == 3)
+        {
+            panelRGB.SetActive(false);
+            panelShininess.SetActive(true);
+        }
+        else
+        {
+            panelRGB.SetActive(true);
+            panelShininess.SetActive(false);
+        }
+    }
+
+}
