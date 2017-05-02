@@ -8,7 +8,8 @@
     _Step("Step size", Float) = 0.05
     _StepFactor("Step factor", Range(0.5, 2.0)) = 1.0
     _IENB("Inverted estimated number of blocks", Float) = 0.05
-    _Opacity("Opacity border", Float) = 0.0   
+    _Opacity("Opacity border", Float) = 0.0  
+	_ClipX("clipX", Float) = -0.5
   }
 
     SubShader
@@ -36,6 +37,7 @@
         {
           float4 screenSpacePos : TEXCOORD0;
           float3 uvw : TEXCOORD1;
+		  float4 objectPos : TEXCOORD2;
           float4 vertex : SV_POSITION;
         };
 
@@ -47,12 +49,14 @@
         float _StepFactor;
         float _IENB;
         float _Opacity;
+		float _ClipX;
  
         v2f vert(appdata v)
         {
           v2f o;
           o.vertex = mul(UNITY_MATRIX_MVP, v.vertex); 
           o.uvw = v.uvw;
+		  o.objectPos = v.vertex;
           o.screenSpacePos = o.vertex;
           return o;
         }
@@ -65,6 +69,9 @@
 
         float4 frag(v2f pix) : SV_TARGET0
         {
+			if (pix.objectPos.x < _ClipX)
+			discard;
+
           // screencoordinates
           float3 tc = pix.screenSpacePos.xyz / pix.screenSpacePos.w * 0.5 + 0.5;
           // get front, back pos for ray in [0, 1] cube

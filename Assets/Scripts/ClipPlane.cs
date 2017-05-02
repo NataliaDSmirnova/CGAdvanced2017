@@ -7,24 +7,22 @@ public class ClipPlane : MonoBehaviour
 {
     // input objects
     public Slider slider;
-    public Material clipPlaneMaterial;
 
     // private objects
-    private Renderer cube;
+    private new Renderer renderer;
     private float clipX;
 
     void Start()
     {
-        cube = GetComponent<Renderer>();
+        renderer = GetComponent<Renderer>();
     }
 
-    public void ClipPlaneOnValueChanged(float value)
+    public void OnValueChanged(float value)
     {
-        clipX = value - 0.5f;
-        if (cube != null)
+        clipX = value;
+        if (renderer != null)
         {
-            cube.sharedMaterial = clipPlaneMaterial;
-            cube.sharedMaterial.SetFloat("_ClipX", clipX);
+            renderer.sharedMaterial.SetFloat("_ClipX", clipX);
         }
     }
 }

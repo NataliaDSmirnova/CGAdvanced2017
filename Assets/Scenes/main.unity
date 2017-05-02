@@ -624,13 +624,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 186475685}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c43c9677572c3984e97b863f2544ab2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1258915412}
-  clipPlaneMaterial: {fileID: 2100000, guid: c0870a70b9996404d9cd1f1ea154d169, type: 2}
 --- !u!114 &186475694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1982,15 +1981,15 @@ MonoBehaviour:
   m_FillRect: {fileID: 1937408013}
   m_HandleRect: {fileID: 187089939}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -0.5
+  m_MaxValue: 0.51
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: -0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 186475693}
-        m_MethodName: ClipPlaneOnValueChanged
+        m_MethodName: OnValueChanged
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
