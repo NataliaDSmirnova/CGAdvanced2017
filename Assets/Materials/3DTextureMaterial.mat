@@ -80,6 +80,9 @@ Material:
         name: _IENB
       second: 0.05
     - first:
+        name: _IsosurfaceThreshold
+      second: 0.05
+    - first:
         name: _Metallic
       second: 0
     - first:

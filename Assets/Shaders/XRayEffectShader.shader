@@ -37,7 +37,6 @@
         {
           float4 screenSpacePos : TEXCOORD0;
           float3 uvw : TEXCOORD1;
-		  float4 objectPos : TEXCOORD2;
           float4 vertex : SV_POSITION;
         };
 
@@ -56,7 +55,6 @@
           v2f o;
           o.vertex = mul(UNITY_MATRIX_MVP, v.vertex); 
           o.uvw = v.uvw;
-		  o.objectPos = v.vertex;
           o.screenSpacePos = o.vertex;
           return o;
         }
@@ -69,9 +67,6 @@
 
         float4 frag(v2f pix) : SV_TARGET0
         {
-			if (pix.objectPos.x < _ClipX)
-			discard;
-
           // screencoordinates
           float3 tc = pix.screenSpacePos.xyz / pix.screenSpacePos.w * 0.5 + 0.5;
           // get front, back pos for ray in [0, 1] cube
@@ -85,12 +80,19 @@
           float3 stepDir = step * dir;
 
           // walk along the ray sampling the volume
-          float3 pos = front;
+          float3 pos = front, objectPos;
           float3 sampledColor = float3(0, 0, 0), 
             color = float3(0, 0, 0);
           for (int i = 0; i < 30; i++)
           {
             if (distance(pos, back) < step * 0.5) break; // check when reach the back  
+			objectPos = 2 * pos - 1;
+			objectPos = mul(unity_WorldToObject, objectPos);
+			if (objectPos.x < _ClipX) 
+			{
+				pos += stepDir;
+				continue;
+			}
             sampledColor = tex3D(_Volume, pos.xyz).rrr;
             if (sampledColor.r < _Opacity)
               sampledColor = 0;
