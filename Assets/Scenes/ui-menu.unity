@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2917,7 +2917,6 @@ GameObject:
   - component: {fileID: 545477976}
   - component: {fileID: 545477978}
   - component: {fileID: 545477977}
-  - component: {fileID: 545477979}
   m_Layer: 5
   m_Name: PanelDebug
   m_TagString: Untagged
@@ -2978,17 +2977,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 545477975}
---- !u!114 &545477979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 545477975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dd72dcbfeaceb047bc4a9309ee7b36a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &549787067
 GameObject:
   m_ObjectHideFlags: 0
@@ -5450,7 +5438,6 @@ GameObject:
   - component: {fileID: 1020657405}
   - component: {fileID: 1020657408}
   - component: {fileID: 1020657407}
-  - component: {fileID: 1020657406}
   m_Layer: 5
   m_Name: PanelLog
   m_TagString: Untagged
@@ -5477,17 +5464,6 @@ RectTransform:
   m_AnchoredPosition: {x: -23, y: 71}
   m_SizeDelta: {x: 605, y: 122}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1020657406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1020657404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e94d78376e70839419796ed5b6f9de35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1020657407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5979,7 +5955,20 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Help Text
+  m_Text: 'Help for CGAdvanced2017 application
+
+
+    1) If you want to turn on/off fps window,
+
+    press button F
+
+    2) If you want to turn on/off console log
+
+    window, press button L
+
+    3) If you want to turn on/off debug window,
+
+    press button D'
 --- !u!222 &1099759111
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7388,7 +7377,6 @@ GameObject:
   - component: {fileID: 1340335575}
   - component: {fileID: 1340335577}
   - component: {fileID: 1340335576}
-  - component: {fileID: 1340335578}
   m_Layer: 5
   m_Name: PanelHelp
   m_TagString: Untagged
@@ -7449,17 +7437,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1340335574}
---- !u!114 &1340335578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1340335574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f845b68992d7244db90368a1f9a3bad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1366915519
 GameObject:
   m_ObjectHideFlags: 0
@@ -7912,7 +7889,6 @@ GameObject:
   - component: {fileID: 1430465068}
   - component: {fileID: 1430465070}
   - component: {fileID: 1430465069}
-  - component: {fileID: 1430465071}
   m_Layer: 5
   m_Name: PanelFPS
   m_TagString: Untagged
@@ -7972,17 +7948,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1430465067}
---- !u!114 &1430465071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1430465067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07896b5a74404524287ac1fe60703d6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1436502383
 GameObject:
   m_ObjectHideFlags: 0
