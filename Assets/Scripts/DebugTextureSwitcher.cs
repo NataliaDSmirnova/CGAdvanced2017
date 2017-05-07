@@ -24,9 +24,6 @@ public class DebugTextureSwitcher : MonoBehaviour
         float imageHeight = image.rectTransform.sizeDelta.y;
         float imageWidth = imageHeight * Screen.width / (float)Screen.height;
         image.rectTransform.sizeDelta = new Vector2(imageWidth, imageHeight);
-        // fix position of image in left lower corner
-        image.rectTransform.anchoredPosition = new Vector2((imageWidth - Screen.width) / 2,
-                                                           (imageHeight - Screen.height) / 2);
 
         // renew texture 
         SetTexture();

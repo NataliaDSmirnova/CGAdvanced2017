@@ -9,6 +9,7 @@
 		_StepFactor("Step factor", Range(0.5, 2.0)) = 1.0
 		_IsosurfaceThreshold("Isosurface threshold", Float) = 0.05
 		_ClipX("clipX", Float) = -0.5
+		_ClipY("clipY", Float) = -0.5
 	}
 
 		SubShader
@@ -47,6 +48,7 @@
 	float _StepFactor;
 	float _IsosurfaceThreshold;
 	float _ClipX;
+	float _ClipY;
 
 	v2f vert(appdata v)
 	{
@@ -80,7 +82,7 @@
 			if (distance(pos, back) < step * 0.5) break; // check when reach the back
 			objectPos = 2 * pos - 1;
 			objectPos = mul(unity_WorldToObject, objectPos);
-			if (objectPos.x < _ClipX)
+			if (objectPos.x < _ClipX || objectPos.y < _ClipY)
 			{
 				pos += stepDir; 
 				continue;

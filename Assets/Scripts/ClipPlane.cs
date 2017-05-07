@@ -5,24 +5,31 @@ using UnityEngine.UI;
 
 public class ClipPlane : MonoBehaviour
 {
-    // input objects
-    public Slider slider;
-
     // private objects
     private new Renderer renderer;
     private float clipX;
+    private float clipY;
 
     void Start()
     {
         renderer = GetComponent<Renderer>();
     }
 
-    public void OnValueChanged(float value)
+    public void OnValueXChanged(float value)
     {
         clipX = value;
         if (renderer != null)
         {
             renderer.sharedMaterial.SetFloat("_ClipX", clipX);
+        }
+    }
+
+    public void OnValueYChanged(float value)
+    {
+        clipY = value;
+        if (renderer != null)
+        {
+            renderer.sharedMaterial.SetFloat("_ClipY", clipY);
         }
     }
 }

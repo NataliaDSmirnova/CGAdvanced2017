@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
 
+    // public variables
     public GameObject panelD;
     public bool isPanelDShow;
     public GameObject panelF;
@@ -13,9 +15,9 @@ public class UIManager : MonoBehaviour {
     public GameObject panelL;
     public bool isPanelLShow;
 
-    public UnityEngine.UI.Toggle toggleH;
+    public Toggle toggleH;
     public GameObject sliderH;
-    public UnityEngine.UI.Toggle toggleV;
+    public Toggle toggleV;
     public GameObject sliderV;
 
     public GameObject panelModeXRay;
@@ -25,10 +27,30 @@ public class UIManager : MonoBehaviour {
     public GameObject panelRGB;
     public GameObject panelShininess;
 
+    // private variables
+    private GameObject cubeObject;
+    private Renderer cubeObjectRenderer;
+    private ClipPlane clipPlane;
+
+    private Shader xRayShader;
+    private Shader volumeShader;
+    private Shader isosurfaceShader;
+    private Shader normalShader;
 
     // Use this for initialization
     void Start ()
     {
+        cubeObject = GameObject.Find("Cube");
+        cubeObjectRenderer = cubeObject.GetComponent<Renderer>();
+        clipPlane = cubeObject.GetComponent<ClipPlane>();
+
+        xRayShader = Shader.Find("CGA/X-Ray");
+        // TODO: fix to volume shader
+        volumeShader = Shader.Find("CGA/X-Ray");
+        isosurfaceShader = Shader.Find("CGA/Isosurface");
+        normalShader = Shader.Find("CGA/NormalShader");
+
+        cubeObjectRenderer.sharedMaterial.shader = xRayShader;
 
         panelD.SetActive(isPanelDShow);
         panelF.SetActive(isPanelFShow);
@@ -48,44 +70,20 @@ public class UIManager : MonoBehaviour {
     {
 		if (Input.GetKeyDown(KeyCode.D))
         {
-            if (isPanelDShow)
-            {
-                isPanelDShow = false;
-                panelD.SetActive(isPanelDShow);
-            }
-            else
-            {
-                isPanelDShow = true;
-                panelD.SetActive(isPanelDShow);
-            }
+            isPanelDShow = !isPanelDShow;
+            panelD.SetActive(isPanelDShow);
         }
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (isPanelFShow)
-            {
-                isPanelFShow = false;
-                panelF.SetActive(isPanelFShow);
-            }
-            else
-            {
-                isPanelFShow = true;
-                panelF.SetActive(isPanelFShow);
-            }
+            isPanelFShow = !isPanelFShow;
+            panelF.SetActive(isPanelFShow);
         }
 
         if (Input.GetKeyDown(KeyCode.L))
         {
-            if (isPanelLShow)
-            {
-                isPanelLShow = false;
-                panelL.SetActive(isPanelLShow);
-            }
-            else
-            {
-                isPanelLShow = true;
-                panelL.SetActive(isPanelLShow);
-            }
+            isPanelLShow = !isPanelLShow;
+            panelL.SetActive(isPanelLShow);
         }
     }
 
@@ -104,11 +102,26 @@ public class UIManager : MonoBehaviour {
     public void OnClickToggleH()
     {
         sliderH.SetActive(toggleH.isOn);
+        if (!toggleH.isOn)
+        {
+            clipPlane.OnValueXChanged(-0.5f);
+        } else
+        {
+            clipPlane.OnValueXChanged(sliderH.GetComponent<Slider>().value);
+        }
     }
 
     public void OnClickToggleV()
     {
         sliderV.SetActive(toggleV.isOn);
+        if (!toggleV.isOn)
+        {
+            clipPlane.OnValueYChanged(-0.5f);
+        }
+        else
+        {
+            clipPlane.OnValueYChanged(sliderV.GetComponent<Slider>().value);
+        }
     }
 
     public void ChangeMode(UnityEngine.UI.Dropdown d)
@@ -117,6 +130,8 @@ public class UIManager : MonoBehaviour {
         switch (d.value)
         {
             case 0:
+                cubeObjectRenderer.sharedMaterial.shader = xRayShader;
+
                 panelModeXRay.SetActive(true);
                 panelModeVR.SetActive(false);
                 panelModeSurface.SetActive(false);
@@ -125,6 +140,8 @@ public class UIManager : MonoBehaviour {
                 panelShininess.SetActive(false);
                 break;
             case 1:
+                cubeObjectRenderer.sharedMaterial.shader = volumeShader;
+
                 panelModeXRay.SetActive(false);
                 panelModeVR.SetActive(true);
                 panelModeSurface.SetActive(false);
@@ -134,6 +151,8 @@ public class UIManager : MonoBehaviour {
            
                 break;
             case 2:
+                cubeObjectRenderer.sharedMaterial.shader = isosurfaceShader;
+
                 panelModeXRay.SetActive(false);
                 panelModeVR.SetActive(false);
                 panelModeSurface.SetActive(true);
@@ -142,6 +161,8 @@ public class UIManager : MonoBehaviour {
                 panelShininess.SetActive(false);
                 break;
             default:
+                cubeObjectRenderer.sharedMaterial.shader = normalShader;
+
                 panelModeXRay.SetActive(false);
                 panelModeVR.SetActive(false);
                 panelModeSurface.SetActive(false);

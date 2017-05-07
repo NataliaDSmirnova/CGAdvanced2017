@@ -17,7 +17,7 @@ public class Load3DTexture : MonoBehaviour
     public Texture3D texture;
     public Material textureMaterial;
     private string texFileName = "Default3DTexture";
-    private string volumeShaderName = "XRayEffectShader";
+    //private string volumeShaderName = "XRayEffectShader";
 
     public Vector4 _LowBound;
     public Vector4 _HighBound;
@@ -250,17 +250,18 @@ public class Load3DTexture : MonoBehaviour
 
   public void tester()
   {
-    bool isInCube = false;
+    /*bool isInCube = false;
     float x, y, z;
-    int n = 0;
+    int n = 0;*/
     Vector4 col = Vector4.zero;
     Ray ray = new Ray();
     Vector3[] bounds = new Vector3[2];
     Vector3 delta = Vector3.zero, currPos = Vector3.zero, normDir = Vector3.zero;
-    float start = 0, step = _Params[1];
+    //float start = 0, step = _Params[1];
+    float step = _Params[1];
 
 
-    Vector3 input = new Vector3(563.50f, 353.50f, 0.18393f);
+        Vector3 input = new Vector3(563.50f, 353.50f, 0.18393f);
     Vector3 camPos = cam.transform.localPosition;
 
     bounds[0] = new Vector3(_LowBound.x, _LowBound.y, _LowBound.z);
