@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Volume : MonoBehaviour
 {
-    //
+    // public variables
     public LoadPVM lPVM;
-    //
-
     public Texture3D texture;
+
+    // private variables
+    private Text consoleLogText;
     private Material textureMaterial;
     private string texFileName = "Default3DTexture";
     //private string texFileName = "Sphere3D2";
@@ -23,8 +25,10 @@ public class Volume : MonoBehaviour
     {
 
         var renderer = GetComponent<MeshRenderer>();
-        textureMaterial = renderer != null ? renderer.sharedMaterial : null; 
+        textureMaterial = renderer != null ? renderer.sharedMaterial : null;
 
+        consoleLogText = GameObject.Find("UICanvas").transform.FindChild("PanelLog").
+            transform.FindChild("TextLog").GetComponent<Text>();
 
         // get texture creator from camera
         texCreator = Camera.main.GetComponent<BackFrontTextureCreator>();
@@ -88,6 +92,7 @@ public class Volume : MonoBehaviour
         uint components = 0;
         if (volumeName.Length == 0)
         {
+            consoleLogText.text += "Empty Volume Name\n";
             Debug.Log("Empty Volume Name");
             return;
         }

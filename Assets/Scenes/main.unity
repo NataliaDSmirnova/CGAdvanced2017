@@ -275,7 +275,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Console log
+  m_Text: 
 --- !u!222 &35660867
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -431,7 +431,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'FPS:'
+  m_Text: 
 --- !u!222 &77753798
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -954,6 +954,7 @@ GameObject:
   - component: {fileID: 186475692}
   - component: {fileID: 186475693}
   - component: {fileID: 186475694}
+  - component: {fileID: 186475691}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -1037,6 +1038,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeedX: 10
   rotationSpeedY: 10
+--- !u!114 &186475691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 186475685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2e413bfd5d73974794d9e7effd4ebdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &186475692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4637,7 +4649,18 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 186475691}
+        m_MethodName: OnValueXRayBColorChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &854438513
@@ -5759,7 +5782,18 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 186475691}
+        m_MethodName: OnValueXRayRColorChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &1054296502
@@ -10524,13 +10558,24 @@ MonoBehaviour:
   m_FillRect: {fileID: 726171606}
   m_HandleRect: {fileID: 1699912806}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.05
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.05
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 186475691}
+        m_MethodName: OnValueThresholdChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &1821442495
@@ -10756,6 +10801,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   d: {fileID: 1831622483}
   standartNamePVM: Test.pvm
+  logPanel: {fileID: 461886006}
 --- !u!1 &1835344161
 GameObject:
   m_ObjectHideFlags: 0
@@ -11359,7 +11405,7 @@ MonoBehaviour:
 
     3) If you want to turn on/off debug window,
 
-    press button D'
+    press button W'
 --- !u!222 &1929381790
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11596,6 +11642,7 @@ MonoBehaviour:
   panelModeSurface: {fileID: 1397292732}
   panelRGB: {fileID: 993889027}
   panelShininess: {fileID: 2081251310}
+  updateInterval: 0.5
 --- !u!114 &1965547709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12372,6 +12419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   d: {fileID: 0}
   standartNamePVM: 
+  logPanel: {fileID: 0}
 --- !u!1 &2071781848
 GameObject:
   m_ObjectHideFlags: 0
@@ -12914,6 +12962,17 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 186475691}
+        m_MethodName: OnValueXRayGColorChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null

@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DropDownLog : MonoBehaviour {
 
-    public UnityEngine.UI.Dropdown d;
+    // public variables
+    public Dropdown d;
     public string standartNamePVM;
+    public GameObject logPanel;
+
+    // private variables
     private Volume volumeClass;
-    
 
     // Use this for initialization
     void Start()

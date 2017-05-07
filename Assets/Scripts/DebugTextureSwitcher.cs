@@ -9,6 +9,7 @@ public class DebugTextureSwitcher : MonoBehaviour
     private RawImage image;
     private bool renderFront = true;
     private BackFrontTextureCreator textureCreator;
+    private Text consoleLogText;
 
     void Start()
     {
@@ -16,6 +17,9 @@ public class DebugTextureSwitcher : MonoBehaviour
         image = GetComponent<RawImage>();
         // get texture creator from camera
         textureCreator = Camera.main.GetComponent<BackFrontTextureCreator>();
+
+        consoleLogText = GameObject.Find("UICanvas").transform.FindChild("PanelLog").
+            transform.FindChild("TextLog").GetComponent<Text>();
     }
 
     void Update()
@@ -38,6 +42,7 @@ public class DebugTextureSwitcher : MonoBehaviour
     {
         if (!textureCreator)
         {
+            consoleLogText.text += "Texture creator is null\n";
             Debug.Log("Texture creator is null");
             return;
         }

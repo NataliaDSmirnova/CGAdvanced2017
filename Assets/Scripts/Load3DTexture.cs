@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public struct Ray
 {
@@ -38,69 +39,69 @@ public class Load3DTexture : MonoBehaviour
       LoadCustomTextureData();
       LoadVolumeTexture();
 
-    /*
-    Matrix4x4 l2w1 = gameObject.transform.localToWorldMatrix,
-      w2l = l2w1.inverse, l2w2;
-    Vector4 loc1 = new Vector4(0.1f, 0.1f, 0.1f),
-      loc2 = new Vector4(0.5f, 0.5f, 0.5f),
-      loc3 = new Vector4(-0.2f, 0.2f, -0.5f);
+        /*
+        Matrix4x4 l2w1 = gameObject.transform.localToWorldMatrix,
+          w2l = l2w1.inverse, l2w2;
+        Vector4 loc1 = new Vector4(0.1f, 0.1f, 0.1f),
+          loc2 = new Vector4(0.5f, 0.5f, 0.5f),
+          loc3 = new Vector4(-0.2f, 0.2f, -0.5f);
 
-    Vector4 r1 = l2w1.MultiplyPoint3x4(loc1),
-      r2 = l2w1.MultiplyPoint3x4(loc2),
-      r3 = l2w1.MultiplyPoint3x4(loc3);
-
-
-    gameObject.transform.localScale = new Vector3(1.5f, 4, 7.5f);
-    l2w2 = gameObject.transform.localToWorldMatrix;
+        Vector4 r1 = l2w1.MultiplyPoint3x4(loc1),
+          r2 = l2w1.MultiplyPoint3x4(loc2),
+          r3 = l2w1.MultiplyPoint3x4(loc3);
 
 
-
-    /*
-    Vector4 p0 = cam.transform.localPosition;
-
-    Vector4 a = new Vector4(0.5f, 0.5f, -0.5f, 1.0f);
-    Vector4 p1 = gameObject.transform.TransformPoint(a);
-
-    Vector4 c = cam.worldToCameraMatrix.MultiplyPoint(p1);
-    Vector4 d = cam.projectionMatrix.MultiplyPoint(c);
-    Vector4 dd = new Vector4((d.x + 1.0f) / 2.0f * cam.pixelWidth, (1.0f - d.y) / 2.0f * cam.pixelHeight);
-
-    Vector4 cc = new Vector4((2.0f * dd.x) / cam.pixelWidth - 1.0f, (-2.0f * dd.y) / cam.pixelHeight + 1.0f, 0.0f);
-    Vector4 p2 = (cam.projectionMatrix * cam.worldToCameraMatrix).inverse.MultiplyPoint(cc);
-
-    Vector3 r = (p1 - p0).normalized,
-      r2 = r * 0.3f;
-    float t1 = r.magnitude, t2 = r2.magnitude, t3 = Vector3.Angle(r, r2);
-
-    Vector3 input = new Vector3(800, 500, 0.8f);
-      
-    _ScreenParams = new Vector4(cam.pixelWidth, cam.pixelHeight, 1.0f / cam.pixelWidth + 1.0f, 1.0f / cam.pixelHeight + 1.0f);
-    P = cam.projectionMatrix;
-    V = cam.worldToCameraMatrix;
-    Vector3 normDir = camToWorld(input);
+        gameObject.transform.localScale = new Vector3(1.5f, 4, 7.5f);
+        l2w2 = gameObject.transform.localToWorldMatrix;
 
 
-    /*Ray ray = new Ray();
-    Vector3[] bounds = new Vector3[2];
-    Vector3 delta = Vector3.zero, currPos = Vector3.zero, normDir = Vector3.zero;
-    float start = 0, step = _Params[1];
 
-    Vector3 cubePos = gameObject.transform.localPosition,
-                cubeScale = gameObject.transform.localScale,
-                voxelSize = new Vector3(1.0f / texture.height, 1.0f / texture.width, 1.0f / texture.depth);
-    _LowBound = new Vector4(cubePos.x - 0.5f * cubeScale.x, cubePos.y - 0.5f * cubeScale.y, cubePos.z - 0.5f * cubeScale.z, 1.0f / (float)texture.depth);
-    _HighBound = new Vector4(cubePos.x + 0.5f * cubeScale.x, cubePos.y + 0.5f * cubeScale.y, cubePos.z + 0.5f * cubeScale.z, (float)texture.depth);
-    bounds[0] = new Vector3(_LowBound.x, _LowBound.y, _LowBound.z);
-    bounds[1] = new Vector3(_HighBound.x, _HighBound.y, _HighBound.z);
+        /*
+        Vector4 p0 = cam.transform.localPosition;
 
-    ray.origin = new Vector3(0f, 0f, 0f);
-    ray.dir = new Vector3(0.0f, 0.0f, 10f);
-    ray.invDir = new Vector3(1.0f / ray.dir[0], 1.0f / ray.dir[1], 1.0f / ray.dir[2]);
-    ray.sign = new int[3] { ray.invDir[0] < 0.0f ? 1 : 0, ray.invDir[1] < 0.0f ? 1 : 0, ray.invDir[2] < 0.0f ? 1 : 0 };
+        Vector4 a = new Vector4(0.5f, 0.5f, -0.5f, 1.0f);
+        Vector4 p1 = gameObject.transform.TransformPoint(a);
+
+        Vector4 c = cam.worldToCameraMatrix.MultiplyPoint(p1);
+        Vector4 d = cam.projectionMatrix.MultiplyPoint(c);
+        Vector4 dd = new Vector4((d.x + 1.0f) / 2.0f * cam.pixelWidth, (1.0f - d.y) / 2.0f * cam.pixelHeight);
+
+        Vector4 cc = new Vector4((2.0f * dd.x) / cam.pixelWidth - 1.0f, (-2.0f * dd.y) / cam.pixelHeight + 1.0f, 0.0f);
+        Vector4 p2 = (cam.projectionMatrix * cam.worldToCameraMatrix).inverse.MultiplyPoint(cc);
+
+        Vector3 r = (p1 - p0).normalized,
+          r2 = r * 0.3f;
+        float t1 = r.magnitude, t2 = r2.magnitude, t3 = Vector3.Angle(r, r2);
+
+        Vector3 input = new Vector3(800, 500, 0.8f);
+
+        _ScreenParams = new Vector4(cam.pixelWidth, cam.pixelHeight, 1.0f / cam.pixelWidth + 1.0f, 1.0f / cam.pixelHeight + 1.0f);
+        P = cam.projectionMatrix;
+        V = cam.worldToCameraMatrix;
+        Vector3 normDir = camToWorld(input);
 
 
-    bool res = isIntersected(ray, bounds, 0.6f, 0.8f);  */
-  }
+        /*Ray ray = new Ray();
+        Vector3[] bounds = new Vector3[2];
+        Vector3 delta = Vector3.zero, currPos = Vector3.zero, normDir = Vector3.zero;
+        float start = 0, step = _Params[1];
+
+        Vector3 cubePos = gameObject.transform.localPosition,
+                    cubeScale = gameObject.transform.localScale,
+                    voxelSize = new Vector3(1.0f / texture.height, 1.0f / texture.width, 1.0f / texture.depth);
+        _LowBound = new Vector4(cubePos.x - 0.5f * cubeScale.x, cubePos.y - 0.5f * cubeScale.y, cubePos.z - 0.5f * cubeScale.z, 1.0f / (float)texture.depth);
+        _HighBound = new Vector4(cubePos.x + 0.5f * cubeScale.x, cubePos.y + 0.5f * cubeScale.y, cubePos.z + 0.5f * cubeScale.z, (float)texture.depth);
+        bounds[0] = new Vector3(_LowBound.x, _LowBound.y, _LowBound.z);
+        bounds[1] = new Vector3(_HighBound.x, _HighBound.y, _HighBound.z);
+
+        ray.origin = new Vector3(0f, 0f, 0f);
+        ray.dir = new Vector3(0.0f, 0.0f, 10f);
+        ray.invDir = new Vector3(1.0f / ray.dir[0], 1.0f / ray.dir[1], 1.0f / ray.dir[2]);
+        ray.sign = new int[3] { ray.invDir[0] < 0.0f ? 1 : 0, ray.invDir[1] < 0.0f ? 1 : 0, ray.invDir[2] < 0.0f ? 1 : 0 };
+
+
+        bool res = isIntersected(ray, bounds, 0.6f, 0.8f);  */
+    }
 
     // Update is called once per frame
     void Update()

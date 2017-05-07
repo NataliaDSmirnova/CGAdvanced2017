@@ -17,11 +17,15 @@ public class BackFrontTextureCreator : MonoBehaviour
     private RenderTexture frontTexture;
     private RenderTexture backTexture;
     private CommandBuffer buffer;
-  
+    private Text consoleLogText;
+
     void Start()
     {
         frontTexture = RenderTexture.GetTemporary(Screen.width, Screen.height, 1, RenderTextureFormat.ARGBFloat);
         backTexture = RenderTexture.GetTemporary(Screen.width, Screen.height, 1, RenderTextureFormat.ARGBFloat);
+
+        consoleLogText = GameObject.Find("UICanvas").transform.FindChild("PanelLog").
+            transform.FindChild("TextLog").GetComponent<Text>();
 
         // get mesh from input object
         buffer = new CommandBuffer();
@@ -35,6 +39,7 @@ public class BackFrontTextureCreator : MonoBehaviour
         var mesh = renderObject.GetComponent<MeshFilter>().sharedMesh;
         if (mesh == null)
         {
+            consoleLogText.text += "Can't get mesh from input object\n";
             Debug.Log("Can't get mesh from input object");
             return;
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
+using UnityEngine.UI;
 public class LoadPVM {
     //fields
     private int currentBit = 0;
@@ -113,6 +114,8 @@ public class LoadPVM {
         }
         else
         {
+            GameObject.Find("UICanvas").transform.FindChild("PanelLog").
+                transform.FindChild("TextLog").GetComponent<Text>().text += "Component Error\n";
             Debug.Log("Component Error");
         }
 

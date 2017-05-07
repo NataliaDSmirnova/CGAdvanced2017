@@ -84,7 +84,7 @@ Material:
       second: 0.05
     - first:
         name: _IsosurfaceThreshold
-      second: 0.05
+      second: 0.08392857
     - first:
         name: _Metallic
       second: 0
@@ -120,6 +120,15 @@ Material:
       second: 1
     - first:
         name: _UVSec
+      second: 0
+    - first:
+        name: _XRayColorB
+      second: 0
+    - first:
+        name: _XRayColorG
+      second: 0
+    - first:
+        name: _XRayColorR
       second: 0
     - first:
         name: _ZWrite

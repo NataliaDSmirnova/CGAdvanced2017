@@ -27,15 +27,22 @@ public class UIManager : MonoBehaviour {
     public GameObject panelRGB;
     public GameObject panelShininess;
 
+    public float updateInterval = 0.5F;
+
     // private variables
     private GameObject cubeObject;
     private Renderer cubeObjectRenderer;
     private ClipPlane clipPlane;
+    private Text fpsText;
 
     private Shader xRayShader;
     private Shader volumeShader;
     private Shader isosurfaceShader;
     private Shader normalShader;
+
+    private float accum = 0; 
+    private int frames = 0; 
+    private float timeleft;
 
     // Use this for initialization
     void Start ()
@@ -43,6 +50,8 @@ public class UIManager : MonoBehaviour {
         cubeObject = GameObject.Find("Cube");
         cubeObjectRenderer = cubeObject.GetComponent<Renderer>();
         clipPlane = cubeObject.GetComponent<ClipPlane>();
+
+        fpsText = panelF.transform.FindChild("TextFPS").GetComponent<Text>();
 
         xRayShader = Shader.Find("CGA/X-Ray");
         // TODO: fix to volume shader
@@ -63,12 +72,14 @@ public class UIManager : MonoBehaviour {
 
         panelRGB.SetActive(false);
         panelShininess.SetActive(false);
+
+        timeleft = updateInterval;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-		if (Input.GetKeyDown(KeyCode.D))
+		if (Input.GetKeyDown(KeyCode.W))
         {
             isPanelDShow = !isPanelDShow;
             panelD.SetActive(isPanelDShow);
@@ -84,6 +95,20 @@ public class UIManager : MonoBehaviour {
         {
             isPanelLShow = !isPanelLShow;
             panelL.SetActive(isPanelLShow);
+        }
+
+        timeleft -= Time.deltaTime;
+        accum += Time.timeScale / Time.deltaTime;
+        ++frames;
+        
+        if (timeleft <= 0.0)
+        {
+            float fps = accum / frames;
+            fpsText.text = "FPS: " + fps;
+
+            timeleft = updateInterval;
+            accum = 0.0F;
+            frames = 0;
         }
     }
 
@@ -105,7 +130,8 @@ public class UIManager : MonoBehaviour {
         if (!toggleH.isOn)
         {
             clipPlane.OnValueXChanged(-0.5f);
-        } else
+        }
+        else
         {
             clipPlane.OnValueXChanged(sliderH.GetComponent<Slider>().value);
         }

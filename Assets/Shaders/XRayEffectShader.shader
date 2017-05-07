@@ -11,6 +11,9 @@
     _Opacity("Opacity border", Float) = 0.0  
 	_ClipX("clipX", Float) = -0.5
 	_ClipY("clipY", Float) = -0.5
+	_XRayColorR("XRayColorR", Float) = 0
+	_XRayColorG("XRayColorG", Float) = 0
+	_XRayColorB("XRayColorB", Float) = 0
   }
 
     SubShader
@@ -51,6 +54,10 @@
         float _Opacity;
 		float _ClipX;
 		float _ClipY;
+
+		float _XRayColorR;
+		float _XRayColorG;
+		float _XRayColorB;
  
         v2f vert(appdata v)
         {
@@ -84,7 +91,7 @@
           // walk along the ray sampling the volume
           float3 pos = front, objectPos;
           float3 sampledColor = float3(0, 0, 0), 
-            color = float3(0, 0, 0);
+            color = float3(_XRayColorR, _XRayColorG, _XRayColorB);
           for (int i = 0; i < 30; i++)
           {
             if (distance(pos, back) < step * 0.5) break; // check when reach the back  
@@ -108,4 +115,3 @@
     }
   }
 }
-
