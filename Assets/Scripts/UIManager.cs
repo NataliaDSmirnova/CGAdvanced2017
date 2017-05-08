@@ -55,7 +55,7 @@ public class UIManager : MonoBehaviour {
 
         xRayShader = Shader.Find("CGA/X-Ray");
         // TODO: fix to volume shader
-        volumeShader = Shader.Find("CGA/X-Ray");
+        volumeShader = Shader.Find("CGA/VolumeRendering");
         isosurfaceShader = Shader.Find("CGA/Isosurface");
         normalShader = Shader.Find("CGA/NormalShader");
 
