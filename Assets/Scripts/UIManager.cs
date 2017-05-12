@@ -24,7 +24,9 @@ public class UIManager : MonoBehaviour {
     public GameObject panelModeVR;
     public GameObject panelModeSurface;
 
-    public GameObject panelRGB;
+    public GameObject panelRGBAmbient;
+    public GameObject panelRGBDiffuse;
+    public GameObject panelRGBSpecular;
     public GameObject panelShininess;
 
     public float updateInterval = 0.5F;
@@ -70,7 +72,9 @@ public class UIManager : MonoBehaviour {
         panelModeVR.SetActive(false);
         panelModeSurface.SetActive(false);
 
-        panelRGB.SetActive(false);
+        panelRGBAmbient.SetActive(false);
+        panelRGBDiffuse.SetActive(false);
+        panelRGBSpecular.SetActive(false);
         panelShininess.SetActive(false);
 
         timeleft = updateInterval;
@@ -162,7 +166,9 @@ public class UIManager : MonoBehaviour {
                 panelModeVR.SetActive(false);
                 panelModeSurface.SetActive(false);
 
-                panelRGB.SetActive(false);
+                panelRGBAmbient.SetActive(false);
+                panelRGBDiffuse.SetActive(false);
+                panelRGBSpecular.SetActive(false);
                 panelShininess.SetActive(false);
                 break;
             case 1:
@@ -172,7 +178,9 @@ public class UIManager : MonoBehaviour {
                 panelModeVR.SetActive(true);
                 panelModeSurface.SetActive(false);
 
-                panelRGB.SetActive(false);
+                panelRGBAmbient.SetActive(false);
+                panelRGBDiffuse.SetActive(false);
+                panelRGBSpecular.SetActive(false);
                 panelShininess.SetActive(false);
            
                 break;
@@ -183,7 +191,9 @@ public class UIManager : MonoBehaviour {
                 panelModeVR.SetActive(false);
                 panelModeSurface.SetActive(true);
 
-                panelRGB.SetActive(true);
+                panelRGBAmbient.SetActive(true);
+                panelRGBDiffuse.SetActive(false);
+                panelRGBSpecular.SetActive(false);
                 panelShininess.SetActive(false);
                 break;
             default:
@@ -193,7 +203,9 @@ public class UIManager : MonoBehaviour {
                 panelModeVR.SetActive(false);
                 panelModeSurface.SetActive(false);
 
-                panelRGB.SetActive(false);
+                panelRGBAmbient.SetActive(false);
+                panelRGBDiffuse.SetActive(false);
+                panelRGBSpecular.SetActive(false);
                 panelShininess.SetActive(false);
                 break;
         }
@@ -201,16 +213,32 @@ public class UIManager : MonoBehaviour {
 
     public void ChangeReflParams(UnityEngine.UI.Dropdown param)
     {
-        if (param.value == 3)
+        switch (param.value)
         {
-            panelRGB.SetActive(false);
-            panelShininess.SetActive(true);
-        }
-        else
-        {
-            panelRGB.SetActive(true);
-            panelShininess.SetActive(false);
+            case 0:
+                panelRGBAmbient.SetActive(true);
+                panelRGBDiffuse.SetActive(false);
+                panelRGBSpecular.SetActive(false);
+                panelShininess.SetActive(false);
+                break;
+            case 1:
+                panelRGBAmbient.SetActive(false);
+                panelRGBDiffuse.SetActive(true);
+                panelRGBSpecular.SetActive(false);
+                panelShininess.SetActive(false);
+                break;
+            case 2:
+                panelRGBAmbient.SetActive(false);
+                panelRGBDiffuse.SetActive(false);
+                panelRGBSpecular.SetActive(true);
+                panelShininess.SetActive(false);
+                break;
+            case 3:
+                panelRGBAmbient.SetActive(false);
+                panelRGBDiffuse.SetActive(false);
+                panelRGBSpecular.SetActive(false);
+                panelShininess.SetActive(true);
+                break;
         }
     }
-
 }

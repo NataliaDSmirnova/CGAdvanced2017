@@ -10,6 +10,16 @@
 		_IsosurfaceThreshold("Isosurface threshold", Float) = 0.05
 		_ClipX("clipX", Float) = -0.5
 		_ClipY("clipY", Float) = -0.5
+		_AmbientR("Ambient color red component", Float) = 0
+		_AmbientG("Ambient color green component", Float) = 0
+		_AmbientB("Ambient color blue component", Float) = 0
+		_DiffuseR("Diffuse color red component", Float) = 0
+		_DiffuseG("Diffuse color green component", Float) = 0.5
+		_DiffuseB("Diffuse color blue component", Float) = 0.5
+		_SpecularR("Specular color red component", Float) = 1
+		_SpecularG("Specular color green component", Float) = 1
+		_SpecularB("Specular color blue component", Float) = 1
+		_Shininess("Shininess", Float) = 32
 	}
 
 		SubShader
@@ -26,6 +36,7 @@
 #pragma fragment frag
 
 #include "UnityCG.cginc"
+#include "UnityLightingCommon.cginc"
 
 		struct appdata
 	{
@@ -48,7 +59,11 @@
 	float _StepFactor;
 	float _IsosurfaceThreshold;
 	float _ClipX;
-	float _ClipY;
+	float _ClipY;	
+	float _AmbientR, _AmbientG, _AmbientB;
+	float _DiffuseR, _DiffuseG, _DiffuseB;
+	float _SpecularR, _SpecularG, _SpecularB;
+	float _Shininess;
 
 	v2f vert(appdata v)
 	{
@@ -76,7 +91,13 @@
 		// walk along the ray sampling the volume
 		float3 pos = front, objectPos;
 		float4 color = float4(0, 0, 0, 0);
+		float4 ambient = float4(_AmbientR, _AmbientG, _AmbientB, 1),
+			diffuse = float4(_DiffuseR, _DiffuseG, _DiffuseB, 1),
+			specular = float4(_SpecularR, _SpecularG, _SpecularB, 1);
 		float3 posColor = float3(0, 0, 0);
+		float3 normal, reflectDir, viewDir, lightDir;
+		float3 stepDirX, stepDirY;
+		float dx, dy, dz;
 		for (int i = 0; i < 30; i++)
 		{
 			if (distance(pos, back) < step * 0.5) break; // check when reach the back
@@ -90,7 +111,19 @@
 			posColor = tex3D(_Volume, pos.xyz).rrr;
 			if (distance(posColor, float3(0, 0, 0)) > _IsosurfaceThreshold)
 			{
-				color = float4(0, 0.5, 0.5, 1);
+				// count normal
+				stepDirX = float3(stepDir.x, -stepDir.z, stepDir.y); // rotate stepDir 90 degrees around X axis
+				stepDirY = float3(-stepDir.z, stepDir.y, stepDir.x); // rotate stepDir 90 degrees around Y axis
+				dx = tex3D(_Volume, (pos - stepDirX).xyz).r - tex3D(_Volume, (pos + stepDirX).xyz).r;
+				dy = tex3D(_Volume, (pos - stepDirY).xyz).r - tex3D(_Volume, (pos + stepDirY).xyz).r;
+				dz = tex3D(_Volume, (pos - stepDir).xyz).r - tex3D(_Volume, (pos + stepDir).xyz).r;
+				normal = normalize(dx * stepDirX + dy * stepDirY + dz * stepDir);
+				// phong lighting model
+				lightDir = normalize(_WorldSpaceLightPos0.xyz + 1);
+				reflectDir = reflect(-lightDir, normal);
+				reflectDir = normalize(reflectDir);
+				viewDir = normalize((_WorldSpaceCameraPos + 1.0) * 0.5 - pos);
+				color = ambient + diffuse * max(0.0, dot(normal, lightDir)) + specular * pow(max(0.0, dot(reflectDir, viewDir)), _Shininess);
 				break;
 			}
 			pos += stepDir;
