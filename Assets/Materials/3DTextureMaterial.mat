@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: 3DTextureMaterial
-  m_Shader: {fileID: 4800000, guid: 781cb33934b708645866d67b9266c890, type: 3}
+  m_Shader: {fileID: 4800000, guid: 28e1ab6b4e92c2d4f9c1d7e5fc420ee1, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
   m_CustomRenderQueue: -1
@@ -144,10 +144,10 @@ Material:
       second: 1
     - first:
         name: _Step
-      second: 0.05
+      second: 0.09
     - first:
         name: _StepFactor
-      second: 1
+      second: 0.5
     - first:
         name: _UVSec
       second: 0

@@ -32,11 +32,11 @@
 	{
 		Cull Back
 		CGPROGRAM
-#pragma vertex vert
-#pragma fragment frag
+    #pragma vertex vert
+    #pragma fragment frag
 
-#include "UnityCG.cginc"
-#include "UnityLightingCommon.cginc"
+    #include "UnityCG.cginc"
+    #include "UnityLightingCommon.cginc"
 
 		struct appdata
 	{

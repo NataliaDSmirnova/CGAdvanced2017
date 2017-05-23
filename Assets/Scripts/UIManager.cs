@@ -173,6 +173,7 @@ public class UIManager : MonoBehaviour {
                 break;
             case 1:
                 cubeObjectRenderer.sharedMaterial.shader = volumeShader;
+                cubeObjectRenderer.sharedMaterial.SetInt("_TransferFunctionId", 0);
 
                 panelModeXRay.SetActive(false);
                 panelModeVR.SetActive(true);
@@ -240,5 +241,13 @@ public class UIManager : MonoBehaviour {
                 panelShininess.SetActive(true);
                 break;
         }
+    }
+
+    public void ChangeTransferParams(UnityEngine.UI.Dropdown param)
+    {
+      if (param.value >= 0 && param.value <= 2)
+      {
+        cubeObjectRenderer.sharedMaterial.SetInt("_TransferFunctionId", param.value);
+      }      
     }
 }

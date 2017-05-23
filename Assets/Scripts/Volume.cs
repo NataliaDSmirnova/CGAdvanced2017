@@ -19,7 +19,7 @@ public class Volume : MonoBehaviour
     private BackFrontTextureCreator texCreator;
   
     public string VolumeTextureData { get; set; }
-                                                
+
     // Use this for initialization
     void Start()
     {
