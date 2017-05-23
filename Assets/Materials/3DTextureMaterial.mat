@@ -66,7 +66,7 @@ Material:
       second: 1
     - first:
         name: _ClipX
-      second: -0.5
+      second: 0.23585713
     - first:
         name: _ClipY
       second: -0.5
@@ -98,11 +98,14 @@ Material:
         name: _GlossyReflections
       second: 1
     - first:
+        name: _GradientBorder
+      second: 0
+    - first:
         name: _IENB
       second: 0.05
     - first:
         name: _IsosurfaceThreshold
-      second: 0.05
+      second: 0.08392857
     - first:
         name: _Metallic
       second: 0
@@ -123,7 +126,7 @@ Material:
       second: 1
     - first:
         name: _Shininess
-      second: 37.428574
+      second: 35.642857
     - first:
         name: _SmoothnessTextureChannel
       second: 0
@@ -144,10 +147,13 @@ Material:
       second: 1
     - first:
         name: _Step
-      second: 0.09
+      second: 0.01
     - first:
         name: _StepFactor
-      second: 0.5
+      second: 1.685
+    - first:
+        name: _TransferFunctionId
+      second: 2
     - first:
         name: _UVSec
       second: 0

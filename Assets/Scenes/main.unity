@@ -10743,7 +10743,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: Baby transfer function
 --- !u!222 &1464708527
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14984,10 +14984,27 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
-    m_Options: []
+    m_Options:
+    - m_Text: Baby transfer function
+      m_Image: {fileID: 0}
+    - m_Text: Orange transfer function
+      m_Image: {fileID: 0}
+    - m_Text: Common transfer function
+      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1965547708}
+        m_MethodName: ChangeTransferParams
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2013798947}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Dropdown, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Dropdown+DropdownEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2013798948
