@@ -2,7 +2,7 @@
 {
 	Properties
 	{
-	    _Volume("VolumeTex", 3D) = "" {}
+		_Volume("VolumeTex", 3D) = "" {}
 		_BackTex("BackFaceTex", 2D) = "white" {}
 		_FronTex("FrontFaceTex", 2D) = "white" {}
 		_Step("Step size", Float) = 0.05
@@ -32,13 +32,13 @@
 	{
 		Cull Back
 		CGPROGRAM
-    #pragma vertex vert
-    #pragma fragment frag
+	#pragma vertex vert
+	#pragma fragment frag
 
-    #include "UnityCG.cginc"
-    #include "UnityLightingCommon.cginc"
+	#include "UnityCG.cginc"
+	#include "UnityLightingCommon.cginc"
 
-		struct appdata
+	struct appdata
 	{
 		float4 vertex : POSITION;
 		float3 uvw : TEXCOORD0;
@@ -59,7 +59,7 @@
 	float _StepFactor;
 	float _IsosurfaceThreshold;
 	float _ClipX;
-	float _ClipY;	
+	float _ClipY;
 	float _AmbientR, _AmbientG, _AmbientB;
 	float _DiffuseR, _DiffuseG, _DiffuseB;
 	float _SpecularR, _SpecularG, _SpecularB;
@@ -98,17 +98,18 @@
 		float3 normal, reflectDir, viewDir, lightDir;
 		float3 stepDirX, stepDirY;
 		float dx, dy, dz;
-		for (int i = 0; i < 200; i++)
+		for (int i = 0; i < 30; i++)
 		{
 			if (distance(pos, back) < step * 0.5) break; // check when reach the back
 			objectPos = 2 * pos - 1;
 			objectPos = mul(unity_WorldToObject, objectPos);
 			if (objectPos.x < _ClipX || objectPos.y < _ClipY)
 			{
-				pos += stepDir; 
+				pos += stepDir;
 				continue;
 			}
-			posColor = tex3D(_Volume, pos.xyz).rrr;
+			objectPos = objectPos + 0.5;
+			posColor = tex3D(_Volume, objectPos.xyz).rrr;
 			if (distance(posColor, float3(0, 0, 0)) > _IsosurfaceThreshold)
 			{
 				// count normal

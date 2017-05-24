@@ -151,7 +151,7 @@
           color = 0,
           compositeColor = 0;          
 
-        for (int i = 0; i < 200; i++)
+        for (int i = 0; i < 30; i++)
         {
           if (distance(pos, back) < step * 0.5 || compositeTransparency < _Opacity) 
             break; // check when reach the back  
@@ -167,7 +167,8 @@
 
           densityPrev = density;
           density = densityNext;
-          densityNext = tex3D(_Volume, pos + stepDir).r;
+		  objectPos = objectPos + 0.5;
+          densityNext = tex3D(_Volume, objectPos + stepDir).r;
           if (_TransferFunctionId == 0)
           {
             sampledColor = transferFunctionColorBaby(density);
