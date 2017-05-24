@@ -20,7 +20,7 @@ public class DropDownLog : MonoBehaviour {
         {
 
             GameObject cubeObj = GameObject.Find("Cube");
-            volumeClass = cubeObj.GetComponent<Volume>();
+            volumeClass = cubeObj.GetComponent<Volume>();         
 
             d.onValueChanged.AddListener(OnValueChange);
             // List<string> PVMInResources = new List<string>();
@@ -53,7 +53,7 @@ public class DropDownLog : MonoBehaviour {
     }
 
     void OnValueChange(int arg)
-    {
+    {        
         volumeClass.LoadTextureDataFromPVM(d.captionText.text);
     }
 

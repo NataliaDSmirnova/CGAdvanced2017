@@ -66,10 +66,10 @@ Material:
       second: 1
     - first:
         name: _ClipX
-      second: 0.23585713
+      second: -0.5
     - first:
         name: _ClipY
-      second: -0.5
+      second: 0.06992855
     - first:
         name: _Cutoff
       second: 0.5
@@ -105,7 +105,7 @@ Material:
       second: 0.05
     - first:
         name: _IsosurfaceThreshold
-      second: 0.08392857
+      second: 0.05
     - first:
         name: _Metallic
       second: 0
@@ -147,13 +147,13 @@ Material:
       second: 1
     - first:
         name: _Step
-      second: 0.01
+      second: 0.016572814
     - first:
         name: _StepFactor
       second: 1.685
     - first:
         name: _TransferFunctionId
-      second: 2
+      second: 1
     - first:
         name: _UVSec
       second: 0

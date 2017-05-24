@@ -40,9 +40,14 @@ public class Volume : MonoBehaviour
     {
         if (textureMaterial != null && texCreator != null)
         {
+            float voxelSize = (float)Math.Sqrt(1.0f / (texture.height * texture.height) + 
+                                               1.0f / (texture.width * texture.width) + 
+                                               1.0f / (texture.depth * texture.depth));
+
             textureMaterial.SetTexture("_BackTex", texCreator.BackTexture);
             textureMaterial.SetTexture("_FrontTex", texCreator.FrontTexture);
             textureMaterial.SetTexture("_Volume", texture);
+            textureMaterial.SetFloat("_Step", voxelSize);
         }
     }
   

@@ -151,7 +151,7 @@
           color = 0,
           compositeColor = 0;          
 
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < 200; i++)
         {
           if (distance(pos, back) < step * 0.5 || compositeTransparency < _Opacity) 
             break; // check when reach the back  

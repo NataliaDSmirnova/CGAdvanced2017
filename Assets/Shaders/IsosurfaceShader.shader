@@ -98,7 +98,7 @@
 		float3 normal, reflectDir, viewDir, lightDir;
 		float3 stepDirX, stepDirY;
 		float dx, dy, dz;
-		for (int i = 0; i < 30; i++)
+		for (int i = 0; i < 200; i++)
 		{
 			if (distance(pos, back) < step * 0.5) break; // check when reach the back
 			objectPos = 2 * pos - 1;
