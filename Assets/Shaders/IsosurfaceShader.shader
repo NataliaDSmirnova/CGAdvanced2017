@@ -115,9 +115,9 @@
 				// count normal
 				stepDirX = float3(stepDir.x, -stepDir.z, stepDir.y); // rotate stepDir 90 degrees around X axis
 				stepDirY = float3(-stepDir.z, stepDir.y, stepDir.x); // rotate stepDir 90 degrees around Y axis
-				dx = tex3D(_Volume, (pos - stepDirX).xyz).r - tex3D(_Volume, (pos + stepDirX).xyz).r;
-				dy = tex3D(_Volume, (pos - stepDirY).xyz).r - tex3D(_Volume, (pos + stepDirY).xyz).r;
-				dz = tex3D(_Volume, (pos - stepDir).xyz).r - tex3D(_Volume, (pos + stepDir).xyz).r;
+				dx = tex3D(_Volume, (objectPos - stepDirX).xyz).r - tex3D(_Volume, (objectPos + stepDirX).xyz).r;
+				dy = tex3D(_Volume, (objectPos - stepDirY).xyz).r - tex3D(_Volume, (objectPos + stepDirY).xyz).r;
+				dz = tex3D(_Volume, (objectPos - stepDir).xyz).r - tex3D(_Volume, (objectPos + stepDir).xyz).r;
 				normal = normalize(dx * stepDirX + dy * stepDirY + dz * stepDir);
 				// phong lighting model
 				lightDir = normalize(_WorldSpaceLightPos0.xyz + 1);
