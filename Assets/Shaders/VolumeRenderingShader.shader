@@ -137,7 +137,8 @@
         float3 dir = back.xyz - front.xyz;
         float length = distance(front, back);
         float step = _Step * _StepFactor;
-        float3 stepDir = step * dir;
+        float3 stepDir = step * dir,
+			objectStepDir;
 
         // walk along the ray sampling the volume
         float3 pos = front, 
@@ -167,8 +168,11 @@
 
           densityPrev = density;
           density = densityNext;
-		      objectPos = objectPos + 0.5;
-          densityNext = tex3D(_Volume, objectPos + stepDir).r;
+		  objectPos = objectPos + 0.5;
+		  objectStepDir = 2 * stepDir - 1;
+		  objectStepDir = mul(unity_WorldToObject, objectStepDir);
+		  objectStepDir = objectStepDir + 0.5;
+          densityNext = tex3D(_Volume, objectPos + objectStepDir).r;
           if (_TransferFunctionId == 0)
           {
             sampledColor = transferFunctionColorBaby(density);

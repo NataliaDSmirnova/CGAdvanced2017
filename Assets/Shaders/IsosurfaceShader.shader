@@ -96,7 +96,7 @@
 			specular = float4(_SpecularR, _SpecularG, _SpecularB, 1);
 		float3 posColor = float3(0, 0, 0);
 		float3 normal, reflectDir, viewDir, lightDir;
-		float3 stepDirX, stepDirY;
+		float3 stepDirX, stepDirY, stepDirZ;
 		float dx, dy, dz;
 		for (int i = 0; i < 30; i++)
 		{
@@ -115,12 +115,27 @@
 				// count normal
 				stepDirX = float3(stepDir.x, -stepDir.z, stepDir.y); // rotate stepDir 90 degrees around X axis
 				stepDirY = float3(-stepDir.z, stepDir.y, stepDir.x); // rotate stepDir 90 degrees around Y axis
+				// stepDirX, stepDirY, stepDir to object coordinates
+				stepDirX = 2 * stepDirX - 1; 
+				stepDirX = mul(unity_WorldToObject, stepDirX);
+				stepDirX = stepDirX + 0.5;
+				stepDirY = 2 * stepDirY - 1;
+				stepDirY = mul(unity_WorldToObject, stepDirY);
+				stepDirY = stepDirY + 0.5;
+				stepDirZ = 2 * stepDir - 1;
+				stepDirZ = mul(unity_WorldToObject, stepDirZ);
+				stepDirZ = stepDirZ + 0.5;
+				// density difference between (pos - stepDir) and (pos + stepDir) in 3 directions
 				dx = tex3D(_Volume, (objectPos - stepDirX).xyz).r - tex3D(_Volume, (objectPos + stepDirX).xyz).r;
 				dy = tex3D(_Volume, (objectPos - stepDirY).xyz).r - tex3D(_Volume, (objectPos + stepDirY).xyz).r;
-				dz = tex3D(_Volume, (objectPos - stepDir).xyz).r - tex3D(_Volume, (objectPos + stepDir).xyz).r;
-				normal = normalize(dx * stepDirX + dy * stepDirY + dz * stepDir);
+				dz = tex3D(_Volume, (objectPos - stepDirZ).xyz).r - tex3D(_Volume, (objectPos + stepDirZ).xyz).r;
+				normal = dx * stepDirX + dy * stepDirY + dz * stepDirZ;
+				normal = normal - 0.5; // normal to world coordinates
+				normal = mul(unity_ObjectToWorld, normal);
+				normal = normal + 1.0;
+				normal = normalize(normal);
 				// phong lighting model
-				lightDir = normalize(_WorldSpaceLightPos0.xyz + 1);
+				lightDir = normalize(_WorldSpaceLightPos0.xyz + 1.0);
 				reflectDir = reflect(-lightDir, normal);
 				reflectDir = normalize(reflectDir);
 				viewDir = normalize((_WorldSpaceCameraPos + 1.0) * 0.5 - pos);
