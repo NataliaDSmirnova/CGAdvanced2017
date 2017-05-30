@@ -98,7 +98,7 @@
 		float3 normal, reflectDir, viewDir, lightDir;
 		float3 stepDirX, stepDirY, stepDirZ;
 		float dx, dy, dz;
-		for (int i = 0; i < 30; i++)
+		for (int i = 0; i < 255; i++)
 		{
 			if (distance(pos, back) < step * 0.5) break; // check when reach the back
 			objectPos = 2 * pos - 1;
@@ -109,7 +109,7 @@
 				continue;
 			}
 			objectPos = objectPos + 0.5;
-			posColor = tex3D(_Volume, objectPos.xyz).rrr;
+			posColor = tex3Dlod(_Volume, float4(objectPos.xyz, 0)).rrr;
 			if (distance(posColor, float3(0, 0, 0)) > _IsosurfaceThreshold)
 			{
 				// count normal
@@ -126,9 +126,9 @@
 				stepDirZ = mul(unity_WorldToObject, stepDirZ);
 				stepDirZ = stepDirZ + 0.5;
 				// density difference between (pos - stepDir) and (pos + stepDir) in 3 directions
-				dx = tex3D(_Volume, (objectPos - stepDirX).xyz).r - tex3D(_Volume, (objectPos + stepDirX).xyz).r;
-				dy = tex3D(_Volume, (objectPos - stepDirY).xyz).r - tex3D(_Volume, (objectPos + stepDirY).xyz).r;
-				dz = tex3D(_Volume, (objectPos - stepDirZ).xyz).r - tex3D(_Volume, (objectPos + stepDirZ).xyz).r;
+				dx = tex3Dlod(_Volume, float4((objectPos - stepDirX).xyz, 0)).r - tex3Dlod(_Volume, float4((objectPos + stepDirX).xyz, 0)).r;
+				dy = tex3Dlod(_Volume, float4((objectPos - stepDirY).xyz, 0)).r - tex3Dlod(_Volume, float4((objectPos + stepDirY).xyz, 0)).r;
+				dz = tex3Dlod(_Volume, float4((objectPos - stepDirZ).xyz, 0)).r - tex3Dlod(_Volume, float4((objectPos + stepDirZ).xyz, 0)).r;
 				normal = dx * stepDirX + dy * stepDirY + dz * stepDirZ;
 				normal = normal - 0.5; // normal to world coordinates
 				normal = mul(unity_ObjectToWorld, normal);
