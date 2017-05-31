@@ -7,10 +7,10 @@
     _FronTex("FrontFaceTex", 2D) = "white" {}
     _Step("Step size", Float) = 0.05
     _StepFactor("Step factor", Range(0.5, 2.0)) = 1.0
-    _IENB("Inverted estimated number of blocks", Float) = 0.05
     _Opacity("Opacity border", Float) = 0.0  
-	  _ClipX("clipX", Float) = -0.5
-	  _ClipY("clipY", Float) = -0.5
+    _ColorFactor("ColorFactor", Float) = 1.0
+	  _ClipX("clipX", Float) = 0
+	  _ClipY("clipY", Float) = 0
 	  _XRayColorR("XRayColorR", Float) = 0
 	  _XRayColorG("XRayColorG", Float) = 0
 	  _XRayColorB("XRayColorB", Float) = 0
@@ -52,6 +52,7 @@
       float _StepFactor;
       float _IENB;
       float _Opacity;
+      float _ColorFactor;
 		  float _ClipX;
 		  float _ClipY;
 
@@ -81,36 +82,34 @@
         // get front, back pos for ray in [0, 1] cube
         float3 back = tex2D(_BackTex, tc.xy).xyz;
         float3 front = tex2D(_FrontTex, tc.xy).xyz;
+        float3 backObj = mul(unity_WorldToObject, back) * 2;
+        float3 frontObj = mul(unity_WorldToObject, front) * 2;
            
         // ray throush the volume
-        float3 dir = back.xyz - front.xyz;
-        float length = distance(front, back);
+        float3 dir = backObj.xyz - frontObj.xyz;
+        float length = distance(frontObj, backObj);
         float step = _Step * _StepFactor;
         float3 stepDir = step * dir;
 
         // walk along the ray sampling the volume
-        float3 pos = front, objectPos;
+        float3 pos = frontObj;
         float3 sampledColor = float3(0, 0, 0), 
                color = float3(_XRayColorR, _XRayColorG, _XRayColorB);
           
         for (int i = 0; i < 255; i++)
         {
-          if (distance(pos, back) < step * 0.5) break; // check when reach the back  
+          if (distance(pos, backObj) < step * 0.1) break; // check when reach the back  
 			      
-          objectPos = 2 * pos - 1;
-			    objectPos = mul(unity_WorldToObject, objectPos);
-			      
-          if (objectPos.x < _ClipX || objectPos.y < _ClipY)
+          if (pos.x < _ClipX || pos.y < _ClipY)
 			    {
 				    pos += stepDir;
 				    continue;
 			    }
           
-    		  objectPos = objectPos + 0.5;
-          sampledColor = tex3Dlod(_Volume, float4(objectPos.xyz, 0)).rrr;
+    	    sampledColor = tex3Dlod(_Volume, float4(pos, 0)).rrr;
           if (sampledColor.r < _Opacity)
             sampledColor = 0;
-          color += sampledColor * _IENB;
+          color += sampledColor * _ColorFactor;
           pos += stepDir;
         }
         // temp color
