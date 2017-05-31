@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: 3DTextureMaterial
-  m_Shader: {fileID: 4800000, guid: e2e821faf04710844a26fd1de8a0c081, type: 3}
+  m_Shader: {fileID: 4800000, guid: b3a7ceef6abb46a468cc280f8d800719, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
   m_CustomRenderQueue: -1
@@ -66,10 +66,10 @@ Material:
       second: 1
     - first:
         name: _ClipX
-      second: -0.5
+      second: 0
     - first:
         name: _ClipY
-      second: 0.51
+      second: 0
     - first:
         name: _ColorFactor
       second: 0.05
@@ -150,7 +150,7 @@ Material:
       second: 1
     - first:
         name: _Step
-      second: 0.017900687
+      second: 0.00390625
     - first:
         name: _StepFactor
       second: 0.5

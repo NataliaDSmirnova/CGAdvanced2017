@@ -10,8 +10,8 @@
     _Opacity("Opacity border", Float) = 0.0
     _TransferFunctionId("Transfer function id", Int) = 0
     _GradientBorder("Gradient border", Range(0.0, 1.0)) = 0.05
-    _ClipX("clipX", Float) = -0.5
-    _ClipY("clipY", Float) = -0.5
+    _ClipX("clipX", Float) = 0
+    _ClipY("clipY", Float) = 0
 	}
 	
   SubShader
@@ -130,19 +130,17 @@
         // screencoordinates
         float3 tc = pix.screenSpacePos.xyz / pix.screenSpacePos.w * 0.5 + 0.5;
         // get front, back pos for ray in [0, 1] cube
-        float3 back = tex2D(_BackTex, tc.xy).xyz;
-        float3 front = tex2D(_FrontTex, tc.xy).xyz;
+		float3 backObj = tex2D(_BackTex, tc.xy).xyz;
+		float3 frontObj = tex2D(_FrontTex, tc.xy).xyz;
 
         // ray throush the volume
-        float3 dir = back.xyz - front.xyz;
-        float length = distance(front, back);
-        float step = _Step * _StepFactor;
-        float3 stepDir = step * dir,
-			objectStepDir;
+		float3 dir = backObj.xyz - frontObj.xyz;
+		float length = distance(frontObj, backObj);
+		float step = _Step * _StepFactor;
+		float3 stepDir = step * dir;
 
         // walk along the ray sampling the volume
-        float3 pos = front, 
-          objectPos;
+        float3 pos = frontObj;
         float alpha = 0, 
           densityPrev = 0,
           density = tex3D(_Volume, pos.xyz).r,
@@ -152,15 +150,12 @@
           color = 0,
           compositeColor = 0;          
 
-        for (int i = 0; i < 255; i++)
+        for (int i = 0; i < 350; i++)
         {
-          if (distance(pos, back) < step * 0.5 || compositeTransparency < _Opacity) 
+          if (distance(pos, backObj) < step * 0.5 || compositeTransparency < _Opacity) 
             break; // check when reach the back  
 
-          objectPos = 2 * pos - 1;
-          objectPos = mul(unity_WorldToObject, objectPos);
-
-          if (objectPos.x < _ClipX || objectPos.y < _ClipY)
+          if (pos.x < _ClipX || pos.y < _ClipY)
           {
             pos += stepDir;
             continue;
@@ -168,11 +163,7 @@
 
           densityPrev = density;
           density = densityNext;
-		  objectPos = objectPos + 0.5;
-		  objectStepDir = 2 * stepDir - 1;
-		  objectStepDir = mul(unity_WorldToObject, objectStepDir);
-		  objectStepDir = objectStepDir + 0.5;
-          densityNext = tex3Dlod(_Volume, float4(objectPos + objectStepDir, 0)).r;
+          densityNext = tex3Dlod(_Volume, float4(pos + stepDir, 0)).r;
           if (_TransferFunctionId == 0)
           {
             sampledColor = transferFunctionColorBaby(density);
