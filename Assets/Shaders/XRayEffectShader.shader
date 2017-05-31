@@ -80,10 +80,8 @@
         // screencoordinates
         float3 tc = pix.screenSpacePos.xyz / pix.screenSpacePos.w * 0.5 + 0.5;
         // get front, back pos for ray in [0, 1] cube
-        float3 back = tex2D(_BackTex, tc.xy).xyz;
-        float3 front = tex2D(_FrontTex, tc.xy).xyz;
-        float3 backObj = mul(unity_WorldToObject, back) * 2;
-        float3 frontObj = mul(unity_WorldToObject, front) * 2;
+        float3 backObj = tex2D(_BackTex, tc.xy).xyz;
+        float3 frontObj = tex2D(_FrontTex, tc.xy).xyz;
            
         // ray throush the volume
         float3 dir = backObj.xyz - frontObj.xyz;
@@ -98,7 +96,7 @@
           
         for (int i = 0; i < 350; i++)
         {
-          if (distance(pos, backObj) < step) break; // check when reach the back  
+          if (distance(pos, backObj) < 0.5 * step) break; // check when reach the back  
 			      
           if (pos.x < _ClipX || pos.y < _ClipY)
 			    {
