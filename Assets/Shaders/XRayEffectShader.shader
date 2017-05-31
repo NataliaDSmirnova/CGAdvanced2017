@@ -96,9 +96,9 @@
         float3 sampledColor = float3(0, 0, 0), 
                color = float3(_XRayColorR, _XRayColorG, _XRayColorB);
           
-        for (int i = 0; i < 255; i++)
+        for (int i = 0; i < 350; i++)
         {
-          if (distance(pos, backObj) < step * 0.1) break; // check when reach the back  
+          if (distance(pos, backObj) < step) break; // check when reach the back  
 			      
           if (pos.x < _ClipX || pos.y < _ClipY)
 			    {
