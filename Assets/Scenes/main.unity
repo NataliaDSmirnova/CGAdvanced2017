@@ -13514,6 +13514,7 @@ MonoBehaviour:
   d: {fileID: 1831622483}
   standartNamePVM: Test.pvm
   logPanel: {fileID: 461886006}
+  sliderIsoThreshold: {fileID: 1812606382}
 --- !u!1 &1835344161
 GameObject:
   m_ObjectHideFlags: 0
@@ -15270,6 +15271,7 @@ MonoBehaviour:
   d: {fileID: 0}
   standartNamePVM: 
   logPanel: {fileID: 0}
+  sliderIsoThreshold: {fileID: 0}
 --- !u!1 &2071781848
 GameObject:
   m_ObjectHideFlags: 0
