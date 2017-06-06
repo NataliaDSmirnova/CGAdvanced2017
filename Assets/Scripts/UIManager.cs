@@ -53,10 +53,12 @@ public class UIManager : MonoBehaviour {
         cubeObjectRenderer = cubeObject.GetComponent<Renderer>();
         clipPlane = cubeObject.GetComponent<ClipPlane>();
 
+        clipPlane.OnValueXChanged(-0.5f);
+        clipPlane.OnValueYChanged(-0.5f);
+
         fpsText = panelF.transform.FindChild("TextFPS").GetComponent<Text>();
 
         xRayShader = Shader.Find("CGA/X-Ray");
-        // TODO: fix to volume shader
         volumeShader = Shader.Find("CGA/VolumeRendering");
         isosurfaceShader = Shader.Find("CGA/Isosurface");
         normalShader = Shader.Find("CGA/NormalShader");
@@ -80,10 +82,10 @@ public class UIManager : MonoBehaviour {
         timeleft = updateInterval;
     }
 	
-	// Update is called once per frame
-	void Update ()
+    // Update is called once per frame
+    void Update ()
     {
-		if (Input.GetKeyDown(KeyCode.W))
+	if (Input.GetKeyDown(KeyCode.W))
         {
             isPanelDShow = !isPanelDShow;
             panelD.SetActive(isPanelDShow);

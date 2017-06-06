@@ -130,14 +130,14 @@
         // screencoordinates
         float3 tc = pix.screenSpacePos.xyz / pix.screenSpacePos.w * 0.5 + 0.5;
         // get front, back pos for ray in [0, 1] cube
-		float3 backObj = tex2D(_BackTex, tc.xy).xyz;
-		float3 frontObj = tex2D(_FrontTex, tc.xy).xyz;
+		    float3 backObj = tex2D(_BackTex, tc.xy).xyz;
+		    float3 frontObj = tex2D(_FrontTex, tc.xy).xyz;
 
         // ray throush the volume
-		float3 dir = backObj.xyz - frontObj.xyz;
-		float length = distance(frontObj, backObj);
-		float step = _Step * _StepFactor;
-		float3 stepDir = step * dir;
+		    float3 dir = backObj.xyz - frontObj.xyz;
+		    float length = distance(frontObj, backObj);
+		    float step = _Step * _StepFactor;
+		    float3 stepDir = step * dir;
 
         // walk along the ray sampling the volume
         float3 pos = frontObj;
