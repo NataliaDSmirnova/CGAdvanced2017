@@ -66,10 +66,10 @@ Material:
       second: 1
     - first:
         name: _ClipX
-      second: 0.25
+      second: -0.5
     - first:
         name: _ClipY
-      second: 0.2857143
+      second: -0.5
     - first:
         name: _ColorFactor
       second: 0.025
@@ -84,7 +84,7 @@ Material:
       second: 0.5
     - first:
         name: _DiffuseG
-      second: 0.5214286
+      second: 0.5
     - first:
         name: _DiffuseR
       second: 0
@@ -129,7 +129,7 @@ Material:
       second: 1
     - first:
         name: _Shininess
-      second: 1
+      second: 32
     - first:
         name: _SmoothnessTextureChannel
       second: 0
