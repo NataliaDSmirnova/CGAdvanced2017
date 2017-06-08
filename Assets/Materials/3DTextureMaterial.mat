@@ -66,10 +66,10 @@ Material:
       second: 1
     - first:
         name: _ClipX
-      second: -0.5
+      second: 0.1
     - first:
         name: _ClipY
-      second: -0.5
+      second: 0
     - first:
         name: _ColorFactor
       second: 0.025

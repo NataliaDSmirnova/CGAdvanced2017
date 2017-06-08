@@ -9,6 +9,7 @@ public class ClipPlane : MonoBehaviour
     private new Renderer renderer;
     private float clipX;
     private float clipY;
+    private float clipZ;
 
     void Start()
     {
@@ -30,6 +31,15 @@ public class ClipPlane : MonoBehaviour
         if (renderer != null)
         {
             renderer.sharedMaterial.SetFloat("_ClipY", clipY);
+        }
+    }
+
+    public void OnValueZChanged(float value)
+    {
+        clipZ = value;
+        if (renderer != null)
+        {
+            renderer.sharedMaterial.SetFloat("_ClipZ", clipZ);
         }
     }
 }

@@ -15,10 +15,12 @@ public class UIManager : MonoBehaviour {
     public GameObject panelL;
     public bool isPanelLShow;
 
-    public Toggle toggleH;
-    public GameObject sliderH;
-    public Toggle toggleV;
-    public GameObject sliderV;
+    public Toggle toggleX;
+    public GameObject sliderX;
+    public Toggle toggleY;
+    public GameObject sliderY;
+    public Toggle toggleZ;
+    public GameObject sliderZ;
 
     public GameObject panelModeXRay;
     public GameObject panelModeVR;
@@ -130,29 +132,42 @@ public class UIManager : MonoBehaviour {
         panelH.SetActive(isPanelHShow);
     }
     
-    public void OnClickToggleH()
+    public void OnClickToggleX()
     {
-        sliderH.SetActive(toggleH.isOn);
-        if (!toggleH.isOn)
+        sliderX.SetActive(toggleX.isOn);
+        if (!toggleX.isOn)
         {
             clipPlane.OnValueXChanged(-0.5f);
         }
         else
         {
-            clipPlane.OnValueXChanged(sliderH.GetComponent<Slider>().value);
+            clipPlane.OnValueXChanged(sliderX.GetComponent<Slider>().value);
         }
     }
 
-    public void OnClickToggleV()
+    public void OnClickToggleY()
     {
-        sliderV.SetActive(toggleV.isOn);
-        if (!toggleV.isOn)
+        sliderY.SetActive(toggleY.isOn);
+        if (!toggleY.isOn)
         {
             clipPlane.OnValueYChanged(-0.5f);
         }
         else
         {
-            clipPlane.OnValueYChanged(sliderV.GetComponent<Slider>().value);
+            clipPlane.OnValueYChanged(sliderY.GetComponent<Slider>().value);
+        }
+    }
+
+    public void OnClickToggleZ()
+    {
+        sliderZ.SetActive(toggleZ.isOn);
+        if (!toggleZ.isOn)
+        {
+            clipPlane.OnValueZChanged(-0.5f);
+        }
+        else
+        {
+            clipPlane.OnValueZChanged(sliderZ.GetComponent<Slider>().value);
         }
     }
 

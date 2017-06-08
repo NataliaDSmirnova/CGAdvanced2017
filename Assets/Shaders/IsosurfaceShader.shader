@@ -10,6 +10,7 @@
 		_IsosurfaceThreshold("Isosurface threshold", Float) = 0.05
 		_ClipX("clipX", Float) = 0
 		_ClipY("clipY", Float) = 0
+		_ClipZ("clipZ", Float) = 0
 		_AmbientR("Ambient color red component", Float) = 0
 		_AmbientG("Ambient color green component", Float) = 0
 		_AmbientB("Ambient color blue component", Float) = 0
@@ -60,6 +61,7 @@
 	float _IsosurfaceThreshold;
 	float _ClipX;
 	float _ClipY;
+	float _ClipZ;
 	float _AmbientR, _AmbientG, _AmbientB;
 	float _DiffuseR, _DiffuseG, _DiffuseB;
 	float _SpecularR, _SpecularG, _SpecularB;
@@ -101,7 +103,7 @@
 		for (int i = 0; i < 350; i++)
 		{
 			if (distance(pos, backObj) < 0.5 * step) break; // check when reach the back
-			if (pos.x < _ClipX || pos.y < _ClipY)
+			if (pos.x < _ClipX || pos.y < _ClipY || pos.z < _ClipZ)
 			{
 				pos += stepDir;
 				continue;

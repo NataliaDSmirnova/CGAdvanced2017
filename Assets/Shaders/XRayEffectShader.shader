@@ -11,6 +11,7 @@
     _ColorFactor("ColorFactor", Float) = 1.0
 	  _ClipX("clipX", Float) = 0
 	  _ClipY("clipY", Float) = 0
+	  _ClipZ("clipZ", Float) = 0
 	  _XRayColorR("XRayColorR", Float) = 0
 	  _XRayColorG("XRayColorG", Float) = 0
 	  _XRayColorB("XRayColorB", Float) = 0
@@ -55,6 +56,7 @@
       float _ColorFactor;
 		  float _ClipX;
 		  float _ClipY;
+		  float _ClipZ;
 
 		  float _XRayColorR;
 		  float _XRayColorG;
@@ -98,7 +100,7 @@
         {
           if (distance(pos, backObj) < 0.5 * step) break; // check when reach the back  
 			      
-          if (pos.x < _ClipX || pos.y < _ClipY)
+          if (pos.x < _ClipX || pos.y < _ClipY || pos.z < _ClipZ)
 			    {
 				    pos += stepDir;
 				    continue;
