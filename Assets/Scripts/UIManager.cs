@@ -110,7 +110,7 @@ public class UIManager : MonoBehaviour {
         if (timeleft <= 0.0)
         {
             float fps = accum / frames;
-            fpsText.text = "FPS: " + fps;
+            fpsText.text = "FPS: " + fps.ToString("F1");
 
             timeleft = updateInterval;
             accum = 0.0F;
