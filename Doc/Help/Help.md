@@ -15,7 +15,7 @@
 Сцена выглядит так:
 
 <img
-  src="img/scene.png"
+  src="img/scene.PNG"
 />
 
 В приложении реализована сферическая камера: при движении мыши с зажатой левой кнопкой можно менять положение камеры, 
@@ -27,7 +27,7 @@
 В правом нижнем углу кнопка помощи, нажав на которую получим информацию о клавишах, на нажатие которых реагирует приложение.
 
 <img
-  src="img/help.png"
+  src="img/help.PNG"
 />
 
 F - включить/отключить FPS.
@@ -41,7 +41,7 @@ W - включить/отключить отладочное окно.
 В правом углу выпадающий список, содержащий несколько pvm-файлов, один из которых можно выбрать для отображения на экране.
 
 <img
-  src="img/texture_file.png"
+  src="img/texture_file.PNG"
 />
 
 ## Режимы отображения
@@ -49,7 +49,7 @@ W - включить/отключить отладочное окно.
 В левом углу выпадающий список, в котором можно выбрать режим отображения данных из текстуры.
 
 <img
-  src="img/mode.png"
+  src="img/mode.PNG"
 />
 
 В приложении реализованы 3 режима: x-ray, volume rendering и isosurface. Под выпадающим списком с выбором режима - выбор параметров для этого режима.
@@ -59,7 +59,7 @@ W - включить/отключить отладочное окно.
 Для x-ray - выбор цвета (3 компоненты):
 
 <img
-  src="img/x-ray.png"
+  src="img/x-ray.PNG"
 />
 
 ### Volume rendering
@@ -67,7 +67,7 @@ W - включить/отключить отладочное окно.
 Для volume rendering - выбор transfer function:
 
 <img
-  src="img/volume_rendering.png"
+  src="img/volume_rendering.PNG"
 />
 
 ### Isosurface
@@ -77,11 +77,11 @@ W - включить/отключить отладочное окно.
 shininess - характеризует гладкость поверхности - чем меньше значение, тем больше блики):
 
 <img
-  src="img/isosurface.png"
+  src="img/isosurface.PNG"
 />
 
 <img
-  src="img/shininess.png"
+  src="img/shininess.PNG"
 />
 
 ## Clip planes
@@ -92,19 +92,19 @@ Clip planes - клиповочные плоскости, которые обре
 Если галочку убрать, то объект будет прорисовываться целиком (по этой координате).
 
 <img
-  src="img/clip_planes.png"
+  src="img/clip_planes.PNG"
 />
 
 Baby.pvm в режиме x-ray:
 
 <img
-  src="img/x-ray_clipX.png"
+  src="img/x-ray_clipX.PNG"
 />
 
 При клиповке в режиме isosurface отображается серым цветом срез данных по клиповочной плоскости.
 Baby.pvm в режиме isosurface:
 
 <img
-  src="img/isosurface_clipX.png"
+  src="img/isosurface_clipX.PNG"
 />
 
