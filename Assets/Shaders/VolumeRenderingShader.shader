@@ -12,7 +12,7 @@
     _GradientBorder("Gradient border", Range(0.0, 1.0)) = 0.05
     _ClipX("clipX", Float) = 0
     _ClipY("clipY", Float) = 0
-	_ClipZ("clipZ", Float) = 0
+	  _ClipZ("clipZ", Float) = 0
 	}
 	
   SubShader
@@ -52,7 +52,7 @@
       float _Opacity;
       float _ClipX;
       float _ClipY;
-	  float _ClipZ;
+	    float _ClipZ;
 
       int _TransferFunctionId;
       float _GradientBorder;

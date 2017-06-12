@@ -66,13 +66,13 @@ Material:
       second: 1
     - first:
         name: _ClipX
-      second: 0.45
+      second: -0.5
     - first:
         name: _ClipY
-      second: 0
+      second: -0.5
     - first:
         name: _ClipZ
-      second: 0
+      second: -0.5
     - first:
         name: _ColorFactor
       second: 0.008
@@ -84,10 +84,10 @@ Material:
       second: 1
     - first:
         name: _DiffuseB
-      second: 0.5
+      second: 0
     - first:
         name: _DiffuseG
-      second: 0.5
+      second: 0
     - first:
         name: _DiffuseR
       second: 0
@@ -111,7 +111,7 @@ Material:
       second: 0.05
     - first:
         name: _IsosurfaceThreshold
-      second: 0.4
+      second: 0.05
     - first:
         name: _Metallic
       second: 0
@@ -132,22 +132,22 @@ Material:
       second: 1
     - first:
         name: _Shininess
-      second: 42.928574
+      second: 1
     - first:
         name: _SmoothnessTextureChannel
       second: 0
     - first:
         name: _SpecularB
-      second: 1
+      second: 0
     - first:
         name: _SpecularG
-      second: 1
+      second: 0
     - first:
         name: _SpecularHighlights
       second: 1
     - first:
         name: _SpecularR
-      second: 1
+      second: 0
     - first:
         name: _SrcBlend
       second: 1
