@@ -87,8 +87,10 @@
 		// ray throush the volume
 		float3 dir = backObj.xyz - frontObj.xyz;
 		float length = distance(frontObj, backObj);
-		float step = _Step * _StepFactor;
-		float3 stepDir = step * dir;
+		float step = _Step * _StepFactor, 
+      stepDirLen = step * length;
+		float3 stepDir = step * dir, 
+      stepDirNorm = normalize(stepDir);
 
 		// walk along the ray sampling the volume
 		float3 pos = frontObj, worldPos;
@@ -98,7 +100,7 @@
 			specular = float4(_SpecularR, _SpecularG, _SpecularB, 1);
 		float3 posColor = float3(0, 0, 0);
 		float3 normal, reflectDir, viewDir, lightDir;
-		float3 stepDirX, stepDirY;
+		float3 stepDirNormX, stepDirNormY, stepDirX, stepDirY;
 		float dx, dy, dz;
 		for (int i = 0; i < 350; i++)
 		{
@@ -129,9 +131,11 @@
 				}
 
 				// count normal
-				stepDirX = float3(stepDir.x, -stepDir.z, stepDir.y); // rotate stepDir 90 degrees around X axis
-				stepDirY = float3(-stepDir.z, stepDir.y, stepDir.x); // rotate stepDir 90 degrees around Y axis
-				// density difference between (pos - stepDir) and (pos + stepDir) in 3 directions
+				stepDirNormX = float3(stepDirNorm.x, -stepDirNorm.z, stepDirNorm.y); // rotate stepDirNorm 90 degrees around X axis        
+        stepDirNormY = normalize(cross(stepDirNorm, stepDirNormX)); // rotate stepDir 90 degrees around Y axis
+        stepDirX = stepDirNormX * stepDirLen;
+        stepDirY = stepDirNormY * stepDirLen;
+        // density difference between (pos - stepDir) and (pos + stepDir) in 3 directions
 				dx = tex3Dlod(_Volume, float4(pos - stepDirX, 0)).r - tex3Dlod(_Volume, float4(pos + stepDirX, 0)).r;
 				dy = tex3Dlod(_Volume, float4(pos - stepDirY, 0)).r - tex3Dlod(_Volume, float4(pos + stepDirY, 0)).r;
 				dz = tex3Dlod(_Volume, float4(pos - stepDir, 0)).r - tex3Dlod(_Volume, float4(pos + stepDir, 0)).r;
@@ -139,14 +143,15 @@
 				// normal to world coordinates
 				normal = mul(unity_ObjectToWorld, normal);
 				normal = normalize(normal);
-				// phong lighting model
-				lightDir = normalize(_WorldSpaceLightPos0.xyz);
-				reflectDir = reflect(-lightDir, normal);
-				reflectDir = normalize(reflectDir);
-				worldPos = mul(unity_ObjectToWorld, pos);
-				viewDir = normalize(_WorldSpaceCameraPos - worldPos);
-				color = ambient + diffuse * max(0.0, dot(normal, lightDir)) + specular * pow(max(0.0, dot(reflectDir, viewDir)), _Shininess);
-				break;
+				// phong lighting model				
+        worldPos = mul(unity_ObjectToWorld, pos);
+        viewDir = normalize(_WorldSpaceCameraPos - worldPos);
+        lightDir = normalize(_WorldSpaceLightPos0.xyz);
+        reflectDir = reflect(-lightDir, normal);
+        reflectDir = normalize(reflectDir);
+        color = ambient + diffuse * max(0.0, dot(normal, lightDir)) + specular * pow(max(0.0, dot(reflectDir, viewDir)), _Shininess);				
+
+        break;
 			}
 			pos += stepDir;
 		}
