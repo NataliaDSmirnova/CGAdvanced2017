@@ -89,6 +89,7 @@ public class Volume : MonoBehaviour
         texture = new Texture3D(dimX, dimY, dimZ, TextureFormat.RFloat, false);
         texture.SetPixels32(colors);
         texture.filterMode = FilterMode.Trilinear;
+        texture.wrapMode = TextureWrapMode.Clamp;
         texture.Apply();
     }
 

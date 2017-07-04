@@ -80,7 +80,7 @@
       // densityC - current point
       // densityL - prev point
       // densityR - next point
-      float3 transferFunctionColorCommon(float densityC, float densityL, float densityR)
+      float4 transferFunctionColorCommon(float densityC, float densityL, float densityR)
       {
         float delta1 = densityC - densityL, delta2 = densityR - densityC,
           diff = 0;
@@ -88,47 +88,47 @@
         if (delta1 >= 0 && delta2 >= 0) // we are in the bottom
         {
           diff = abs(delta1 - delta2);
-          return float3(127.0 / 256.0, 127.0 / 256.0, min(diff, 1.0) + _GradientBorder);
+          return float4(127.0 / 256.0, 127.0 / 256.0, min(diff, 1.0) + _GradientBorder, 1.0);
         }
         else if (delta1 >= 0 && delta2 < 0) // we are descending
         {
           diff = abs(delta1 + delta2);
-          return float3(127.0 / 256.0, max(min(diff, 1.0) - _GradientBorder, 0.0), 127.0 / 256.0);
+          return float4(127.0 / 256.0, max(min(diff, 1.0) - _GradientBorder, 0.0), 127.0 / 256.0, 1.0);
         }
         else if (delta1 < 0 && delta2 >= 0) // we are ascending
         {
           diff = abs(delta1 + delta2);
-          return float3(127.0 / 256.0, min(diff, 1.0) + _GradientBorder / 256.0, 127.0 / 256.0);
+          return float4(127.0 / 256.0, min(diff, 1.0) + _GradientBorder / 256.0, 127.0 / 256.0, 1.0);
         }
         else //if (delta1 < 0 && delta2 < 0) // we are atthe top
         {
           diff = abs(delta1 - delta2);
-          return float3(min(diff, 1.0) + _GradientBorder, 127.0 / 256.0, 127.0 / 256.0);
+          return float4(min(diff, 1.0) + _GradientBorder, 127.0 / 256.0, 127.0 / 256.0, 1.0);
         }
       }
 
       // Used for 'Orange' model
-      float3 transferFunctionColorOrange(float density)
+      float4 transferFunctionColorOrange(float density)
       {
         if (density > 0.7 && density <= 1.00) // 0 - 0.08 - 'Skin'
-          return float3(255.0 / 256.0, 69.0 / 256.0, 0.0 / 256.0);
+          return float4(255.0 / 256.0, 69.0 / 256.0, 0.0 / 256.0, 1.0);
         else //if (density > 0.9 && density <= 1.0) // 0.9 - 1.0 - 'Innards'
-          return float3(255.0 / 256.0, 140.0 / 256.0, 0.0 / 256.0);
+          return float4(255.0 / 256.0, 140.0 / 256.0, 0.0 / 256.0, 1.0);
       }
 
       // Used for 'Baby' model
-      float3 transferFunctionColorBaby(float density)
+      float4 transferFunctionColorBaby(float density)
       {
-        if (density >= 0 && density <= 0.1) // 0 - 0.08 - 'Skin'
-          return float3(225.0 / 256.0, 223.0 / 256.0, 196.0 / 256.0);
-        else if (density > 0.1 && density <= 0.45) // 0.08 - 0.45 - 'Brain'
-          return float3(240.0 / 256.0, 200.0 / 256.0, 201.0 / 256.0);
-        else if (density > 0.45 && density <= 0.9) // 0.45 - 0.9 - 'Bone'
-          return float3(227.0 / 256.0, 218.0 / 256.0, 201.0 / 256.0);
-        else if (density > 0.9 && density <= 0.97) // 0.9 - 1.0 - 'Other'
-          return float3(255.0 / 256.0, 255.0 / 256.0, 255.0 / 256.0);
-        else //if (density > 0.9 && density <= 0.97) // 0.9 - 1.0 - 'Metal'
-          return float3(176.0 / 256.0, 196.0 / 256.0, 222.0 / 256.0);
+        if (density >= 0 && density <= 0.3) // 'Stuff'
+          return float4(0.0, 0.0, 0.0, 0.0);
+        else if (density > 0.3 && density <= 0.68) // 'Skin'
+          return float4(225.0 / 256.0, 223.0 / 256.0, 196.0 / 256.0, 1.0);
+        else if (density > 0.68 && density <= 0.75) // 'Muscle'/Brain
+          return float4(240.0 / 256.0, 200.0 / 256.0, 201.0 / 256.0, 1.0);
+        else if (density > 0.75 && density <= 0.91) // 'Metal'
+          return float4(176.0 / 256.0, 196.0 / 256.0, 222.0 / 256.0, 1.0);
+        else // 'Bone'
+          return float4(227.0 / 256.0, 218.0 / 256.0, 201.0 / 256.0, 1.0);
       }
 
       v2f vert(appdata v)
@@ -153,18 +153,17 @@
         float length = distance(frontObj, backObj);
         float step = _Step * _StepFactor,
           stepDirLen = step * length;
-        float3 stepDir = step * dir,
-          stepDirNorm = normalize(stepDir);
+        float3 stepDir = step * dir;
 
         // walk along the ray sampling the volume
         float3 pos = frontObj, worldPos;
-        float4 color = float4(0, 0, 0, 0);
+        float4 color = float4(0, 0, 0, 1);
         float4 ambient = float4(_AmbientR, _AmbientG, _AmbientB, 1),
           diffuse = float4(_DiffuseR, _DiffuseG, _DiffuseB, 1),
           specular = float4(_SpecularR, _SpecularG, _SpecularB, 1);
         float3 posColor = float3(0, 0, 0);
         float3 normal, reflectDir, viewDir, lightDir;
-        float3 stepDirNormX, stepDirNormY, stepDirX, stepDirY;
+        float3 stepDirX, stepDirY;
         float dx, dy, dz;
         
         float alpha = 0,
@@ -172,8 +171,8 @@
           density = tex3Dlod(_Volume, float4(pos, 0)).r,
           densityNext = density,
           compositeTransparency = 1;
-        float3 sampledColor = float3(0, 0, 0),          
-          compositeColor = 0;
+        float3 compositeColor = 0;
+        float4 sampledColor = float4(0, 0, 0, 0);
         
         int isoFinished = 0;
 
@@ -209,10 +208,8 @@
             }
 
             // count normal
-            stepDirNormX = float3(stepDirNorm.x, -stepDirNorm.z, stepDirNorm.y); // rotate stepDirNorm 90 degrees around X axis        
-            stepDirNormY = normalize(cross(stepDirNorm, stepDirNormX)); // rotate stepDir 90 degrees around Y axis
-            stepDirX = stepDirNormX * stepDirLen;
-            stepDirY = stepDirNormY * stepDirLen;
+            stepDirX = float3(stepDir.x, -stepDir.z, stepDir.y); // rotate stepDir 90 degrees around X axis
+            stepDirY = float3(-stepDir.z, stepDir.y, stepDir.x); // rotate stepDir 90 degrees around Y axis
             // density difference between (pos - stepDir) and (pos + stepDir) in 3 directions
             dx = tex3Dlod(_Volume, float4(pos - stepDirX, 0)).r - tex3Dlod(_Volume, float4(pos + stepDirX, 0)).r;
             dy = tex3Dlod(_Volume, float4(pos - stepDirY, 0)).r - tex3Dlod(_Volume, float4(pos + stepDirY, 0)).r;
@@ -222,6 +219,7 @@
             normal = mul(unity_ObjectToWorld, normal);
             normal = normalize(normal);
             // phong lighting model				
+            pos = pos * 2 - 1;
             worldPos = mul(unity_ObjectToWorld, pos);
             viewDir = normalize(_WorldSpaceCameraPos - worldPos);
             lightDir = normalize(_WorldSpaceLightPos0.xyz);
@@ -249,10 +247,10 @@
             {
               sampledColor = transferFunctionColorCommon(densityPrev, density, densityNext);
             }
+            
+            alpha = sampledColor.w * density;
 
-            alpha = density;
-
-            compositeColor += alpha * sampledColor * compositeTransparency;
+            compositeColor += alpha * sampledColor.xyz * compositeTransparency;
             compositeTransparency *= (1 - alpha);                                                      
           }
           pos += stepDir;
