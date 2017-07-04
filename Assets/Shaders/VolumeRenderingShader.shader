@@ -57,59 +57,64 @@
       int _TransferFunctionId;
       float _GradientBorder;
 
+      float3 fitColorInRange(float r, float g, float b)
+      {
+        return float3(r / 255.0, g / 255.0, b / 255.0);
+      }
+
       // Used for any model, based on gradient
       // densityC - current point
       // densityL - prev point
       // densityR - next point
-      float3 transferFunctionColorCommon(float densityC, float densityL, float densityR)
+      float4 transferFunctionColorCommon(float densityC, float densityL, float densityR)
       {
-        float delta1 = densityC - densityL, delta2 = densityR - densityC, 
+        float delta1 = densityC - densityL, delta2 = densityR - densityC,
           diff = 0;
 
         if (delta1 >= 0 && delta2 >= 0) // we are in the bottom
         {
           diff = abs(delta1 - delta2);
-          return float3(127.0 / 256.0, 127.0 / 256.0, min(diff, 1.0) + _GradientBorder);
+          return float4(fitColorInRange(127, 127, min(diff, 1.0) + _GradientBorder), 1.0);
         }
         else if (delta1 >= 0 && delta2 < 0) // we are descending
         {
           diff = abs(delta1 + delta2);
-          return float3(127.0 / 256.0, max(min(diff, 1.0) - _GradientBorder, 0.0), 127.0/ 256.0);
+          return float4(fitColorInRange(127, max(min(diff, 1.0) - _GradientBorder, 0.0), 127), 1.0);
         }
         else if (delta1 < 0 && delta2 >= 0) // we are ascending
         {
           diff = abs(delta1 + delta2);
-          return float3(127.0 / 256.0, min(diff, 1.0) + _GradientBorder / 256.0, 127.0/ 256.0);
+          return float4(fitColorInRange(127, min(diff, 1.0) + _GradientBorder, 127), 1.0);
         }
         else //if (delta1 < 0 && delta2 < 0) // we are atthe top
         {
           diff = abs(delta1 - delta2);
-          return float3(min(diff, 1.0) + _GradientBorder, 127.0 / 256.0, 127.0 / 256.0);
-        }                  
+          return float4(fitColorInRange(min(diff, 1.0) + _GradientBorder, 127, 127), 1.0);
+        }
       }
 
       // Used for 'Orange' model
-      float3 transferFunctionColorOrange(float density)
+      float4 transferFunctionColorOrange(float density)
       {
         if (density > 0.7 && density <= 1.00) // 0 - 0.08 - 'Skin'
-          return float3(255.0 / 256.0, 69.0 / 256.0, 0.0 / 256.0);       
+          return float4(fitColorInRange(255, 69, 0), 1.0);
         else //if (density > 0.9 && density <= 1.0) // 0.9 - 1.0 - 'Innards'
-          return float3(255.0 / 256.0, 140.0 / 256.0, 0.0 / 256.0);
+          return float4(fitColorInRange(255, 140, 0), 1.0);
       }
 
       // Used for 'Baby' model
-      float3 transferFunctionColorBaby(float density)
+      float4 transferFunctionColorBaby(float density)
       {
-        if (density >= 0 && density <= 0.1) // 0 - 0.08 - 'Skin'
-          return float3(225.0 / 256.0, 223.0 / 256.0, 196.0 / 256.0);
-        else if (density > 0.1 && density <= 0.45) // 0.08 - 0.45 - 'Brain'
-          return float3(240.0 / 256.0, 200.0 / 256.0, 201.0 / 256.0);
-        else if (density > 0.45 && density <= 0.9) // 0.45 - 0.9 - 'Bone'
-          return float3(227.0 / 256.0, 218.0 / 256.0, 201.0 / 256.0);
-        else if (density > 0.9 && density <= 0.97) // 0.9 - 1.0 - 'Other'
-          return float3(255.0 / 256.0, 255.0 / 256.0, 255.0 / 256.0);
-        else //if (density > 0.9 && density <= 0.97) // 0.9 - 1.0 - 'Metal'
-          return float3(176.0 / 256.0, 196.0 / 256.0, 222.0 / 256.0);
+        if (density >= 0 && density <= 0.59) // 'Stuff'
+          return float4(fitColorInRange(0, 0, 0), 0.0);
+        else if (density > 0.59 && density <= 0.68) // 'Skin'
+          return float4(fitColorInRange(225, 223, 196), 0.5);
+        else if (density > 0.68 && density <= 0.76) // 'Muscle'/Brain
+          return float4(fitColorInRange(240, 200, 201), 0.4);
+        else if (density > 0.76 && density <= 0.91) // 'Metal'
+          return float4(fitColorInRange(176, 196, 222), 0.7);
+        else // 'Bone'
+          return float4(fitColorInRange(250, 250, 250), 0.9);
       }
 
       v2f vert(appdata v)
@@ -148,9 +153,9 @@
           density = tex3D(_Volume, pos.xyz).r,
           densityNext = density,
           compositeTransparency = 1;
-        float3 sampledColor = float3(0, 0, 0),
-          color = 0,
+        float3 color = 0,
           compositeColor = 0;          
+        float4 sampledColor = float4(0, 0, 0, 1);
 
         for (int i = 0; i < 350; i++)
         {
@@ -168,20 +173,20 @@
           densityNext = tex3Dlod(_Volume, float4(pos + stepDir, 0)).r;
           if (_TransferFunctionId == 0)
           {
-            sampledColor = transferFunctionColorBaby(density);
+            sampledColor = transferFunctionColorBaby(density * sqrt(3));
           } 
           else if (_TransferFunctionId == 1)
           {
-            sampledColor = transferFunctionColorOrange(density);
+            sampledColor = transferFunctionColorOrange(density * sqrt(3));
           }
           else
           {
-            sampledColor = transferFunctionColorCommon(densityPrev, density, densityNext);
+            sampledColor = transferFunctionColorCommon(densityPrev * sqrt(3), density * sqrt(3), densityNext * sqrt(3));
           }
           
-          alpha = density;
+          alpha = sampledColor.w * density;
 
-          compositeColor += alpha * sampledColor * compositeTransparency;
+          compositeColor += alpha * sampledColor.xyz * compositeTransparency;
           compositeTransparency *= (1 - alpha);
           
           pos += stepDir;

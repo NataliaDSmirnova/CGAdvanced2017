@@ -76,6 +76,12 @@
       int _TransferFunctionId;
       float _GradientBorder;
 
+      // r, g, b in [0:255]
+      float3 fitColorInRange(float r, float g, float b)
+      {
+        return float3(r / 255.0, g / 255.0, b / 255.0);
+      }
+
       // Used for any model, based on gradient
       // densityC - current point
       // densityL - prev point
@@ -88,22 +94,22 @@
         if (delta1 >= 0 && delta2 >= 0) // we are in the bottom
         {
           diff = abs(delta1 - delta2);
-          return float4(127.0 / 256.0, 127.0 / 256.0, min(diff, 1.0) + _GradientBorder, 1.0);
+          return float4(fitColorInRange(127, 127, min(diff, 1.0) + _GradientBorder), 1.0);
         }
         else if (delta1 >= 0 && delta2 < 0) // we are descending
         {
           diff = abs(delta1 + delta2);
-          return float4(127.0 / 256.0, max(min(diff, 1.0) - _GradientBorder, 0.0), 127.0 / 256.0, 1.0);
+          return float4(fitColorInRange(127, max(min(diff, 1.0) - _GradientBorder, 0.0), 127), 1.0);
         }
         else if (delta1 < 0 && delta2 >= 0) // we are ascending
         {
           diff = abs(delta1 + delta2);
-          return float4(127.0 / 256.0, min(diff, 1.0) + _GradientBorder / 256.0, 127.0 / 256.0, 1.0);
+          return float4(fitColorInRange(127, min(diff, 1.0) + _GradientBorder, 127), 1.0);
         }
         else //if (delta1 < 0 && delta2 < 0) // we are atthe top
         {
           diff = abs(delta1 - delta2);
-          return float4(min(diff, 1.0) + _GradientBorder, 127.0 / 256.0, 127.0 / 256.0, 1.0);
+          return float4(fitColorInRange(min(diff, 1.0) + _GradientBorder, 127, 127), 1.0);
         }
       }
 
@@ -111,24 +117,24 @@
       float4 transferFunctionColorOrange(float density)
       {
         if (density > 0.7 && density <= 1.00) // 0 - 0.08 - 'Skin'
-          return float4(255.0 / 256.0, 69.0 / 256.0, 0.0 / 256.0, 1.0);
+          return float4(fitColorInRange(255, 69, 0), 1.0);
         else //if (density > 0.9 && density <= 1.0) // 0.9 - 1.0 - 'Innards'
-          return float4(255.0 / 256.0, 140.0 / 256.0, 0.0 / 256.0, 1.0);
-      }
+          return float4(fitColorInRange(255, 140, 0), 1.0);
+      }      
 
       // Used for 'Baby' model
       float4 transferFunctionColorBaby(float density)
       {
-        if (density >= 0 && density <= 0.3) // 'Stuff'
-          return float4(0.0, 0.0, 0.0, 0.0);
-        else if (density > 0.3 && density <= 0.68) // 'Skin'
-          return float4(225.0 / 256.0, 223.0 / 256.0, 196.0 / 256.0, 1.0);
-        else if (density > 0.68 && density <= 0.75) // 'Muscle'/Brain
-          return float4(240.0 / 256.0, 200.0 / 256.0, 201.0 / 256.0, 1.0);
-        else if (density > 0.75 && density <= 0.91) // 'Metal'
-          return float4(176.0 / 256.0, 196.0 / 256.0, 222.0 / 256.0, 1.0);
+        if (density >= 0 && density <= 0.59) // 'Stuff'
+          return float4(fitColorInRange(0, 0, 0), 0.0);
+        else if (density > 0.59 && density <= 0.68) // 'Skin'
+          return float4(fitColorInRange(225, 223, 196), 0.5);
+        else if (density > 0.68 && density <= 0.76) // 'Muscle'/Brain
+          return float4(fitColorInRange(240, 200, 201), 0.4);
+        else if (density > 0.76 && density <= 0.91) // 'Metal'
+          return float4(fitColorInRange(176, 196, 222), 0.7);
         else // 'Bone'
-          return float4(227.0 / 256.0, 218.0 / 256.0, 201.0 / 256.0, 1.0);
+          return float4(fitColorInRange(250, 250, 250), 0.9);        
       }
 
       v2f vert(appdata v)
@@ -188,9 +194,9 @@
           if (distance(posColor, float3(0, 0, 0)) > _IsosurfaceThreshold)
           {
             // gray 2D texture on cliped slice
-            if (_ClipX > 0 && abs(pos.x - _ClipX) < 0.01f)
+            /*if (_ClipX > 0 && abs(pos.x - _ClipX) < 0.01f)
             {
-              color = float4(posColor, posColor.r);
+              color = float4(0, 0, 1, posColor.r);
               isoFinished = 1;
               break;
             }
@@ -205,7 +211,7 @@
               color = float4(posColor, posColor.r);
               isoFinished = 1;
               break;
-            }
+            }*/            
 
             // count normal
             stepDirX = float3(stepDir.x, -stepDir.z, stepDir.y); // rotate stepDir 90 degrees around X axis
@@ -231,21 +237,21 @@
             break;
           }
           else 
-          {                                             
+          {                                                   
             densityPrev = density;
             density = densityNext;
             densityNext = tex3Dlod(_Volume, float4(pos + stepDir, 0)).r;
             if (_TransferFunctionId == 0)
             {
-              sampledColor = transferFunctionColorBaby(density);
+              sampledColor = transferFunctionColorBaby(density * sqrt(3));
             }
             else if (_TransferFunctionId == 1)
             {
-              sampledColor = transferFunctionColorOrange(density);
+              sampledColor = transferFunctionColorOrange(density * sqrt(3));
             }
             else
             {
-              sampledColor = transferFunctionColorCommon(densityPrev, density, densityNext);
+              sampledColor = transferFunctionColorCommon(densityPrev * sqrt(3), density * sqrt(3), densityNext * sqrt(3));
             }
             
             alpha = sampledColor.w * density;

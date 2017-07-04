@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: 3DTextureMaterial
-  m_Shader: {fileID: 4800000, guid: d89274d89c6501146b13146d3bcb551b, type: 3}
+  m_Shader: {fileID: 4800000, guid: 28e1ab6b4e92c2d4f9c1d7e5fc420ee1, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
   m_CustomRenderQueue: -1
@@ -54,28 +54,28 @@ Material:
     m_Floats:
     - first:
         name: _AmbientB
-      second: 0
+      second: 1
     - first:
         name: _AmbientG
-      second: 0
+      second: 1
     - first:
         name: _AmbientR
-      second: 0
+      second: 1
     - first:
         name: _BumpScale
       second: 1
     - first:
         name: _ClipX
-      second: -0.5
+      second: 0.5285714
     - first:
         name: _ClipY
-      second: -0.5
+      second: 0
     - first:
         name: _ClipZ
       second: 0
     - first:
         name: _ColorFactor
-      second: 0.025
+      second: 0.008
     - first:
         name: _Cutoff
       second: 0.5
@@ -87,10 +87,10 @@ Material:
       second: 0
     - first:
         name: _DiffuseG
-      second: 0
+      second: 1
     - first:
         name: _DiffuseR
-      second: 0
+      second: 1
     - first:
         name: _DstBlend
       second: 0
@@ -111,7 +111,7 @@ Material:
       second: 0.05
     - first:
         name: _IsosurfaceThreshold
-      second: 0.30107144
+      second: 1
     - first:
         name: _Metallic
       second: 0
@@ -153,7 +153,7 @@ Material:
       second: 1
     - first:
         name: _Step
-      second: 0.0078125
+      second: 0.00390625
     - first:
         name: _StepFactor
       second: 0.5
