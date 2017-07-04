@@ -14,12 +14,9 @@ public class UIManager : MonoBehaviour {
     public bool isPanelHShow;
     public GameObject panelL;
     public bool isPanelLShow;
-
-    public Toggle toggleX;
+    
     public GameObject sliderX;
-    public Toggle toggleY;
-    public GameObject sliderY;
-    public Toggle toggleZ;
+    public GameObject sliderY;    
     public GameObject sliderZ;
 
     public GameObject panelModeXRay;
@@ -145,45 +142,7 @@ public class UIManager : MonoBehaviour {
         isPanelHShow = true;
         panelH.SetActive(isPanelHShow);
     }
-    
-    public void OnClickToggleX()
-    {
-        sliderX.SetActive(toggleX.isOn);
-        if (!toggleX.isOn)
-        {
-            clipPlane.OnValueXChanged(-0.5f);
-        }
-        else
-        {
-            clipPlane.OnValueXChanged(sliderX.GetComponent<Slider>().value);
-        }
-    }
-
-    public void OnClickToggleY()
-    {
-        sliderY.SetActive(toggleY.isOn);
-        if (!toggleY.isOn)
-        {
-            clipPlane.OnValueYChanged(-0.5f);
-        }
-        else
-        {
-            clipPlane.OnValueYChanged(sliderY.GetComponent<Slider>().value);
-        }
-    }
-
-    public void OnClickToggleZ()
-    {
-        sliderZ.SetActive(toggleZ.isOn);
-        if (!toggleZ.isOn)
-        {
-            clipPlane.OnValueZChanged(-0.5f);
-        }
-        else
-        {
-            clipPlane.OnValueZChanged(sliderZ.GetComponent<Slider>().value);
-        }
-    }
+                
 
     public void ChangeMode(UnityEngine.UI.Dropdown d)
     {
