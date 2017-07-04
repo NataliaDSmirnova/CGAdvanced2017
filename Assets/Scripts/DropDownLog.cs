@@ -10,6 +10,7 @@ public class DropDownLog : MonoBehaviour {
     public string standartNamePVM;
     public GameObject logPanel;
     public Slider sliderIsoThreshold;
+    public float recommendedThreshold;
 
     // private variables
     private Volume volumeClass;
@@ -62,72 +63,82 @@ public class DropDownLog : MonoBehaviour {
         // set default options
         if (d.captionText.text == "Baby.pvm")
         {
-            renderer.sharedMaterial.SetFloat("_ColorFactor", 0.008f);
-            renderer.sharedMaterial.SetFloat("_IsosurfaceThreshold", 0.4f);
-            sliderIsoThreshold.value = 0.4f;
+          recommendedThreshold = 0.4f;
+          renderer.sharedMaterial.SetFloat("_ColorFactor", 0.008f);
+          renderer.sharedMaterial.SetFloat("_IsosurfaceThreshold", recommendedThreshold);
+          sliderIsoThreshold.value = recommendedThreshold;
         }
 
-        if (d.captionText.text == "Base.pvm")
+        else if (d.captionText.text == "Base.pvm")
         {
-            renderer.sharedMaterial.SetFloat("_ColorFactor", 0.025f);
-            renderer.sharedMaterial.SetFloat("_IsosurfaceThreshold", 0.05f);
-            sliderIsoThreshold.value = 0.05f;
+          recommendedThreshold = 0.05f;
+          renderer.sharedMaterial.SetFloat("_ColorFactor", 0.025f);
+          renderer.sharedMaterial.SetFloat("_IsosurfaceThreshold", recommendedThreshold);
+          sliderIsoThreshold.value = recommendedThreshold;
         }
 
-        if (d.captionText.text == "BluntFin.pvm")
+        else if (d.captionText.text == "BluntFin.pvm")
         {
-            renderer.sharedMaterial.SetFloat("_ColorFactor", 0.025f);
-            renderer.sharedMaterial.SetFloat("_IsosurfaceThreshold", 0.05f);
-            sliderIsoThreshold.value = 0.05f;
+          recommendedThreshold = 0.05f;
+          renderer.sharedMaterial.SetFloat("_ColorFactor", 0.025f);
+          renderer.sharedMaterial.SetFloat("_IsosurfaceThreshold", recommendedThreshold);
+          sliderIsoThreshold.value = recommendedThreshold;
         }
 
-        if (d.captionText.text == "DTI-B0.pvm")
+        else if (d.captionText.text == "DTI-B0.pvm")
         {
-            renderer.sharedMaterial.SetFloat("_ColorFactor", 0.01f);
-            renderer.sharedMaterial.SetFloat("_IsosurfaceThreshold", 0.37f);
-            sliderIsoThreshold.value = 0.37f;
+          recommendedThreshold = 0.37f;
+          renderer.sharedMaterial.SetFloat("_ColorFactor", 0.01f);
+          renderer.sharedMaterial.SetFloat("_IsosurfaceThreshold", recommendedThreshold);
+          sliderIsoThreshold.value = recommendedThreshold;
         }
 
-        if (d.captionText.text == "DTI-MD.pvm")
+        else if (d.captionText.text == "DTI-MD.pvm")
         {
-            renderer.sharedMaterial.SetFloat("_ColorFactor", 0.03f);
-            renderer.sharedMaterial.SetFloat("_IsosurfaceThreshold", 0.17f);
-            sliderIsoThreshold.value = 0.17f;
+          recommendedThreshold = 0.17f;
+          renderer.sharedMaterial.SetFloat("_ColorFactor", 0.03f);
+          renderer.sharedMaterial.SetFloat("_IsosurfaceThreshold", recommendedThreshold);
+          sliderIsoThreshold.value = recommendedThreshold;
         }
 
-        if (d.captionText.text == "Fuel.pvm")
+        else if (d.captionText.text == "Fuel.pvm")
         {
-            renderer.sharedMaterial.SetFloat("_ColorFactor", 0.05f);
-            renderer.sharedMaterial.SetFloat("_IsosurfaceThreshold", 0.05f);
-            sliderIsoThreshold.value = 0.05f;
+          recommendedThreshold = 0.05f;
+          renderer.sharedMaterial.SetFloat("_ColorFactor", 0.05f);
+          renderer.sharedMaterial.SetFloat("_IsosurfaceThreshold", recommendedThreshold);
+          sliderIsoThreshold.value = recommendedThreshold;
         }
 
-        if (d.captionText.text == "Orange.pvm")
+        else if (d.captionText.text == "Orange.pvm")
         {
-            renderer.sharedMaterial.SetFloat("_ColorFactor", 0.01f);
-            renderer.sharedMaterial.SetFloat("_IsosurfaceThreshold", 0.21f);
-            sliderIsoThreshold.value = 0.21f;
+          recommendedThreshold = 0.21f;
+          renderer.sharedMaterial.SetFloat("_ColorFactor", 0.01f);
+          renderer.sharedMaterial.SetFloat("_IsosurfaceThreshold", recommendedThreshold);
+          sliderIsoThreshold.value = recommendedThreshold;
         }
 
-        if (d.captionText.text == "Standart.pvm")
+        else if (d.captionText.text == "Standart.pvm")
         {
-            renderer.sharedMaterial.SetFloat("_ColorFactor", 0.025f);
-            renderer.sharedMaterial.SetFloat("_IsosurfaceThreshold", 0.05f);
-            sliderIsoThreshold.value = 0.05f;
+          recommendedThreshold = 0.05f;
+          renderer.sharedMaterial.SetFloat("_ColorFactor", 0.025f);
+          renderer.sharedMaterial.SetFloat("_IsosurfaceThreshold", recommendedThreshold);
+          sliderIsoThreshold.value = recommendedThreshold;
         }
 
-        if (d.captionText.text == "Temp.pvm")
+        else if (d.captionText.text == "Temp.pvm")
         {
-            renderer.sharedMaterial.SetFloat("_ColorFactor", 0.025f);
-            renderer.sharedMaterial.SetFloat("_IsosurfaceThreshold", 0.05f);
-            sliderIsoThreshold.value = 0.05f;
+          recommendedThreshold = 0.05f;
+          renderer.sharedMaterial.SetFloat("_ColorFactor", 0.025f);
+          renderer.sharedMaterial.SetFloat("_IsosurfaceThreshold", recommendedThreshold);
+          sliderIsoThreshold.value = recommendedThreshold;
         }
 
-        if (d.captionText.text == "Test.pvm")
+        else if (d.captionText.text == "Test.pvm")
         {
-            renderer.sharedMaterial.SetFloat("_ColorFactor", 0.025f);
-            renderer.sharedMaterial.SetFloat("_IsosurfaceThreshold", 0.05f);
-            sliderIsoThreshold.value = 0.05f;
+          recommendedThreshold = 0.05f;
+          renderer.sharedMaterial.SetFloat("_ColorFactor", 0.025f);
+          renderer.sharedMaterial.SetFloat("_IsosurfaceThreshold", recommendedThreshold);
+          sliderIsoThreshold.value = recommendedThreshold;
         }
     }
 }

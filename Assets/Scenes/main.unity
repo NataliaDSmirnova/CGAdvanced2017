@@ -8527,6 +8527,7 @@ GameObject:
   - component: {fileID: 799878586}
   - component: {fileID: 799878585}
   - component: {fileID: 799878584}
+  - component: {fileID: 799878587}
   m_Layer: 5
   m_Name: DropdownMode
   m_TagString: Untagged
@@ -8660,6 +8661,45 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 799878582}
+--- !u!114 &799878587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 799878582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c917c7dfa0ad00e4b85754efc4a58594, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropdown: {fileID: 799878584}
+  dropdownLog: {fileID: 1831622483}
+  currMode: X-ray
+  sliderXrayR: {fileID: 1045846521}
+  sliderXrayG: {fileID: 2115642559}
+  sliderXrayB: {fileID: 822317277}
+  sliderIsoThreshold: {fileID: 1812606382}
+  sliderIsoAmbientR: {fileID: 2029482023}
+  sliderIsoAmbientG: {fileID: 1154125839}
+  sliderIsoAmbientB: {fileID: 2071781850}
+  sliderIsoDiffuseR: {fileID: 621369941}
+  sliderIsoDiffuseG: {fileID: 1183658494}
+  sliderIsoDiffuseB: {fileID: 350441579}
+  sliderIsoSpecularR: {fileID: 1493884061}
+  sliderIsoSpecularG: {fileID: 1300554277}
+  sliderIsoSpecularB: {fileID: 1815877732}
+  sliderIsoShininess: {fileID: 706931337}
+  sliderIsoVRThreshold: {fileID: 1846405271}
+  sliderIsoVRAmbientR: {fileID: 1366539609}
+  sliderIsoVRAmbientG: {fileID: 853295554}
+  sliderIsoVRAmbientB: {fileID: 1666228388}
+  sliderIsoVRDiffuseR: {fileID: 572538609}
+  sliderIsoVRDiffuseG: {fileID: 1314207132}
+  sliderIsoVRDiffuseB: {fileID: 934614332}
+  sliderIsoVRSpecularR: {fileID: 1364147164}
+  sliderIsoVRSpecularG: {fileID: 175738353}
+  sliderIsoVRSpecularB: {fileID: 242940236}
+  sliderIsoVRShininess: {fileID: 147668833}
 --- !u!1 &802782535
 GameObject:
   m_ObjectHideFlags: 0
@@ -20606,6 +20646,7 @@ MonoBehaviour:
   standartNamePVM: Test.pvm
   logPanel: {fileID: 461886006}
   sliderIsoThreshold: {fileID: 1812606382}
+  recommendedThreshold: 0
 --- !u!1 &1835344161
 GameObject:
   m_ObjectHideFlags: 0
@@ -23311,6 +23352,7 @@ MonoBehaviour:
   standartNamePVM: 
   logPanel: {fileID: 0}
   sliderIsoThreshold: {fileID: 0}
+  recommendedThreshold: 0
 --- !u!1 &2071781848
 GameObject:
   m_ObjectHideFlags: 0

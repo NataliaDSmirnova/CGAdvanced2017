@@ -27,30 +27,8 @@ public class ChangeParamValues : MonoBehaviour {
 
     void Start()
     {
-        renderer = GetComponent<Renderer>();
-
-        /* Setting up default values */
-        SetupDefaultValues();
-        
-    }
-
-    public void SetupDefaultValues()
-    {
-        renderer.sharedMaterial.SetFloat("_IsosurfaceThreshold", 0.05f);
-        renderer.sharedMaterial.SetFloat("_AmbientR", 0.0f);
-        renderer.sharedMaterial.SetFloat("_AmbientG", 0.0f);
-        renderer.sharedMaterial.SetFloat("_AmbientB", 0.0f);
-        renderer.sharedMaterial.SetFloat("_DiffuseR", 0.0f);
-        renderer.sharedMaterial.SetFloat("_DiffuseG", 0.0f);
-        renderer.sharedMaterial.SetFloat("_DiffuseB", 0.0f);
-        renderer.sharedMaterial.SetFloat("_SpecularR", 0.0f);
-        renderer.sharedMaterial.SetFloat("_SpecularG", 0.0f);
-        renderer.sharedMaterial.SetFloat("_SpecularB", 0.0f);
-        renderer.sharedMaterial.SetFloat("_Shininess", 1);
-        renderer.sharedMaterial.SetFloat("_XRayColorR", 0.0f);
-        renderer.sharedMaterial.SetFloat("_XRayColorG", 0.0f);
-        renderer.sharedMaterial.SetFloat("_XRayColorB", 0.0f);        
-    }
+        renderer = GetComponent<Renderer>();                
+    }    
 
     public void OnValueThresholdChanged(float value)
     {

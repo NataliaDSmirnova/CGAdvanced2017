@@ -41,8 +41,7 @@ public class UIManager : MonoBehaviour {
 
     // private variables
     private GameObject cubeObject;
-    private Renderer cubeObjectRenderer;
-    private ChangeParamValues cubeParamScript;
+    private Renderer cubeObjectRenderer;    
     private ClipPlane clipPlane;
     private Text fpsText;
 
@@ -50,10 +49,7 @@ public class UIManager : MonoBehaviour {
     private Shader volumeShader;
     private Shader isosurfaceShader;
     private Shader normalShader;
-    private Shader comboIsoVRShader;
-
-    private Component[] surfaceSliders;
-    private Component[] isoVRSliders;
+    private Shader comboIsoVRShader;    
 
     private float accum = 0; 
     private int frames = 0; 
@@ -64,10 +60,7 @@ public class UIManager : MonoBehaviour {
     {
         cubeObject = GameObject.Find("Cube");
         cubeObjectRenderer = cubeObject.GetComponent<Renderer>();
-        clipPlane = cubeObject.GetComponent<ClipPlane>();
-        cubeParamScript = GameObject.FindObjectOfType(typeof(ChangeParamValues)) as ChangeParamValues;
-        surfaceSliders = gameObject.transform.Find("PanelSurface").transform.GetComponentsInChildren(typeof(Slider)) as Component[];
-        isoVRSliders = gameObject.transform.Find("PanelComboIsoVR").transform.GetComponentsInChildren(typeof(Slider)) as Component[];
+        clipPlane = cubeObject.GetComponent<ClipPlane>();            
 
         clipPlane.OnValueXChanged(-0.5f);
         clipPlane.OnValueYChanged(-0.5f);
@@ -237,9 +230,7 @@ public class UIManager : MonoBehaviour {
 
                 break;
             case 2:
-                cubeObjectRenderer.sharedMaterial.shader = isosurfaceShader;
-                cubeParamScript.SetupDefaultValues();
-                ResetSliderPositions();
+                cubeObjectRenderer.sharedMaterial.shader = isosurfaceShader;                                
 
                 panelModeXRay.SetActive(false);
                 panelModeVR.SetActive(false);
@@ -258,9 +249,7 @@ public class UIManager : MonoBehaviour {
                 break;
             case 3:
                 cubeObjectRenderer.sharedMaterial.shader = comboIsoVRShader;
-                cubeObjectRenderer.sharedMaterial.SetInt("_TransferFunctionId", 0);
-                cubeParamScript.SetupDefaultValues();
-                ResetSliderPositions();
+                cubeObjectRenderer.sharedMaterial.SetInt("_TransferFunctionId", 0);                                
 
                 panelModeXRay.SetActive(false);
                 panelModeVR.SetActive(false);
@@ -296,20 +285,7 @@ public class UIManager : MonoBehaviour {
 
                 break;
         }
-    }
-
-    public void ResetSliderPositions()
-    {
-        foreach (Slider slider in surfaceSliders)
-        {
-          slider.value = slider.minValue;
-        }
-
-        foreach (Slider slider in isoVRSliders)
-        {
-          slider.value = slider.minValue;
-        }
-    }
+    }    
 
     public void ChangeReflParams(UnityEngine.UI.Dropdown param)
     {
