@@ -113,21 +113,21 @@
 			if (distance(posColor, float3(0, 0, 0)) > _IsosurfaceThreshold)
 			{
 				// gray 2D texture on cliped slice
-				/*if (_ClipX > 0 && abs(pos.x - _ClipX) < 0.01f) 
+				if (_ClipX > 0 && abs(pos.x - _ClipX) < 0.01f) 
 				{
-					color = float4(posColor, posColor.r);
+					color = float4(posColor, 1);
 					break;
 				}
 				if (_ClipY > 0 && abs(pos.y - _ClipY) < 0.01f)
 				{
-					color = float4(posColor, posColor.r);
+					color = float4(posColor, 1);
 					break;
 				}
 				if (_ClipZ > 0 && abs(pos.z - _ClipZ) < 0.01f)
 				{
-					color = float4(posColor, posColor.r);
+					color = float4(posColor, 1);
 					break;
-				}*/
+				}
 
 				// count normal
         stepDirX = float3(stepDir.x, -stepDir.z, stepDir.y); // rotate stepDir 90 degrees around X axis

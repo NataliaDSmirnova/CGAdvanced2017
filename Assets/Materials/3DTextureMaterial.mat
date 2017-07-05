@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: 3DTextureMaterial
-  m_Shader: {fileID: 4800000, guid: e2e821faf04710844a26fd1de8a0c081, type: 3}
+  m_Shader: {fileID: 4800000, guid: d89274d89c6501146b13146d3bcb551b, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
   m_CustomRenderQueue: -1
@@ -75,7 +75,7 @@ Material:
       second: 0
     - first:
         name: _ColorFactor
-      second: 0.025
+      second: 0.008
     - first:
         name: _Cutoff
       second: 0.5
@@ -111,7 +111,7 @@ Material:
       second: 0.05
     - first:
         name: _IsosurfaceThreshold
-      second: 0.05
+      second: 1
     - first:
         name: _Metallic
       second: 0
@@ -153,10 +153,10 @@ Material:
       second: 1
     - first:
         name: _Step
-      second: 0.0078125
+      second: 0.00390625
     - first:
         name: _StepFactor
-      second: 0.5
+      second: 1
     - first:
         name: _TransferFunctionId
       second: 0

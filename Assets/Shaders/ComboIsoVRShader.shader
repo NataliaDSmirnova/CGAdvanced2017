@@ -116,10 +116,12 @@
       // Used for 'Orange' model
       float4 transferFunctionColorOrange(float density)
       {
-        if (density > 0.7 && density <= 1.00) // 0 - 0.08 - 'Skin'
-          return float4(fitColorInRange(255, 69, 0), 1.0);
-        else //if (density > 0.9 && density <= 1.0) // 0.9 - 1.0 - 'Innards'
-          return float4(fitColorInRange(255, 140, 0), 1.0);
+        if (density >= 0 && density <= 0.09) // 'Outer' zone
+          return float4(fitColorInRange(0, 0, 0), 0);
+        else if (density > 0.09 && density <= 0.36) // 'Skin'
+          return float4(fitColorInRange(55, 240, 50), 0.17);
+        else //if (density > 0.4 && density <= 1.00) // 'Innards'
+          return float4(fitColorInRange(255, 39, 0), 0.4);
       }      
 
       // Used for 'Baby' model
@@ -127,14 +129,12 @@
       {
         if (density >= 0 && density <= 0.59) // 'Stuff'
           return float4(fitColorInRange(0, 0, 0), 0.0);
-        else if (density > 0.59 && density <= 0.68) // 'Skin'
-          return float4(fitColorInRange(225, 223, 196), 0.5);
-        else if (density > 0.68 && density <= 0.76) // 'Muscle'/Brain
-          return float4(fitColorInRange(240, 200, 201), 0.4);
-        else if (density > 0.76 && density <= 0.91) // 'Metal'
+        else if (density > 0.59 && density <= 0.76) // 'Skin' + 'Muscle'/Brain
+          return float4(fitColorInRange(240, 50, 90), 0.1);
+        else if (density > 0.76 && density <= 0.9) // 'Metal'
           return float4(fitColorInRange(176, 196, 222), 0.7);
         else // 'Bone'
-          return float4(fitColorInRange(250, 250, 250), 0.9);        
+          return float4(fitColorInRange(250, 250, 250), 0.9);
       }
 
       v2f vert(appdata v)
@@ -194,24 +194,24 @@
           if (distance(posColor, float3(0, 0, 0)) > _IsosurfaceThreshold)
           {
             // gray 2D texture on cliped slice
-            /*if (_ClipX > 0 && abs(pos.x - _ClipX) < 0.01f)
+            if (_ClipX > 0 && abs(pos.x - _ClipX) < 0.01f)
             {
-              color = float4(0, 0, 1, posColor.r);
+              color = float4(posColor, 1);
               isoFinished = 1;
               break;
             }
             if (_ClipY > 0 && abs(pos.y - _ClipY) < 0.01f)
             {
-              color = float4(posColor, posColor.r);
+              color = float4(posColor, 1);
               isoFinished = 1;
               break;
             }
             if (_ClipZ > 0 && abs(pos.z - _ClipZ) < 0.01f)
             {
-              color = float4(posColor, posColor.r);
+              color = float4(posColor, 1);
               isoFinished = 1;
               break;
-            }*/            
+            }            
 
             // count normal
             stepDirX = float3(stepDir.x, -stepDir.z, stepDir.y); // rotate stepDir 90 degrees around X axis
@@ -264,6 +264,8 @@
 
         if (isoFinished == 0)
           color = float4(compositeColor, 1 - compositeTransparency);
+        else
+          color = float4(compositeColor * (1.0 - compositeTransparency) + color.xyz * compositeTransparency, 1.0);
 
         return color;
       }
